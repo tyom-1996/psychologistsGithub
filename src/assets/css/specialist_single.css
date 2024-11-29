@@ -1,0 +1,2131 @@
+@font-face {
+    font-family: 'JejuMyeongjo';
+    src: url('/assets/fonts/JejuMyeongjo.eot');
+    src: url('/assets/fonts/JejuMyeongjo.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/JejuMyeongjo.woff2') format('woff2'),
+    url('/assets/fonts/JejuMyeongjo.woff') format('woff'),
+    url('/assets/fonts/JejuMyeongjo.ttf') format('truetype'),
+    url('/assets/fonts/JejuMyeongjo.svg#JejuMyeongjo') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+#specialists_single_page {
+    width: 100%;
+    /*background-image: url("/images/back_img.jpg");*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    background-color: #0D0803;
+    height: 100%;
+}
+
+
+.specialists_single_page_section {
+    width: 100%;
+    padding-bottom: 100px;
+    padding-top: 200px;
+}
+.specialists_single_page_section_wrapper {
+    width: 100%;
+    max-width: 1593px;
+    margin: 0 auto;
+}
+
+.specialists_single_page_section_item1 {
+    width: 100%;
+    margin-bottom: 60px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(131, 86, 40, 0.72) -51.06%, rgba(13, 8, 3, 0.72) 106.98%);
+    padding: 40px 40px 26px 76px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.specialists_single_page_section_item1_img {
+    position: relative;
+    max-width: 254px;
+    width: 100%;
+    height: 267px;
+    margin-right: 83px;
+}
+.specialists_single_page_section_item1_img Image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.specialists_single_page_section_item1_info_wrapper {
+    flex: 1;
+}
+
+.specialists_single_page_section_item1_title {
+    color: rgba(196, 125, 78, 1);
+    font-weight: 400;
+    font-size: 59px;
+    font-family: 'JejuMyeongjo', sans-serif;
+    margin-bottom: 4px;
+}
+.specialists_single_page_section_item1_info {
+    color: rgba(180, 180, 180, 1);
+    font-weight: 300;
+    font-size: 33px;
+    font-family: "Inter", serif;
+    margin-bottom: 43px;
+}
+
+.specialists_single_page_section_item1_price_dropdown_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.specialists_dropdown_form {
+    width: 100%;
+    margin-right: 46px;
+    position: relative;
+}
+
+.specialists_dropdown_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid rgba(120, 81, 36, 1);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.specialists_dropdown_header_title {
+    font-family: "Inter", serif;
+    color: rgba(93, 93, 93, 1);
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.specialists_dropdown_item {
+    font-family: "Inter", serif;
+    color: rgba(93, 93, 93, 1);
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 10px;
+}
+
+
+.specialists_dropdown_menu {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    background: rgba(13, 8, 3, 1);
+    border-bottom: 1px solid rgba(120, 81, 36, 1);
+    border-right: 1px solid rgba(120, 81, 36, 1);
+    border-left: 1px solid rgba(120, 81, 36, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    margin: 0;
+    /*padding: 0;*/
+    width: 100%;
+    z-index: 10;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 15px;
+}
+
+
+.specialists_dropdown_header_icon_mobile {
+    display: none;
+}
+
+.specialists_single_page_section_item1_price_info1 {
+    text-align: center;
+    color: rgba(196, 125, 78, 1);
+    font-weight: 400;
+    font-size: 42px;
+    font-family: 'JejuMyeongjo', sans-serif;
+}
+.specialists_single_page_section_item1_price_info1 span {
+    font-size: 29px;
+}
+.specialists_single_page_section_item1_price_info2 {
+    color: rgba(180, 180, 180, 1);
+    font-weight: 300;
+    font-size: 22px;
+    font-family: "Inter", serif;
+    text-align: center;
+}
+
+.specialists_single_page_section_item1_price_info_box {
+    max-width: 190px;
+    width: 100%;
+}
+
+.make_an_appointment_with_specialists_btn {
+    background: rgba(196, 125, 78, 1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    max-width: 244px;
+    width: 100%;
+    height: 41px;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-family: 'JejuMyeongjo', sans-serif;
+    font-size: 18px;
+    border: none;
+
+}
+
+.specialists_single_page_section_item2 {
+    width: 100%;
+}
+
+.specialists_single_page_section_item2_title_line_wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.specialists_single_page_section_item2_title {
+    color: rgba(196, 125, 78, 1);
+    font-weight: 400;
+    font-family: 'JejuMyeongjo', sans-serif;
+    font-size: 35px;
+    margin-right: 20px;
+}
+
+.specialists_single_page_section_item2_line {
+    flex: 1;
+    height: 1px;
+    background: rgba(196, 125, 78, 1);
+    position: relative;
+    bottom: 6px;
+}
+
+.specialists_single_page_section_item2_info {
+    color: rgba(255, 255, 255, 1);
+    margin-bottom: 5px;
+    font-weight: 300;
+    font-size: 28px;
+    font-family: "Inter", serif;
+    line-height: 35px;
+}
+
+.specialists_single_page_section_item2_info_part {
+    width: 100%;
+}
+
+/*mobile*/
+
+@media (min-width: 760px) and (max-width: 1642px) {
+    .specialists_single_page_section_wrapper {
+        max-width: unset!important;
+        width: 90% !important;
+    }
+}
+@media (max-width: 760px) {
+    .specialists_single_page_section_wrapper {
+        max-width: unset!important;
+        width: 85% !important;
+    }
+}
+
+
+@media (min-width: 1000px) and (max-width: 1200px) {
+    .specialists_dropdown_header_title {
+        font-size: 13px!important;
+    }
+    .specialists_dropdown_item {
+        font-size: 13px!important;
+    }
+    .specialists_single_page_section_item1_price_info_box {
+        max-width: 170px!important;
+    }
+    .specialists_single_page_section_item1_img {
+        max-width: 224px!important;
+        height: 237px!important;
+        margin-right: 63px!important;
+    }
+    .specialists_single_page_section_item1_title {
+        font-size: 49px!important;
+    }
+    .specialists_single_page_section_item1_info {
+        font-size: 28px!important;
+        margin-bottom: 38px!important;
+    }
+    .specialists_dropdown_form {
+        margin-right: 36px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 {
+        font-size: 38px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 span {
+        font-size: 26px!important;
+    }
+    .specialists_single_page_section_item1_price_info2 {
+        font-size: 20px!important;
+    }
+    .specialists_single_page_section_item1_price_dropdown_wrapper {
+        margin-bottom: 27px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        font-size: 18px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        max-width: 220px!important;
+        height: 39px!important;
+    }
+    .specialists_single_page_section_item2_title {
+        font-size: 32px!important;
+    }
+    .specialists_single_page_section_item2_title_line_wrapper {
+        margin-bottom: 40px!important;
+    }
+    .specialists_single_page_section_item2_info {
+        font-size: 24px!important;
+    }
+    .specialists_single_page_section {
+        padding-bottom: 80px!important;
+        padding-top: 180px!important;
+    }
+    .specialists_single_page_section_item1 {
+        border-radius: 18px!important;
+        padding: 35px 35px 26px 60px!important;
+    }
+}
+@media (min-width: 860px) and (max-width: 1000px) {
+    .specialists_dropdown_menu {
+        padding: 13px!important;
+    }
+    .specialists_dropdown_header_title {
+        font-size: 12px!important;
+    }
+    .specialists_dropdown_item {
+        font-size: 12px!important;
+    }
+    .specialists_single_page_section_item1_price_info_box {
+        max-width: 150px!important;
+    }
+    .specialists_dropdown_header {
+        padding: 14px!important;
+        border-radius: 6px!important;
+    }
+    .specialists_single_page_section_item1_img {
+        max-width: 194px!important;
+        height: 207px!important;
+        margin-right: 40px!important;
+    }
+    .specialists_single_page_section_item1_title {
+        font-size: 38px!important;
+    }
+    .specialists_single_page_section_item1_info {
+        font-size: 25px!important;
+        margin-bottom: 28px!important;
+    }
+    .specialists_dropdown_form {
+        margin-right: 28px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 {
+        font-size: 30px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 span {
+        font-size: 22px!important;
+    }
+    .specialists_single_page_section_item1_price_info2 {
+        font-size: 18px!important;
+    }
+    .specialists_single_page_section_item1_price_dropdown_wrapper {
+        margin-bottom: 22px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        font-size: 16px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        max-width: 200px!important;
+        height: 35px!important;
+        border-radius: 8px!important;
+    }
+    .specialists_single_page_section_item2_title {
+        font-size: 30px!important;
+    }
+    .specialists_single_page_section_item2_title_line_wrapper {
+        margin-bottom: 35px!important;
+    }
+    .specialists_single_page_section_item2_info {
+        font-size: 22px!important;
+    }
+    .specialists_single_page_section {
+        padding-bottom: 60px!important;
+        padding-top: 160px!important;
+    }
+    .specialists_single_page_section_item1 {
+        border-radius: 14px!important;
+        padding: 30px 30px 25px 40px!important;
+    }
+}
+@media (min-width: 768px) and (max-width: 860px) {
+    .specialists_dropdown_menu {
+        padding: 12px!important;
+    }
+    .specialists_dropdown_header_title {
+        font-size: 11px!important;
+    }
+    .specialists_dropdown_item {
+        font-size: 11px!important;
+    }
+    .specialists_single_page_section_item1_price_info_box {
+        max-width: 125px!important;
+    }
+    .specialists_dropdown_header_icon_mobile {
+        display: flex!important;
+    }
+    .specialists_dropdown_header_icon {
+        display: none!important;
+    }
+    .specialists_dropdown_header {
+        padding: 12px!important;
+        border-radius: 5px!important;
+    }
+    .specialists_single_page_section_item1_img {
+        max-width: 170px!important;
+        height: 183px!important;
+        margin-right: 30px!important;
+    }
+    .specialists_single_page_section_item1_title {
+        font-size: 30px!important;
+    }
+    .specialists_single_page_section_item1_info {
+        font-size: 18px!important;
+        margin-bottom: 20px!important;
+    }
+    .specialists_dropdown_form {
+        margin-right: 20px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 {
+        font-size: 25px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 span {
+        font-size: 18px!important;
+    }
+    .specialists_single_page_section_item1_price_info2 {
+        font-size: 15px!important;
+    }
+    .specialists_single_page_section_item1_price_dropdown_wrapper {
+        margin-bottom: 18px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        font-size: 14px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        max-width: 170px!important;
+        height: 30px!important;
+        border-radius: 6px!important;
+    }
+    .specialists_single_page_section_item2_title {
+        font-size: 28px!important;
+    }
+    .specialists_single_page_section_item2_title_line_wrapper {
+        margin-bottom: 30px!important;
+    }
+    .specialists_single_page_section_item2_info {
+        font-size: 19px!important;
+        line-height: 24px!important;
+    }
+    .specialists_single_page_section {
+        padding-bottom: 50px!important;
+        padding-top: 120px!important;
+    }
+    .specialists_single_page_section_item1 {
+        border-radius: 12px!important;
+        padding: 25px 25px 25px 30px!important;
+        margin-bottom: 50px!important;
+    }
+}
+@media (min-width: 426px) and (max-width: 768px) {
+    .specialists_dropdown_menu {
+        padding: 10px!important;
+    }
+    .specialists_dropdown_header_title {
+        font-size: 10px!important;
+    }
+    .specialists_dropdown_item {
+        font-size: 10px!important;
+    }
+    .specialists_dropdown_header_icon_mobile {
+        display: flex!important;
+    }
+    .specialists_dropdown_header_icon {
+        display: none!important;
+    }
+    .specialists_dropdown_header {
+        padding: 9px 6px!important;
+        border-radius: 3px!important;
+    }
+    .specialists_single_page_section_item1_img {
+        max-width: 100px!important;
+        height: 100px!important;
+        margin-right: 28px!important;
+    }
+    .specialists_single_page_section_item1_title {
+        font-size: 22px!important;
+    }
+    .specialists_single_page_section_item1_info {
+        font-size: 13px!important;
+        margin-bottom: 14px!important;
+    }
+    .specialists_dropdown_form {
+        margin-right: 17px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 {
+        font-size: 16px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 span {
+        font-size: 11px!important;
+    }
+    .specialists_single_page_section_item1_price_info2 {
+        font-size: 9px!important;
+    }
+    .specialists_single_page_section_item1_price_dropdown_wrapper {
+        margin-bottom: 10px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        font-size: 10px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        max-width: 120px!important;
+        height: 21px!important;
+        border-radius: 4px!important;
+    }
+    .specialists_single_page_section_item2_title {
+        font-size: 26px!important;
+        margin-right: 15px!important;
+    }
+    .specialists_single_page_section_item2_title_line_wrapper {
+        margin-bottom: 25px!important;
+    }
+    .specialists_single_page_section_item2_info {
+        font-size: 16px!important;
+        line-height: 22px!important;
+    }
+    .specialists_single_page_section {
+        padding-bottom: 40px!important;
+        padding-top: 100px!important;
+    }
+    .specialists_single_page_section_item1 {
+        border-radius: 8px!important;
+        padding: 15px 15px 24px 28px!important;
+        margin-bottom: 40px!important;
+    }
+    .specialists_single_page_section_item1_price_info_box {
+        max-width: 80px!important;
+    }
+}
+@media (min-width: 370px) and (max-width: 426px) {
+    .specialists_dropdown_menu {
+        padding: 10px!important;
+    }
+    .specialists_dropdown_header_title {
+        font-size: 10px!important;
+    }
+    .specialists_dropdown_item {
+        font-size: 10px!important;
+    }
+    .specialists_dropdown_header_icon_mobile {
+        display: flex!important;
+    }
+    .specialists_dropdown_header_icon {
+        display: none!important;
+    }
+    .specialists_dropdown_header {
+        padding: 7px 6px!important;
+        border-radius: 3px!important;
+    }
+    .specialists_single_page_section_item1_img {
+        max-width: 108px!important;
+        height: 114px!important;
+        margin-right: 27px!important;
+    }
+    .specialists_single_page_section_item1_title {
+        font-size: 22px!important;
+    }
+    .specialists_single_page_section_item1_info {
+        font-size: 13px!important;
+        margin-bottom: unset!important;
+    }
+    .specialists_dropdown_form {
+        margin-right: 17px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 {
+        font-size: 16px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 span {
+        font-size: 11px!important;
+    }
+    .specialists_single_page_section_item1_price_info2 {
+        font-size: 9px!important;
+    }
+    .specialists_single_page_section_item1_price_dropdown_wrapper {
+        margin-bottom: 10px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        font-size: 10px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        max-width: 120px!important;
+        height: 25px!important;
+        border-radius: 4px!important;
+    }
+    .specialists_single_page_section_item2_title {
+        font-size: 24px!important;
+        margin-right: unset!important;
+    }
+    .specialists_single_page_section_item2_line {
+        display: none!important;
+    }
+    .specialists_single_page_section_item2_title_line_wrapper {
+        margin-bottom: 25px!important;
+    }
+    .specialists_single_page_section_item2_info {
+        font-size: 14px!important;
+        line-height: 20px!important;
+    }
+    .specialists_single_page_section {
+        padding-bottom: 40px!important;
+        padding-top: 100px!important;
+    }
+    .specialists_single_page_section_item1 {
+        border-radius: 8px!important;
+        padding: 15px 15px 24px 28px!important;
+    }
+    .specialists_single_page_section_item1_price_info_box {
+        max-width: 75px!important;
+    }
+    .specialists_single_page_section_item1_mobile {
+        margin-bottom: 40px!important;
+        display: block!important;
+        border-radius: 7px!important;
+        padding: 11px 20px 14px 20px!important;
+        width: 100%;
+        background: linear-gradient(180deg, rgba(131, 86, 40, 0.72) -51.06%, rgba(13, 8, 3, 0.72) 106.98%);
+    }
+    .specialists_single_page_section_item1 {
+        display: none!important;
+    }
+    .specialists_single_page_section_item1_mobile_child1 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 27px;
+    }
+    .specialists_dropdown_form {
+        margin-right: unset!important;
+        margin-bottom: 21px;
+    }
+    .specialists_single_page_section_item1_mobile_btn_price_info_box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+@media (min-width: 350px) and (max-width: 370px) {
+    .specialists_dropdown_menu {
+        padding: 10px!important;
+    }
+    .specialists_dropdown_header_title {
+        font-size: 10px!important;
+    }
+    .specialists_dropdown_item {
+        font-size: 10px!important;
+    }
+    .specialists_dropdown_header_icon_mobile {
+        display: flex!important;
+    }
+    .specialists_dropdown_header_icon {
+        display: none!important;
+    }
+    .specialists_dropdown_header {
+        padding: 7px 6px!important;
+        border-radius: 3px!important;
+    }
+    .specialists_single_page_section_item1_img {
+        max-width: 108px!important;
+        height: 114px!important;
+        margin-right: 18px!important;
+    }
+    .specialists_single_page_section_item1_title {
+        font-size: 20px!important;
+    }
+    .specialists_single_page_section_item1_info {
+        font-size: 13px!important;
+        margin-bottom: unset!important;
+    }
+    .specialists_dropdown_form {
+        margin-right: 17px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 {
+        font-size: 16px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 span {
+        font-size: 11px!important;
+    }
+    .specialists_single_page_section_item1_price_info2 {
+        font-size: 9px!important;
+    }
+    .specialists_single_page_section_item1_price_dropdown_wrapper {
+        margin-bottom: 10px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        font-size: 10px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        max-width: 120px!important;
+        height: 25px!important;
+        border-radius: 4px!important;
+    }
+    .specialists_single_page_section_item2_title {
+        font-size: 22px!important;
+        margin-right: unset!important;
+    }
+    .specialists_single_page_section_item2_line {
+        display: none!important;
+    }
+    .specialists_single_page_section_item2_title_line_wrapper {
+        margin-bottom: 25px!important;
+    }
+    .specialists_single_page_section_item2_info {
+        font-size: 14px!important;
+        line-height: 20px!important;
+    }
+    .specialists_single_page_section {
+        padding-bottom: 40px!important;
+        padding-top: 100px!important;
+    }
+    .specialists_single_page_section_item1 {
+        border-radius: 8px!important;
+        padding: 15px 15px 24px 28px!important;
+    }
+    .specialists_single_page_section_item1_price_info_box {
+        max-width: 75px!important;
+    }
+    .specialists_single_page_section_item1_mobile {
+        margin-bottom: 40px!important;
+        display: block!important;
+        border-radius: 7px!important;
+        padding: 11px 20px 14px 20px!important;
+        width: 100%;
+        background: linear-gradient(180deg, rgba(131, 86, 40, 0.72) -51.06%, rgba(13, 8, 3, 0.72) 106.98%);
+    }
+    .specialists_single_page_section_item1 {
+        display: none!important;
+    }
+    .specialists_single_page_section_item1_mobile_child1 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 27px;
+    }
+    .specialists_dropdown_form {
+        margin-right: unset!important;
+        margin-bottom: 21px;
+    }
+    .specialists_single_page_section_item1_mobile_btn_price_info_box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+@media (max-width: 350px) {
+    .specialists_dropdown_menu {
+        padding: 10px!important;
+    }
+    .specialists_dropdown_header_title {
+        font-size: 10px!important;
+    }
+    .specialists_dropdown_item {
+        font-size: 10px!important;
+    }
+    .specialists_dropdown_header_icon_mobile {
+        display: flex!important;
+    }
+    .specialists_dropdown_header_icon {
+        display: none!important;
+    }
+    .specialists_dropdown_header {
+        padding: 7px 6px!important;
+        border-radius: 3px!important;
+    }
+    .specialists_single_page_section_item1_img {
+        max-width: 100px!important;
+        height: 114px!important;
+        margin-right: 14px!important;
+    }
+    .specialists_single_page_section_item1_title {
+        font-size: 18px!important;
+    }
+    .specialists_single_page_section_item1_info {
+        font-size: 12px!important;
+        margin-bottom: unset!important;
+    }
+    .specialists_dropdown_form {
+        margin-right: 17px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 {
+        font-size: 16px!important;
+    }
+    .specialists_single_page_section_item1_price_info1 span {
+        font-size: 11px!important;
+    }
+    .specialists_single_page_section_item1_price_info2 {
+        font-size: 9px!important;
+    }
+    .specialists_single_page_section_item1_price_dropdown_wrapper {
+        margin-bottom: 10px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        font-size: 10px!important;
+    }
+    .make_an_appointment_with_specialists_btn {
+        max-width: 120px!important;
+        height: 25px!important;
+        border-radius: 4px!important;
+    }
+    .specialists_single_page_section_item2_title {
+        font-size: 19px!important;
+        margin-right: unset!important;
+    }
+    .specialists_single_page_section_item2_line {
+        display: none!important;
+    }
+    .specialists_single_page_section_item2_title_line_wrapper {
+        margin-bottom: 25px!important;
+    }
+    .specialists_single_page_section_item2_info {
+        font-size: 13.5px!important;
+        line-height: 20px!important;
+    }
+    .specialists_single_page_section {
+        padding-bottom: 40px!important;
+        padding-top: 100px!important;
+    }
+    .specialists_single_page_section_item1 {
+        border-radius: 8px!important;
+        padding: 15px 15px 24px 28px!important;
+    }
+    .specialists_single_page_section_item1_price_info_box {
+        max-width: 75px!important;
+    }
+    .specialists_single_page_section_item1_mobile {
+        margin-bottom: 40px!important;
+        display: block!important;
+        border-radius: 7px!important;
+        padding: 11px 18px 14px 18px!important;
+        width: 100%;
+        background: linear-gradient(180deg, rgba(131, 86, 40, 0.72) -51.06%, rgba(13, 8, 3, 0.72) 106.98%);
+    }
+    .specialists_single_page_section_item1 {
+        display: none!important;
+    }
+    .specialists_single_page_section_item1_mobile_child1 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 27px;
+    }
+    .specialists_dropdown_form {
+        margin-right: unset!important;
+        margin-bottom: 21px;
+    }
+    .specialists_single_page_section_item1_mobile_btn_price_info_box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+.specialists_single_page_section_item1_mobile {
+    display: none;
+}
+
+@media (min-width: 426px) and (max-width: 600px) {
+        .specialists_single_page_section_item1_mobile {
+            margin-bottom: 40px!important;
+            display: block!important;
+            border-radius: 8px!important;
+            padding: 15px 15px 24px 28px!important;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(131, 86, 40, 0.72) -51.06%, rgba(13, 8, 3, 0.72) 106.98%);
+        }
+       .specialists_single_page_section_item1 {
+           display: none!important;
+       }
+       .specialists_single_page_section_item1_mobile_child1 {
+           width: 100%;
+           display: flex;
+           align-items: center;
+           justify-content: flex-start;
+           margin-bottom: 27px;
+       }
+       .specialists_dropdown_form {
+           margin-right: unset!important;
+           margin-bottom: 21px;
+       }
+       .specialists_single_page_section_item1_mobile_btn_price_info_box {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           width: 100%;
+       }
+}
+
+
+/*appointment_register_section*/
+#appointmentRegister {
+    width: 100%;
+    /*background-image: url("/images/back_img.jpg");*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    background-color: #0D0803;
+    height: 100%;
+}
+
+.appointment_register_section {
+    width: 100%;
+    padding-top: 200px;
+    padding-bottom: 100px;
+}
+.appointment_register_wrapper {
+    width: 100%;
+    max-width: 1593px;
+    margin: 0 auto;
+}
+
+
+.appointment_register_title_line_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 58px;
+}
+.appointment_register_title {
+    color: rgba(196, 125, 78, 1);
+    font-weight: 400;
+    font-size: 29px;
+    font-family: 'JejuMyeongjo', sans-serif;
+    margin-right: 20px;
+}
+
+.appointment_register_line {
+    flex: 1;
+    height: 1px;
+    background:  rgba(196, 125, 78, 1);
+    position: relative;
+    bottom: 5px;
+}
+
+.appointment_register_form {
+    width: 100%;
+}
+.appointment_register_form_items_wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.appointment_register_form_item {
+    width: 49%;
+}
+
+.appointment_register_form_input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.appointment_register_form_input_field {
+    width: 100%;
+    border: 1px solid rgba(196, 125, 78, 1);
+    border-radius: 8px;
+    padding: 16px;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    color: rgba(93, 93, 93, 1);
+    font-weight: 400;
+    font-family: "Inter", serif;
+    font-size: 15px;
+}
+.appointment_register_form_input_field::placeholder {
+    color: rgba(93, 93, 93, 1);
+    font-weight: 400;
+    font-family: "Inter", serif;
+    font-size: 15px;
+}
+
+.appointment_register_form_input_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.appointment_register_form_input_field1 {
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgba(196, 125, 78, 1);
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    color: rgba(93, 93, 93, 1);
+    font-weight: 400;
+    font-family: "Inter", serif;
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.appointment_register_form_input_field2 {
+    border: 1px solid rgba(196, 125, 78, 1);
+    border-radius: 8px;
+    padding: 16px;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    color: rgba(93, 93, 93, 1);
+    font-weight: 400;
+    font-family: "Inter", serif;
+    font-size: 15px;
+    flex: 1;
+}
+
+
+.appointment_register_form_dropdown_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid rgba(196, 125, 78, 1);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.appointment_register_form_dropdown_header_title {
+    font-family: "Inter", serif;
+    color: rgba(93, 93, 93, 1);
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.appointment_register_form_dropdown_item {
+    font-family: "Inter", serif;
+    color: rgba(93, 93, 93, 1);
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 10px;
+}
+
+
+.appointment_register_form_dropdown_menu {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    background: rgba(13, 8, 3, 1);
+    border-bottom: 1px solid rgba(196, 125, 78, 1);
+    border-right: 1px solid rgba(196, 125, 78, 1);
+    border-left: 1px solid rgba(196, 125, 78, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    margin: 0;
+    /*padding: 0;*/
+    width: 100%;
+    z-index: 10;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 15px;
+}
+
+.appointment_register_form_dropdown {
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.appointment_register_form_dropdown_header_icon_mobile {
+    display: none;
+}
+
+.appointment_register_form_pay_btn_price_info_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.appointment_register_form_pay_btn {
+    background: rgba(196, 125, 78, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 18px;
+    font-family: 'JejuMyeongjo', sans-serif;
+    max-width: 244px;
+    width: 100%;
+    height: 41px;
+    border-radius: 10px;
+}
+
+.appointment_register_form_price_info_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+}
+.appointment_register_form_price_info {
+    color: rgba(196, 125, 78, 1);
+    font-weight: 400;
+    font-size: 42px;
+    font-family: 'JejuMyeongjo', sans-serif;
+}
+
+.appointment_register_form_price_info span {
+    color: rgba(196, 125, 78, 1);
+    font-weight: 400;
+    font-size: 29px;
+    font-family: 'JejuMyeongjo', sans-serif;
+}
+
+.appointment_register_form_price_info_title {
+    color: rgba(180, 180, 180, 1);
+    font-weight: 300;
+    font-size: 22px;
+    font-family: "Inter", serif;
+}
+
+.pay_success_popup {
+    position: fixed;
+    background: #000000A3;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.pay_success_popup_wrapper {
+    width: 100%;
+    border: 0.86px solid rgba(196, 125, 78, 1);
+    max-width: 514px;
+    margin: 0 auto;
+    padding: 41px 0;
+    background: rgba(37, 22, 7, 1);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+}
+.pay_success_popup_close_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 999;
+}
+.pay_success_popup_icon1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.pay_success_popup_icon2 {
+    display: none;
+}
+.pay_success_popup_icon3 {
+    display: none;
+}
+.pay_success_popup_title {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 300;
+    font-size: 31px;
+    font-family: "Inter", serif;
+    margin-bottom: 21px;
+}
+.pay_success_popup_btn {
+    background: rgba(196, 125, 78, 1);
+    width: 100%;
+    max-width: 171px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 13px;
+    font-family: 'JejuMyeongjo', sans-serif;
+
+}
+.calendar_popup {
+    position: fixed;
+    background: #000000A3;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.calendar_popup_wrapper {
+    width: 100%;
+    border: 0.86px solid rgba(196, 125, 78, 1);
+    max-width: 733px;
+    margin: 0 auto;
+    padding: 38px 39px 45px 39px;
+    background: rgba(37, 22, 7, 1);
+    border-radius: 23px;
+
+}
+
+.calendar_popup_title_icon_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    border-bottom: 0.79px solid rgba(196, 125, 78, 1);
+    padding-bottom: 25px;
+}
+
+.calendar_popup_title {
+    color: rgba(196, 125, 78, 1);
+    font-weight: 400;
+    font-size: 23px;
+    font-family: 'JejuMyeongjo', sans-serif;
+
+}
+
+.calendar_popup_close_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.react-calendar {
+    width: 100% !important;
+    background: none!important;
+    border: none!important;
+}
+
+.react-calendar__tile--now {
+    background: unset!important;
+}
+
+.react-calendar__tile--active {
+    background: unset!important;
+    color: unset!important;
+}
+.react-calendar__navigation {
+    width: 50% !important;
+}
+
+.react-calendar__navigation__label__labelText.react-calendar__navigation__label__labelText--from {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 300;
+    font-size: 25px;
+    font-family: "Inter", serif;
+}
+
+ .react-calendar__navigation__arrow {
+    font-size: 25px!important;
+    color: rgba(196, 125, 78, 1) !important;
+    min-width: 20px!important;
+}
+
+.react-calendar__navigation button {
+    min-width: 30px!important;
+}
+.react-calendar__month-view__weekdays__weekday {
+    color: rgba(196, 125, 78, 1);
+    font-weight: 300;
+    font-size: 25px!important;
+    font-family: "Inter", serif!important;
+}
+
+
+.react-calendar__month-view__days__day--neighboringMonth {
+    color: rgba(65, 65, 65, 1) !important;
+    font-weight: 300;
+    font-size: 25px!important;
+    font-family: "Inter", serif!important;
+}
+
+.react-calendar__month-view__days__day {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 300;
+    font-size: 25px!important;
+    font-family: "Inter", serif!important;
+    margin-bottom: 15px!important;
+}
+
+.react-calendar__month-view__days__day--weekend {
+    color: rgba(134, 134, 134, 1) !important;
+    font-weight: 300;
+    font-size: 25px!important;
+    font-family: "Inter", serif!important;
+}
+
+.react-calendar__tile--active {
+    color: rgba(196, 125, 78, 1) !important;
+    font-weight: 300;
+    font-size: 25px!important;
+    font-family: "Inter", serif!important;
+}
+
+.react-calendar__month-view__weekdays {
+    margin-bottom: 20px!important;
+}
+
+.react-datepicker-wrapper {
+    width: 100% !important;
+}
+.react-datepicker__input-container input {
+   width: 100% !important;
+    border: 1px solid rgba(196, 125, 78, 1);
+    background: none!important;
+    border-radius: 11px!important;
+    padding: 16px!important;
+    color: rgba(134, 134, 134, 1) !important;
+    font-weight: 300;
+    font-size: 25px!important;
+    font-family: "Inter", serif!important;
+    outline: none!important;
+    cursor: pointer!important;
+}
+
+.react-datepicker__input-container input::placeholder {
+    color: rgba(134, 134, 134, 1) !important;
+    font-weight: 300;
+    font-size: 25px!important;
+    font-family: "Inter", serif!important;
+
+}
+
+.react-datepicker__close-icon::after {
+    cursor: pointer;
+    background-color: rgba(196, 125, 78, 1) !important;
+    color: #fff;
+    border-radius: 50%;
+    height: 20px!important;
+    width: 20px!important;
+    padding: 2px;
+    font-size: 16px!important;
+    line-height: 1;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    content: "×";
+}
+
+.react-datepicker__close-icon {
+    right: 10px!important;
+}
+.react-datepicker__time-container .react-datepicker__time {
+    border: 1.22px solid rgba(196, 125, 78, 1) !important;
+    background: linear-gradient(180deg, rgba(131, 86, 40, 0.72) -51.06%, rgba(13, 8, 3, 0.72) 106.98%) !important;
+
+}
+
+.react-datepicker-popper[data-placement^=top] .react-datepicker__triangle {
+    fill: rgba(131, 86, 40, 0.72) !important;
+    color:rgba(131, 86, 40, 0.72) !important
+}
+
+.react-datepicker__header {
+    background: linear-gradient(180deg, rgba(131, 86, 40, 0.72) -51.06%, rgba(13, 8, 3, 0.72) 106.98%) !important;
+
+}
+
+.react-datepicker__header--time--only {
+    display: none!important;
+}
+
+
+/*appointment_register_mobile*/
+
+.appointment_register_form_items_wrapper_mobile {
+    display: none;
+}
+.calendar_popup_close_btn_icon2 {
+    display: none;
+}
+
+@media (min-width: 760px) and (max-width: 1642px) {
+    .appointment_register_wrapper {
+        max-width: unset!important;
+        width: 90% !important;
+    }
+}
+@media (max-width: 760px) {
+    .appointment_register_wrapper {
+        max-width: unset!important;
+        width: 85% !important;
+    }
+}
+
+
+@media (min-width: 1000px) and (max-width: 1200px) {
+    .react-datepicker__input-container input {
+        border-radius: 9px !important;
+        padding: 14px !important;
+        font-size: 22px !important;
+    }
+    .react-datepicker__input-container input::placeholder {
+        font-size: 22px !important;
+    }
+    .react-calendar__month-view__weekdays {
+        margin-bottom: 18px!important;
+    }
+    .react-calendar__navigation__label__labelText.react-calendar__navigation__label__labelText--from {
+        font-size: 22px!important;
+    }
+    .react-calendar__month-view__weekdays__weekday {
+        font-size: 22px!important;
+    }
+    .react-calendar__month-view__days__day {
+        font-size: 22px!important;
+        margin-bottom: 12px!important;
+    }
+    .calendar_popup_title{
+        font-size: 20px!important;
+    }
+    .calendar_popup_title_icon_wrapper {
+        padding-bottom: 22px!important;
+        margin-bottom: 22px!important;
+    }
+    .calendar_popup_wrapper {
+        max-width: 733px;
+        margin: 0 auto;
+        padding: 30px 30px 36px 30px!important;
+        border-radius: 20px!important;
+    }
+    .appointment_register_section {
+        padding-top: 150px!important;
+    }
+}
+
+@media (max-width: 600px) {
+    .appointment_register_line {
+        display: none!important;
+    }
+    .appointment_register_title {
+        margin-right: unset!important;
+    }
+}
+
+@media (min-width: 860px) and (max-width: 1000px) {
+    .react-datepicker__input-container input {
+        border-radius: 8px !important;
+        padding: 12px !important;
+        font-size: 20px !important;
+    }
+    .react-datepicker__input-container input::placeholder {
+        font-size: 20px !important;
+    }
+    .react-calendar__navigation__arrow {
+        font-size: 22px!important;
+    }
+    .react-calendar__month-view__weekdays {
+        margin-bottom: 15px!important;
+    }
+    .react-calendar__navigation__label__labelText.react-calendar__navigation__label__labelText--from {
+        font-size: 20px!important;
+    }
+    .react-calendar__month-view__weekdays__weekday {
+        font-size: 20px!important;
+    }
+    .react-calendar__month-view__days__day {
+        font-size: 20px!important;
+        margin-bottom: 10px!important;
+    }
+    .calendar_popup_title{
+        font-size: 18px!important;
+    }
+    .calendar_popup_title_icon_wrapper {
+        padding-bottom: 20px!important;
+        margin-bottom: 20px!important;
+    }
+    .calendar_popup_wrapper {
+        max-width: 733px;
+        margin: 0 auto;
+        padding: 27px 27px 30px 27px!important;
+        border-radius: 18px!important;
+    }
+    .appointment_register_section {
+        padding-top: 120px!important;
+        padding-bottom: 80px!important;
+    }
+    .appointment_register_title {
+        font-size: 28px!important;
+        margin-right: 18px!important;
+    }
+    .appointment_register_title_line_wrapper {
+        margin-bottom: 48px!important;
+    }
+    .appointment_register_form_dropdown_item {
+        font-size: 13px!important;
+    }
+    .appointment_register_form_input_field {
+        font-size: 13px!important;
+        padding: 13px!important;
+        border-radius: 6px!important;
+    }
+    .appointment_register_form_input {
+        margin-bottom: 17px!important;
+    }
+    .appointment_register_form_input_wrapper {
+        margin-bottom: 17px!important;
+    }
+    .appointment_register_form_input_field::placeholder {
+        font-size: 13px!important;
+    }
+    .appointment_register_form_input_field2 {
+        font-size: 13px!important;
+        padding: 13px!important;
+        border-radius: 6px!important;
+    }
+    .appointment_register_form_input_field2::placeholder {
+        font-size: 13px!important;
+    }
+
+    .appointment_register_form_input_field1 {
+        font-size: 13px!important;
+        border-radius: 6px!important;
+        height: 43px!important;
+        margin-right: 16px!important;
+        width: 43px!important;
+    }
+    .appointment_register_form_input_field1::placeholder {
+        font-size: 13px!important;
+    }
+    .appointment_register_form_dropdown_header {
+        padding: 13px!important;
+        border-radius: 6px!important;
+    }
+    .appointment_register_form_dropdown_header_title {
+        font-size: 13px!important;
+    }
+    .appointment_register_form_dropdown {
+        margin-bottom: 17px!important;
+    }
+    .appointment_register_form_pay_btn {
+        font-size: 16px!important;
+        width: 190px!important;
+        border-radius: 8px!important;
+        height: 36px!important;
+    }
+    .appointment_register_form_price_info {
+        font-size: 36px!important;
+    }
+    .appointment_register_form_price_info span {
+        font-size: 26px!important;
+    }
+    .appointment_register_form_price_info_title {
+        font-size: 19px!important;
+    }
+}
+@media (min-width: 768px) and (max-width: 860px) {
+
+    .calendar_popup_close_btn_icon1 {
+        display: none!important;
+    }
+    .calendar_popup_close_btn_icon2 {
+        display: flex!important;
+    }
+    .pay_success_popup_btn {
+        font-size: 12px!important;
+        max-width: 150px!important;
+        height: 25px!important;
+        border-radius: 6px!important;
+    }
+    .pay_success_popup_icon1 {
+        display: none!important;
+    }
+    .pay_success_popup_icon2 {
+        display: flex!important;
+        margin-bottom: 23px!important;
+    }
+    .pay_success_popup_wrapper {
+        padding: 35px!important;
+        border-radius: 13px!important;
+        max-width: 425px!important;
+    }
+    .pay_success_popup_title {
+        font-size: 26px!important;
+        margin-bottom: 18px!important;
+    }
+    .react-datepicker__close-icon::after {
+        width: 18px!important;
+        height: 18px!important;
+    }
+    .react-datepicker__input-container input {
+        border-radius: 7px !important;
+        padding: 12px !important;
+        font-size: 18px !important;
+    }
+    .react-datepicker__input-container input::placeholder {
+        font-size: 18px !important;
+    }
+
+    .react-calendar__navigation__arrow {
+        font-size: 20px!important;
+    }
+    .react-calendar__month-view__weekdays {
+        margin-bottom: 13px!important;
+    }
+    .react-calendar__navigation__label__labelText.react-calendar__navigation__label__labelText--from {
+        font-size: 18px!important;
+    }
+    .react-calendar__month-view__weekdays__weekday {
+        font-size: 18px!important;
+    }
+    .react-calendar__month-view__days__day {
+        font-size: 18px!important;
+        margin-bottom: 8px!important;
+    }
+    .calendar_popup_title{
+        font-size: 16px!important;
+    }
+    .calendar_popup_title_icon_wrapper {
+        padding-bottom: 18px!important;
+        margin-bottom: 18px!important;
+    }
+    .calendar_popup_wrapper {
+        max-width: unset!important;
+        width: 90% !important;
+        margin: 0 auto;
+        padding: 25px 25px 28px 25px!important;
+        border-radius: 16px!important;
+    }
+    .appointment_register_form_dropdown_item {
+        font-size: 12px!important;
+        padding-bottom: 8px!important;
+    }
+    .appointment_register_section {
+        padding-top: 100px!important;
+        padding-bottom: 60px!important;
+    }
+    .appointment_register_title {
+        font-size: 27px!important;
+        margin-right: 16px!important;
+    }
+    .appointment_register_title_line_wrapper {
+        margin-bottom: 38px!important;
+    }
+    .appointment_register_form_input_field {
+        font-size: 12px!important;
+        padding: 12px!important;
+        border-radius: 5px!important;
+    }
+    .appointment_register_form_input {
+        margin-bottom: 15px!important;
+    }
+    .appointment_register_form_input_wrapper {
+        margin-bottom: 15px!important;
+    }
+    .appointment_register_form_input_field::placeholder {
+        font-size: 12px!important;
+    }
+    .appointment_register_form_input_field2 {
+        font-size: 12px!important;
+        padding: 12px!important;
+        border-radius: 5px!important;
+    }
+    .appointment_register_form_input_field2::placeholder {
+        font-size: 12px!important;
+    }
+
+    .appointment_register_form_input_field1 {
+        font-size: 12px!important;
+        border-radius: 5px!important;
+        height: 40.5px!important;
+        margin-right: 14px!important;
+        width: 40.5px!important;
+
+    }
+    .appointment_register_form_input_field1::placeholder {
+        font-size: 12px!important;
+    }
+    .appointment_register_form_dropdown_header {
+        padding: 12px!important;
+        border-radius: 5px!important;
+    }
+    .appointment_register_form_dropdown_header_title {
+        font-size: 12px!important;
+    }
+    .appointment_register_form_dropdown {
+        margin-bottom: 15px!important;
+    }
+    .appointment_register_form_pay_btn {
+        font-size: 14px!important;
+        width: 170px!important;
+        border-radius: 6px!important;
+        height: 30px!important;
+    }
+    .appointment_register_form_price_info {
+        font-size: 32px!important;
+    }
+    .appointment_register_form_price_info span {
+        font-size: 23px!important;
+    }
+    .appointment_register_form_price_info_title {
+        font-size: 17px!important;
+    }
+    .appointment_register_form_dropdown_header_icon_mobile {
+        display: flex!important;
+    }
+    .appointment_register_form_dropdown_header_icon {
+        display: none!important;
+    }
+}
+@media (min-width: 426px) and (max-width: 768px) {
+    .pay_success_popup_btn {
+        font-size: 10px!important;
+        max-width: 130px!important;
+        height: 22px!important;
+        border-radius: 5px!important;
+    }
+    .pay_success_popup_icon1 {
+        display: none!important;
+    }
+    .pay_success_popup_icon2 {
+        display: flex!important;
+        margin-bottom: 23px!important;
+    }
+    .pay_success_popup_wrapper {
+        padding: 30px!important;
+        border-radius: 12px!important;
+        max-width: 388px!important;
+    }
+    .pay_success_popup_title {
+        font-size: 23px!important;
+        margin-bottom: 17px!important;
+    }
+    .react-datepicker__close-icon::after {
+        width: 16px!important;
+        height: 16px!important;
+        font-size: 14px!important;
+    }
+    .react-datepicker__input-container input {
+        border-radius: 6px !important;
+        padding: 10px !important;
+        font-size: 16px !important;
+    }
+    .react-datepicker__input-container input::placeholder {
+        font-size: 16px !important;
+    }
+    .react-calendar__month-view__weekdays__weekday {
+        padding: unset!important;
+    }
+    .react-calendar__tile {
+        padding: unset!important;
+    }
+    .calendar_popup_close_btn_icon1 {
+        display: none!important;
+    }
+    .calendar_popup_close_btn_icon2 {
+        display: flex!important;
+    }
+    .react-calendar__navigation {
+        margin-bottom: 10px!important;
+    }
+    .react-calendar__navigation__arrow {
+        font-size: 18px!important;
+    }
+    .react-calendar__navigation {
+        width: 64% !important;
+    }
+    .react-calendar__month-view__weekdays {
+        margin-bottom: 11px!important;
+    }
+    .react-calendar__navigation__label__labelText.react-calendar__navigation__label__labelText--from {
+        font-size: 13px!important;
+    }
+    .react-calendar__month-view__weekdays__weekday {
+        font-size: 14px!important;
+    }
+    .react-calendar__month-view__days__day {
+        font-size: 14px!important;
+        margin-bottom: 7px!important;
+    }
+    .calendar_popup_title{
+        font-size: 12px!important;
+    }
+    .calendar_popup_title_icon_wrapper {
+        padding-bottom: 14px!important;
+        margin-bottom: 12px!important;
+    }
+    .calendar_popup_wrapper {
+        max-width: 390px!important;
+        width: 100%!important;
+        margin: 0 auto;
+        padding: 20px 20px 24px 20px!important;
+        border-radius: 12px!important;
+    }
+    .appointment_register_form_input textarea {
+        height: 77px!important;
+    }
+    .appointment_register_form_items_wrapper_mobile {
+        width: 100%;
+        display: flex!important;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .appointment_register_form_items_wrapper {
+        display: none!important;
+    }
+    .appointment_register_form_item {
+        width: 100% !important;
+
+    }
+    .appointment_register_section {
+        padding-top: 80px!important;
+        padding-bottom: 50px!important;
+    }
+    .appointment_register_title {
+        font-size: 26px!important;
+        margin-right: 15px!important;
+    }
+    .appointment_register_title_line_wrapper {
+        margin-bottom: 30px!important;
+    }
+    .appointment_register_form_input_field {
+        font-size: 10px!important;
+        padding: 9px 15px!important;
+        border-radius: 4px!important;
+    }
+    .appointment_register_form_input {
+        margin-bottom: 12px!important;
+    }
+    .appointment_register_form_input_field::placeholder {
+        font-size: 10px!important;
+    }
+    .appointment_register_form_input_field2 {
+        font-size: 10px!important;
+        padding: 9px 15px!important;
+        border-radius: 4px!important;
+    }
+    .appointment_register_form_input_field2::placeholder {
+        font-size: 10px!important;
+    }
+
+    .appointment_register_form_input_field1 {
+        font-size: 10px!important;
+        border-radius: 4px!important;
+        height: 32px!important;
+        margin-right: 10px!important;
+        width: 30px!important;
+
+    }
+    .appointment_register_form_input_field1::placeholder {
+        font-size: 10px!important;
+    }
+    .appointment_register_form_dropdown_header {
+        padding: 9px 15px!important;
+        border-radius: 4px!important;
+    }
+    .appointment_register_form_dropdown_header_title {
+        font-size: 10px!important;
+    }
+    .appointment_register_form_dropdown {
+        margin-bottom: 12px!important;
+    }
+    .appointment_register_form_pay_btn {
+        font-size: 10px!important;
+        width: 120px!important;
+        border-radius: 4px!important;
+        height: 25px!important;
+    }
+    .appointment_register_form_price_info {
+        font-size: 23px!important;
+    }
+    .appointment_register_form_price_info span {
+        font-size: 16px!important;
+    }
+    .appointment_register_form_price_info_title {
+        font-size: 13px!important;
+    }
+    .appointment_register_form_dropdown_header_icon_mobile {
+        display: flex!important;
+    }
+    .appointment_register_form_dropdown_header_icon {
+        display: none!important;
+    }
+    .appointment_register_form_input_wrapper {
+        margin-bottom: 12px!important;
+    }
+    .appointment_register_form_dropdown_item {
+        font-size: 10px!important;
+        padding-bottom: 6px!important;
+    }
+}
+@media (min-width: 388px) and (max-width: 426px) {
+    .react-calendar__navigation {
+        width: 64% !important;
+    }
+}
+@media (min-width: 348px) and (max-width: 388px) {
+    .react-calendar__navigation {
+        width: 72% !important;
+    }
+}
+@media  (max-width: 348px) {
+    .react-calendar__navigation {
+        width: 80% !important;
+    }
+}
+@media (max-width: 426px) {
+    .pay_success_popup_btn {
+        font-size: 10px!important;
+        max-width: 130px!important;
+        height: 22px!important;
+        border-radius: 5px!important;
+    }
+    .pay_success_popup_icon1 {
+        display: none!important;
+    }
+    .pay_success_popup_icon2 {
+        display: none!important;
+    }
+    .pay_success_popup_icon3 {
+        display: flex!important;
+        margin-bottom: 23px!important;
+    }
+    .pay_success_popup_wrapper {
+        padding: 26px!important;
+        border-radius: 10px!important;
+        max-width: unset!important;
+        width: 90% !important;
+    }
+    .pay_success_popup_title {
+        font-size: 20px!important;
+        margin-bottom: 14px!important;
+    }
+    .react-datepicker__close-icon::after {
+        width: 14px!important;
+        height: 14px!important;
+        font-size: 12px!important;
+    }
+    .react-datepicker__input-container input {
+        border-radius: 5px !important;
+        padding: 8px 12px!important;
+        font-size: 14px !important;
+    }
+    .react-datepicker__input-container input::placeholder {
+        font-size: 14px !important;
+    }
+    .react-calendar__month-view__weekdays__weekday {
+         padding: unset!important;
+    }
+    .react-calendar__tile {
+        padding: unset!important;
+    }
+    .react-calendar__navigation {
+        margin-bottom: 8px!important;
+    }
+    .react-calendar__navigation__arrow {
+        font-size: 16px!important;
+    }
+
+    .react-calendar__month-view__weekdays {
+        margin-bottom: 9px!important;
+    }
+    .react-calendar__navigation__label__labelText.react-calendar__navigation__label__labelText--from {
+        font-size: 11px!important;
+    }
+    .react-calendar__month-view__weekdays__weekday {
+        font-size: 11px!important;
+    }
+    .react-calendar__month-view__days__day {
+        font-size: 11px!important;
+        margin-bottom: 7px!important;
+    }
+    .calendar_popup_title{
+        font-size: 10px!important;
+    }
+    .calendar_popup_title_icon_wrapper {
+        padding-bottom: 11px!important;
+        margin-bottom: 11px!important;
+    }
+    .calendar_popup_wrapper {
+        max-width: unset!important;
+        width: 90%!important;
+        margin: 0 auto;
+        padding: 17px 17px 20px 17px!important;
+        border-radius: 10px!important;
+    }
+    .calendar_popup_close_btn_icon1 {
+        display: none!important;
+    }
+    .calendar_popup_close_btn_icon2 {
+        display: flex!important;
+    }
+    .appointment_register_form_dropdown_item {
+        font-size: 10px!important;
+        padding-bottom: 5px!important;
+    }
+    .appointment_register_form_input textarea {
+        height: 56px!important;
+    }
+    .appointment_register_form_items_wrapper_mobile {
+        width: 100%;
+        display: flex!important;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .appointment_register_form_items_wrapper {
+        display: none!important;
+    }
+    .appointment_register_form_item {
+        width: 100% !important;
+
+    }
+    .appointment_register_section {
+        padding-top: 90px!important;
+        padding-bottom: 50px!important;
+    }
+    .appointment_register_title {
+        font-size: 24px!important;
+        margin-right: unset!important;
+    }
+    .appointment_register_title_line_wrapper {
+        margin-bottom: 33px!important;
+    }
+    .appointment_register_form_input_field {
+        font-size: 10px!important;
+        padding: 9px 15px!important;
+        border-radius: 4px!important;
+    }
+    .appointment_register_form_input {
+        margin-bottom: 12px!important;
+    }
+    .appointment_register_form_input_field::placeholder {
+        font-size: 10px!important;
+    }
+    .appointment_register_form_input_field2 {
+        font-size: 10px!important;
+        padding: 9px 15px!important;
+        border-radius: 4px!important;
+    }
+    .appointment_register_form_input_field2::placeholder {
+        font-size: 10px!important;
+    }
+
+    .appointment_register_form_input_field1 {
+        font-size: 10px!important;
+        border-radius: 4px!important;
+        height: 32px!important;
+        margin-right: 10px!important;
+        width: 30px!important;
+
+    }
+    .appointment_register_form_input_field1::placeholder {
+        font-size: 10px!important;
+    }
+    .appointment_register_form_dropdown_header {
+        padding: 9px 15px!important;
+        border-radius: 4px!important;
+    }
+    .appointment_register_form_dropdown_header_title {
+        font-size: 10px!important;
+    }
+    .appointment_register_form_dropdown {
+        margin-bottom: 12px!important;
+    }
+    .appointment_register_form_pay_btn {
+        font-size: 10px!important;
+        width: 120px!important;
+        border-radius: 4px!important;
+        height: 25px!important;
+    }
+    .appointment_register_form_price_info {
+        font-size: 23px!important;
+    }
+    .appointment_register_form_price_info span {
+        font-size: 16px!important;
+    }
+    .appointment_register_form_price_info_title {
+        font-size: 13px!important;
+    }
+    .appointment_register_form_dropdown_header_icon_mobile {
+        display: flex!important;
+    }
+    .appointment_register_form_dropdown_header_icon {
+        display: none!important;
+    }
+    .appointment_register_form_input_wrapper {
+        margin-bottom: 12px!important;
+    }
+}
+

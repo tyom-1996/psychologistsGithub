@@ -1,0 +1,791 @@
+@font-face {
+    font-family: 'JejuMyeongjo';
+    src: url('/assets/fonts/JejuMyeongjo.eot');
+    src: url('/assets/fonts/JejuMyeongjo.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/JejuMyeongjo.woff2') format('woff2'),
+    url('/assets/fonts/JejuMyeongjo.woff') format('woff'),
+    url('/assets/fonts/JejuMyeongjo.ttf') format('truetype'),
+    url('/assets/fonts/JejuMyeongjo.svg#JejuMyeongjo') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+#psychologists-edit-profile {
+    width: 100%;
+    /*background-image: url("/images/back_img.jpg");*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    background-color: #0D0803;
+    height: 100%;
+}
+#patient-edit-profile {
+    width: 100%;
+    /*background-image: url("/images/back_img.jpg");*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    background-color: #0D0803;
+    height: 100%;
+}
+
+.edit_profile {
+    width: 100%;
+    padding-top: 150px;
+    padding-bottom: 100px;
+}
+
+.edit_profile_wrapper {
+    width: 100%;
+    max-width: 1593px;
+    margin: 0 auto;
+}
+
+.edit_profile_title_line_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 58px;
+}
+
+.edit_profile_title {
+    font-size: 29px;
+    font-weight: 400;
+    color: rgba(196, 125, 78, 1);
+    margin-right: 20px;
+    font-family: 'JejuMyeongjo', sans-serif;
+
+}
+
+.edit_profile_line {
+    border: 1px solid rgba(196, 125, 78, 1);
+    flex: 1;
+    height: 1px;
+    position: relative;
+    bottom: -10px;
+}
+
+.edit_profile_items_wrapper {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    /*justify-content: space-between;*/
+    margin-bottom: 20px;
+}
+
+.edit_profile_item1 {
+    max-width: 265px;
+    width: 100%;
+    position: relative;
+}
+
+
+.edit_profile_item1_img {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 248px;
+    width: 100%;
+    height: 283px;
+}
+.edit_profile_item1_img Image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.edit_profile_img_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    background: rgba(255, 255, 255, 1);
+    width: 47px;
+    height: 47px;
+    border: none;
+    border-radius: 100%;
+    position: absolute;
+    z-index: 999;
+    right: 0;
+    bottom: 0;
+
+}
+
+.edit_profile_item2 {
+    width: 100%;
+    max-width: 1345px;
+}
+.edit_profile_item2_input {
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+.edit_profile_form_input {
+    width: 100%;
+    margin-bottom: 30px;
+    position: relative;
+}
+.edit_profile_item2_inputs_wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+.edit_profile_item2_input_field {
+    width: 100%;
+    background: none;
+    border: 1px solid rgba(196, 125, 78, 1);
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    padding: 17px 16px;
+    font-family: 'JejuMyeongjo', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 15px;
+    position: relative;
+}
+.edit_profile_form_input_field {
+    width: 100%;
+    background: none;
+    border: 1px solid rgba(196, 125, 78, 1);
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    padding: 17px 16px;
+    font-family: 'JejuMyeongjo', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 15px;
+    position: relative;
+}
+.edit_profile_item2_input_field2 {
+    flex: 1;
+    background: none;
+    border: 1px solid rgba(196, 125, 78, 1);
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    padding: 17px 16px;
+    font-family: 'JejuMyeongjo', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 15px;
+    position: relative;
+}
+.edit_profile_item2_input_field1 {
+    background: none;
+    border: 1px solid rgba(196, 125, 78, 1);
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    font-family: 'JejuMyeongjo', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    text-align: center;
+}
+.edit_profile_item2_input_field::placeholder {
+    font-family: 'JejuMyeongjo', sans-serif;
+    color: rgba(124, 124, 124, 1);
+    font-weight: 400;
+    font-size: 15px;
+}
+.edit_profile_form_input_field::placeholder {
+    font-family: 'JejuMyeongjo', sans-serif;
+    color: rgba(124, 124, 124, 1);
+    font-weight: 400;
+    font-size: 15px;
+}
+.edit_profile_item2_input_field2::placeholder {
+    font-family: 'JejuMyeongjo', sans-serif;
+    color: rgba(124, 124, 124, 1);
+    font-weight: 400;
+    font-size: 15px;
+}
+.edit_profile_item2_input_field1::placeholder {
+    font-family: 'JejuMyeongjo', sans-serif;
+    color: rgba(124, 124, 124, 1);
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.edit_password_icon {
+    position: absolute;
+    right: 14px;
+    top: 13px;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+.edit_profile_item2_inputs_wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.edit_profile_btn {
+    background: rgba(196, 125, 78, 1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    max-width: 244px;
+    height: 41px;
+    width: 100%;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 18px;
+    font-family: 'JejuMyeongjo', sans-serif;
+    border: none;
+
+}
+
+.edit_profile_img_icon2 {
+    display: none;
+}
+
+.edit_password_icon2 {
+    display: none;
+}
+.edit_profile_item1_img_mobile2 {
+    display: none;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 125px;
+    width: 100%;
+    height: 155px;
+}
+.edit_profile_item1_img_mobile {
+    display: none;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 178px;
+    width: 100%;
+    height: 153px;
+}
+
+.edit_profile_item1_img_mobile Image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.edit_profile_item1_img_mobile2 Image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/*mobile*/
+@media (min-width: 600px) and (max-width: 3000px) {
+    .edit_profile_item1 {
+        margin-right: 10px;
+    }
+}
+@media (min-width: 760px) and (max-width: 1642px) {
+    .edit_profile_wrapper {
+        max-width: unset!important;
+        width: 90% !important;
+    }
+}
+@media (max-width: 760px) {
+    .edit_profile_wrapper {
+        max-width: unset!important;
+        width: 85% !important;
+    }
+}
+@media (min-width: 1000px) and (max-width: 1200px) {
+    .edit_profile_title_line_wrapper {
+        margin-bottom: 45px!important;
+    }
+    .edit_profile_item1_img {
+        border-radius: 14px!important;
+        max-width: 228px!important;
+        height: 263px!important;
+    }
+    .edit_profile_img_icon {
+        right: 20px!important;
+    }
+    .edit_profile_item1 {
+        max-width: 255px!important;
+    }
+}
+@media (min-width: 880px) and (max-width: 1000px) {
+    .edit_profile_img_icon {
+         width: 42px!important;
+        height: 42px!important;
+    }
+    .edit_profile_btn {
+        font-size: 16px!important;
+        max-width: 200px!important;
+        height: 38px!important;
+        border-radius: 8px!important;
+    }
+    .edit_profile_items_wrapper {
+        margin-bottom: 17px!important;
+    }
+    .edit_profile_item2_input {
+        margin-bottom: 18px!important;
+    }
+    .edit_profile_item2_inputs_wrapper {
+        margin-bottom: 18px!important;
+    }
+    .edit_profile_title_line_wrapper {
+        margin-bottom: 40px!important;
+    }
+    .edit_profile_item1_img {
+        border-radius: 12px!important;
+        max-width: 200px!important;
+        height: 238px!important;
+    }
+    .edit_profile_img_icon {
+        right: 15px!important;
+    }
+    .edit_profile_item1 {
+        max-width: 220px!important;
+    }
+    .edit_profile_title {
+        font-size: 28px!important;
+        margin-right: 18px!important;
+    }
+    .edit_profile_item2_input_field {
+        font-size: 14px!important;
+        padding: 15px!important;
+    }
+    .edit_profile_item2_input_field2 {
+        font-size: 14px!important;
+        padding: 15px!important;
+    }
+    .edit_profile_form_input_field {
+        font-size: 14px!important;
+        padding: 15px!important;
+    }
+    .edit_profile_item2_input_field1 {
+        width: 48px!important;
+        height: 48px!important;
+        margin-right: 17px!important;
+    }
+    .edit_profile_item2_input_field::placeholder {
+        font-size: 14px!important;
+    }
+    .edit_profile_item2_input_field1::placeholder {
+        font-size: 14px!important;
+    }
+    .edit_profile_item2_input_field2::placeholder {
+        font-size: 14px!important;
+    }
+    .edit_profile_form_input_field::placeholder {
+        font-size: 14px!important;
+    }
+    .edit_profile {
+        padding-top: 130px!important;
+    }
+}
+@media (min-width: 768px) and (max-width: 880px) {
+    .edit_password_icon2 {
+        right: 14px!important;
+        top: 13px!important;
+    }
+    .edit_password_icon2 {
+        position: absolute;
+        background: none;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        display: flex!important;
+    }
+    .edit_password_icon {
+        display: none!important;
+    }
+    .edit_profile_img_icon2 {
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        background: rgba(255, 255, 255, 1);
+        width: 30px!important;
+        height: 30px!important;
+        border: none;
+        border-radius: 100%;
+        position: absolute;
+        z-index: 999;
+        right: 6px;
+        bottom: 0;
+        display: flex!important;
+    }
+    .edit_profile_img_icon {
+        display: none!important;
+    }
+    .edit_profile_btn {
+        font-size: 12px!important;
+        max-width: 150px!important;
+        height: 30px!important;
+        border-radius: 6px!important;
+    }
+    .edit_profile_items_wrapper {
+        margin-bottom: 13px!important;
+    }
+    .edit_profile_item2_input {
+        margin-bottom: 13px!important;
+    }
+    .edit_profile_item2_inputs_wrapper {
+        margin-bottom: 13px!important;
+    }
+    .edit_profile_title_line_wrapper {
+        margin-bottom: 25px!important;
+    }
+    .edit_profile_item1_img {
+        border-radius: 9px!important;
+        max-width: 150px!important;
+        height: 170px!important;
+    }
+    .edit_profile_img_icon {
+        right: 12px!important;
+    }
+    .edit_profile_item1 {
+        max-width: 160px!important;
+    }
+    .edit_profile_title {
+        font-size: 26px!important;
+        margin-right: 13px!important;
+    }
+    .edit_profile_item2_input_field {
+        font-size: 12px!important;
+        padding: 11px 15px!important;
+        border-radius: 5px!important;
+    }
+    .edit_profile_item2_input_field2 {
+        font-size: 12px!important;
+        padding: 11px 15px!important;
+        border-radius: 5px!important;
+    }
+    .edit_profile_form_input_field {
+        font-size: 12px!important;
+        padding: 11px 15px!important;
+        border-radius: 5px!important;
+    }
+    .edit_profile_item2_input_field1 {
+        width: 38px!important;
+        height: 38px!important;
+        margin-right: 12px!important;
+        border-radius: 5px!important;
+    }
+    .edit_profile_item2_input_field::placeholder {
+        font-size: 12px!important;
+    }
+    .edit_profile_item2_input_field1::placeholder {
+        font-size: 12px!important;
+    }
+    .edit_profile_item2_input_field2::placeholder {
+        font-size: 12px!important;
+    }
+    .edit_profile_form_input_field::placeholder {
+        font-size: 12px!important;
+    }
+    .edit_profile {
+        padding-top: 110px!important;
+        padding-bottom: 70px!important;
+    }
+
+}
+@media (min-width: 426px) and (max-width: 768px) {
+    .edit_password_icon2 {
+        right: 11px!important;
+        top: 9px!important;
+    }
+    .edit_password_icon2 {
+        position: absolute;
+        background: none;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        display: flex!important;
+    }
+    .edit_password_icon {
+        display: none!important;
+    }
+    .edit_profile_img_icon2 {
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        background: rgba(255, 255, 255, 1);
+        width: 25px!important;
+        height: 25px!important;
+        border: none;
+        border-radius: 100%;
+        position: absolute;
+        z-index: 999;
+        right: 6px;
+        bottom: 0;
+        display: flex!important;
+    }
+    .edit_profile_img_icon {
+        display: none!important;
+    }
+    .edit_profile_btn {
+        font-size: 10px!important;
+        max-width: 110px!important;
+        height: 23px!important;
+        border-radius: 4px!important;
+    }
+    .edit_profile_items_wrapper {
+        margin-bottom: 12px!important;
+    }
+    .edit_profile_item2_input {
+        margin-bottom: 11px!important;
+    }
+    .edit_profile_item2_inputs_wrapper {
+        margin-bottom: 11px!important;
+    }
+    .edit_profile_title_line_wrapper {
+        margin-bottom: 21px!important;
+    }
+    .edit_profile_item1_img {
+        border-radius: 8px!important;
+        max-width: 133px!important;
+        height: 153px!important;
+    }
+    .edit_profile_img_icon {
+        right: 12px!important;
+    }
+    .edit_profile_item1 {
+        max-width: 143px!important;
+    }
+    .edit_profile_title {
+        font-size: 25px!important;
+        margin-right: 15px!important;
+    }
+    .edit_profile_item2_input_field {
+        font-size: 10px!important;
+        padding: 9px 15px!important;
+        border-radius: 3px!important;
+    }
+    .edit_profile_item2_input_field2 {
+        font-size: 10px!important;
+        padding: 9px 15px!important;
+        border-radius: 3px!important;
+    }
+    .edit_profile_form_input_field {
+        font-size: 10px!important;
+        padding: 9px 15px!important;
+        border-radius: 3px!important;
+    }
+    .edit_profile_item2_input_field1 {
+        width: 32px!important;
+        height: 30px!important;
+        margin-right: 10px!important;
+        border-radius: 3px!important;
+    }
+    .edit_profile_item2_input_field::placeholder {
+        font-size: 10px!important;
+    }
+    .edit_profile_item2_input_field1::placeholder {
+        font-size: 10px!important;
+    }
+    .edit_profile_item2_input_field2::placeholder {
+        font-size: 10px!important;
+    }
+    .edit_profile_form_input_field::placeholder {
+        font-size: 10px!important;
+    }
+    .edit_profile {
+        padding-top: 100px!important;
+        padding-bottom: 60px!important;
+    }
+
+}
+@media (max-width: 426px) {
+    .edit_password_icon2 {
+        position: absolute;
+        background: none;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        display: flex!important;
+    }
+    .edit_password_icon {
+        display: none!important;
+    }
+    .edit_profile_img_icon2 {
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        background: rgba(255, 255, 255, 1);
+        width: 25px!important;
+        height: 25px!important;
+        border: none;
+        border-radius: 100%;
+        position: absolute;
+        z-index: 999;
+        display: flex!important;
+        right: -1px!important;
+        bottom: -4px!important;
+    }
+    .edit_profile_img_icon {
+        display: none!important;
+    }
+    .edit_profile_btn {
+        font-size: 10px!important;
+        max-width: 110px!important;
+        height: 23px!important;
+        border-radius: 4px!important;
+    }
+    .edit_profile_items_wrapper {
+        margin-bottom: 12px!important;
+    }
+    .edit_profile_item2_input {
+        margin-bottom: 11px!important;
+    }
+    .edit_profile_item2_inputs_wrapper {
+        margin-bottom: 11px!important;
+    }
+    .edit_profile_img_icon {
+        right: 12px!important;
+    }
+    .edit_profile_item1 {
+        max-width: 143px!important;
+    }
+
+    .edit_profile_item2_input_field {
+        font-size: 10px!important;
+        padding: 9px 15px!important;
+        border-radius: 3px!important;
+    }
+    .edit_profile_item2_input_field2 {
+        font-size: 10px!important;
+        padding: 9px 15px!important;
+        border-radius: 3px!important;
+    }
+    .edit_profile_form_input_field {
+        font-size: 10px!important;
+        padding: 9px 15px!important;
+        border-radius: 3px!important;
+    }
+    .edit_profile_item2_input_field1 {
+        width: 32px!important;
+        height: 30px!important;
+        margin-right: 10px!important;
+        border-radius: 3px!important;
+    }
+    .edit_profile_item2_input_field::placeholder {
+        font-size: 10px!important;
+    }
+    .edit_profile_item2_input_field1::placeholder {
+        font-size: 10px!important;
+    }
+    .edit_profile_item2_input_field2::placeholder {
+        font-size: 10px!important;
+    }
+    .edit_profile_form_input_field::placeholder {
+        font-size: 10px!important;
+    }
+    .edit_profile {
+        padding-top: 100px!important;
+        padding-bottom: 60px!important;
+    }
+    .edit_profile_line {
+        display: none!important;
+    }
+    .edit_profile_title {
+        margin-right: unset!important;
+        text-align: center;
+        font-size: 25px!important;
+    }
+    .edit_profile_title_line_wrapper {
+        justify-content: center!important;
+        margin-bottom: 23px!important;
+    }
+    .edit_profile_items_wrapper {
+        flex-direction: column;
+    }
+    .edit_profile_item1 {
+        margin: 0 auto;
+        margin-bottom: 25px;
+        max-width: 189px!important;
+    }
+    #edit_profile_item_mobile {
+        margin: 0 auto;
+        margin-bottom: 25px;
+        max-width: 138px!important;
+    }
+    .edit_profile_item1_img {
+        display: none!important;
+    }
+    .edit_profile_item1_img_mobile {
+        display: flex !important;
+    }
+    .edit_profile_item1_img_mobile2 {
+        display: flex !important;
+    }
+    .edit_profile_form_input {
+        margin-bottom: 25px!important;
+    }
+    .edit_password_icon2 {
+        right: 11px!important;
+        top: 9px!important;
+    }
+
+}
+
+@media (min-width: 426px) and (max-width: 600px) {
+    .edit_profile_line {
+        display: none!important;
+    }
+    .edit_profile_title {
+        margin-right: unset!important;
+        text-align: center;
+    }
+    .edit_profile_title_line_wrapper {
+        justify-content: center!important;
+    }
+    .edit_profile_items_wrapper {
+        flex-direction: column;
+    }
+    .edit_profile_item1 {
+        margin: 0 auto;
+        margin-bottom: 25px;
+        max-width: 189px!important;
+    }
+
+    #edit_profile_item_mobile {
+        margin: 0 auto;
+        margin-bottom: 25px;
+        max-width: 138px!important;
+    }
+    .edit_profile_item1_img {
+         display: none!important;
+    }
+    .edit_profile_item1_img_mobile {
+        display: flex!important;
+    }
+    .edit_profile_item1_img_mobile2 {
+        display: flex!important;
+    }
+    .edit_profile_img_icon2 {
+        right: -1px!important;
+        bottom: -4px!important;
+    }
+}
