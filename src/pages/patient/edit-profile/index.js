@@ -9,6 +9,13 @@ import ProfileEditIcon1 from "@/assets/icons/profileEditIcon1";
 import ProfileEditIcon1Mobile from "@/assets/icons/profileEditIcon1Mobile";
 import ProfileEditIcon2Mobile from "@/assets/icons/profileEditIcon2Mobile";
 import ProfileEditIcon2 from "@/assets/icons/profileEditIcon2";
+import {useEditProfile} from "@/hooks/useEditProfile";
+import {useGetProfileInfo} from "@/hooks/useGetProfileInfo";
+import {useChangePassword} from "@/hooks/useChangePassword";
+import CloseIcon2 from "@/assets/icons/closeIcon2";
+import Link from "next/link";
+import {PasswordShowIcon} from "@/assets/icons/PasswordShowIcon";
+import {PasswordCloseIcon} from "@/assets/icons/PasswordCloseIcon";
 
 
 const PatientEditProfile = () => {
@@ -17,18 +24,58 @@ const PatientEditProfile = () => {
     const [name, setName] = useState('');
     const [surname, setSurName] = useState('');
     const [email, setEmail] = useState('');
+    const [about, setAbout] = useState('');
     const [password, setPassword] = useState('');
+    const [profileImage, setProfileImage] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState('+7');
+    const {editProfile, editProfileData } = useEditProfile();
+    const {changePassword, passwordError, newPasswordError, changePasswordData } = useChangePassword();
+    const {getProfileInfo, loadingUserInfo, profileInfoData } = useGetProfileInfo();
+    const [showEditPasswordPopup, setShowEditPasswordPopup] = useState(false);
+    const [isOldPasswordVisible, setIsOldPasswordVisible] = useState(false);
+    const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
+    const [oldPassword, setOldPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
 
     const router = useRouter();
 
-    const handleTabClick = (tab) => {
-        setActiveTab(tab);
-    };
+    const saveProfile = async (e) => {
+        e.preventDefault();
+        await editProfile(name, surname, email, phoneNumber, about)
+
+    }
+    const handleChangePassword = async (e) => {
+        e.preventDefault();
+        await changePassword(oldPassword, newPassword)
+
+    }
 
     useEffect(() => {
+        if (changePasswordData) {
+            if (changePasswordData?.message == "Password changed successfully") {
+                setShowEditPasswordPopup(false)
+            }
+        }
+    }, [changePasswordData])
 
-    }, []);
+    useEffect(() => {
+        if (profileInfoData) {
+            console.log(profileInfoData?.about, 'profileInfoData?.about____________')
+            setName(profileInfoData?.first_name);
+            setSurName(profileInfoData?.last_name);
+            setEmail(profileInfoData?.email);
+            setAbout(profileInfoData?.about);
+            setPhoneNumber(profileInfoData?.phone);
+            setProfileImage(profileInfoData?.image)
+        }
+
+    }, [profileInfoData]);
+    const togglePasswordVisibility1 = () => {
+        setIsOldPasswordVisible(!isOldPasswordVisible);
+    };
+    const togglePasswordVisibility2 = () => {
+        setIsNewPasswordVisible(!isNewPasswordVisible);
+    };
 
     return (
         <div className={'main_wrapper'} id={'patient-edit-profile'}>
@@ -43,7 +90,7 @@ const PatientEditProfile = () => {
                         <div className="edit_profile_item1">
                             <div className="edit_profile_item1_img">
                                 <Image
-                                    src="/images/edit_profile_img1.png"
+                                    src={profileImage ? profileImage : '/images/edit_profile_img1.png'}
                                     alt="Company Logo"
                                     layout="fill"
                                     objectFit="cover"
@@ -129,10 +176,17 @@ const PatientEditProfile = () => {
                                     placeholder='****************'
                                     className='edit_profile_item2_input_field'
                                 />
-                                <button className='edit_password_icon'>
+                                <button
+                                    className='edit_password_icon'
+                                    onClick={() => setShowEditPasswordPopup(true)}
+                                >
                                     <ProfileEditIcon1/>
                                 </button>
-                                <button className='edit_password_icon2'>
+
+                                <button
+                                    className='edit_password_icon2'
+                                    onClick={() => setShowEditPasswordPopup(true)}
+                                >
                                     <ProfileEditIcon1Mobile/>
                                 </button>
                             </div>
@@ -142,15 +196,103 @@ const PatientEditProfile = () => {
                              <textarea
                                  name="" id="" cols="10" rows="6" placeholder='Письмо'
                                  className='edit_profile_form_input_field'
+                                 value={about}
+                                 onChange={(e) => {
+                                     setAbout(e.target.value)
+                                 }}
                              ></textarea>
                     </div>
-                    <button className='edit_profile_btn'>
+                    <button
+                        className='edit_profile_btn'
+                        onClick={(e) => {
+                            saveProfile(e)
+                        }}
+                    >
                         Сохранить
+
                     </button>
                 </div>
             </section>
-
             <Footer activePage={"patient_profile"}/>
+
+            {showEditPasswordPopup &&
+                <div className={'edit_password_modal'}>
+                    <div className="edit_password_modal_wrapper">
+                        <button
+                            className='edit_password_modal_close_btn'
+                            onClick={() => {
+                                setShowEditPasswordPopup(false);
+                            }}
+                        >
+                            <CloseIcon2 />
+                        </button>
+                        <header className='login-wrapper_header2'>
+                            <Link href={'/'} className='login-wrapper_header_link'>
+                                <Image
+                                    src="/svg/logo.svg"
+                                    alt="Company Logo"
+                                    layout="fill"
+                                    objectFit="cover"
+                                    quality={100}
+                                />
+                            </Link>
+                        </header>
+                        <div className='login_form'>
+                            <div className='login_form_input'   id='login_form_input_field1'>
+                                <input
+                                    type={isOldPasswordVisible ? 'text' : 'password'}
+                                    value={oldPassword}
+                                    onChange={(e) => setOldPassword(e.target.value)}
+                                    placeholder='Старый пароль'
+                                    className='login_form_input_field'
+                                />
+                                <button
+                                    className='password_icon_btn'
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        togglePasswordVisibility1();
+                                    }}
+                                >
+                                    {isOldPasswordVisible ? <PasswordShowIcon /> : <PasswordCloseIcon />}
+                                </button>
+                            </div>
+                            {passwordError &&
+                                <p className="error_text">{passwordError}</p>
+                            }
+                            <div className='login_form_input'   id='login_form_input_field2'>
+                                <input
+                                    type={isNewPasswordVisible ? 'text' : 'password'}
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    placeholder='Новый пароль'
+                                    className='login_form_input_field'
+
+                                />
+                                <button
+                                    className='password_icon_btn'
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        togglePasswordVisibility2();
+                                    }}
+                                >
+                                    {isNewPasswordVisible ? <PasswordShowIcon /> : <PasswordCloseIcon />}
+                                </button>
+                            </div>
+                            {newPasswordError &&
+                                <p className="error_text">{newPasswordError}</p>
+                            }
+                            <div className="login_form_btn_parent">
+                                <button
+                                    className='login_form_btn'
+                                    onClick={(e) => handleChangePassword(e)}
+                                >
+                                    Изменить пароль
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
 
         </div>
     );

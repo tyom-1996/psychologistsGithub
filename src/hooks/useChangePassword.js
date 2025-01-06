@@ -122,58 +122,46 @@
 
 
 import { useState } from 'react';
-import { setNewPassword } from '../utils/api/authApi'; // Import the API function
+import { changePassword2 } from '../utils/api/authApi'; // Import the API function
 
-export const useSetNewPassword = () => {
+export const useChangePassword = () => {
     const [loading, setLoading] = useState(false);
-    const [emailErrorText, setEmailErrorText] = useState('');
-    const [newPasswordErrorText, setNewPasswordErrorText] = useState('');
-    const [confirmNewPasswordErrorText, setConfirmNewPasswordErrorText] = useState('');
-    const [newPasswordData, setNewPasswordData] = useState(null);
+    const [changePasswordData, setChangePasswordData] = useState(null);
+    const [passwordError, setPasswordError] = useState('');
+    const [newPasswordError, setNewPasswordError] = useState('');
 
-    const validateInputs = (email, newPassword, confirmNewPassword) => {
+    const validateInputs = (oldPassword, newPassword) => {
         let isValid = true;
-
-        // General validation for email or phone
-            if (!email.trim()) {
-                setEmailErrorText('Поле является обязательным.');
-                isValid = false;
-            }
-            if (!newPassword.trim()) {
-                setNewPasswordErrorText('Поле является обязательным.');
-                isValid = false;
-            }
-            if (!confirmNewPassword.trim()) {
-                setConfirmNewPasswordErrorText('Поле является обязательным.');
-                isValid = false;
-            }
+        if (!oldPassword) {
+            setPasswordError('Поле является обязательным.');
+            isValid = false;
+        }
+        if (!newPassword) {
+            setNewPasswordError('Поле является обязательным.');
+            isValid = false;
+        }
 
         return isValid;
     };
 
-    const newPasswordSet = async (email, newPassword, confirmNewPassword) => {
-        setLoading(true);
-        setEmailErrorText('');
-        setNewPasswordErrorText('');
-        setConfirmNewPasswordErrorText('');
 
-        const isValid = validateInputs(email, newPassword, confirmNewPassword);
+    const changePassword = async (oldPassword, newPassword) => {
+        setLoading(true);
+        setPasswordError('');
+        setNewPasswordError('');
+
+        const isValid = validateInputs(oldPassword,  newPassword);
         if (!isValid) {
             setLoading(false);
             return false;
         }
 
         try {
-            const data = await setNewPassword(email, newPassword, confirmNewPassword); // Call the API function
-            console.log(data, 'set_new_password')
-            setNewPasswordData(data);
+            const data = await changePassword2(oldPassword, newPassword); // Call the API function
+            setChangePasswordData(data);
         } catch (error) {
-            // Handle specific error cases
-           if (error === "Passwords do not match") {
-                setConfirmNewPasswordErrorText('Пароли не совпадают');
-            } else if (error === "User not found") {
-                setEmailErrorText('Неверные учетные данные')
-           } else {
+            if (error == 'Old password is incorrect') {
+                setPasswordError('Старый пароль неверен')
             }
         } finally {
             setLoading(false);
@@ -181,11 +169,10 @@ export const useSetNewPassword = () => {
     };
 
     return {
-        newPasswordSet,
-        newPasswordData,
+        changePassword,
+        changePasswordData,
+        passwordError,
+        newPasswordError,
         loading,
-        emailErrorText,
-        newPasswordErrorText,
-        confirmNewPasswordErrorText
     };
 };

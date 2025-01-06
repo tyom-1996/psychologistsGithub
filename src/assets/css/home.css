@@ -2257,3 +2257,209 @@
 .react-pagination li {
     list-style: none!important;
 }
+
+
+.error_text2 {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: red;
+    margin-top: 10px;
+
+}
+
+.pay_success_popup {
+    position: fixed;
+    background: #000000A3;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.pay_success_popup_wrapper {
+    width: 100%;
+    border: 0.86px solid rgba(196, 125, 78, 1);
+    max-width: 514px;
+    margin: 0 auto;
+    padding: 41px 0;
+    background: rgba(37, 22, 7, 1);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+}
+.pay_success_popup_close_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 999;
+}
+.pay_success_popup_icon1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.pay_success_popup_icon2 {
+    display: none;
+}
+.pay_success_popup_icon3 {
+    display: none;
+}
+.pay_success_popup_title {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 300;
+    font-size: 31px;
+    font-family: "Inter", serif;
+    margin-bottom: 21px;
+    text-align: center;
+}
+.pay_success_popup_btn {
+    background: rgba(196, 125, 78, 1);
+    width: 100%;
+    max-width: 171px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 13px;
+    font-family: 'JejuMyeongjo', sans-serif;
+    text-decoration: none;
+}
+
+.calendar_popup_close_btn_icon2 {
+    display: none;
+}
+
+@media (min-width: 768px) and (max-width: 860px) {
+    .calendar_popup_close_btn_icon1 {
+        display: none!important;
+    }
+    .calendar_popup_close_btn_icon2 {
+        display: flex!important;
+    }
+    .pay_success_popup_btn {
+        font-size: 12px !important;
+        max-width: 150px !important;
+        height: 25px !important;
+        border-radius: 6px !important;
+    }
+
+    .pay_success_popup_icon1 {
+        display: none !important;
+    }
+
+    .pay_success_popup_icon2 {
+        display: flex !important;
+        margin-bottom: 23px !important;
+    }
+
+    .pay_success_popup_wrapper {
+        padding: 35px !important;
+        border-radius: 13px !important;
+        max-width: 425px !important;
+    }
+
+    .pay_success_popup_title {
+        font-size: 26px !important;
+        margin-bottom: 18px !important;
+    }
+}
+@media (min-width: 426px) and (max-width: 768px) {
+    .calendar_popup_close_btn_icon1 {
+        display: none!important;
+    }
+    .calendar_popup_close_btn_icon2 {
+        display: flex!important;
+    }
+    .pay_success_popup_btn {
+        font-size: 10px !important;
+        max-width: 130px !important;
+        height: 22px !important;
+        border-radius: 5px !important;
+    }
+
+    .pay_success_popup_icon1 {
+        display: none !important;
+    }
+
+    .pay_success_popup_icon2 {
+        display: flex !important;
+        margin-bottom: 23px !important;
+    }
+
+    .pay_success_popup_wrapper {
+        padding: 30px !important;
+        border-radius: 12px !important;
+        max-width: 388px !important;
+    }
+
+    .pay_success_popup_title {
+        font-size: 23px !important;
+        margin-bottom: 17px !important;
+    }
+}
+
+@media (max-width: 426px) {
+    .calendar_popup_close_btn_icon1 {
+        display: none!important;
+    }
+    .calendar_popup_close_btn_icon2 {
+        display: flex!important;
+    }
+    .pay_success_popup_btn {
+        font-size: 10px !important;
+        max-width: 130px !important;
+        height: 22px !important;
+        border-radius: 5px !important;
+    }
+
+    .pay_success_popup_icon1 {
+        display: none !important;
+    }
+
+    .pay_success_popup_icon2 {
+        display: none !important;
+    }
+
+    .pay_success_popup_icon3 {
+        display: flex !important;
+        margin-bottom: 23px !important;
+    }
+
+    .pay_success_popup_wrapper {
+        padding: 26px !important;
+        border-radius: 10px !important;
+        max-width: unset !important;
+        width: 90% !important;
+    }
+
+    .pay_success_popup_title {
+        font-size: 20px !important;
+        margin-bottom: 14px !important;
+    }
+}

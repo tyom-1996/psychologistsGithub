@@ -15,8 +15,11 @@ import FilterIcon from "@/assets/icons/filterIcon";
 import FilterIconMobile from "@/assets/icons/filterIconMobile";
 import FilterModal from "../../components/modals/FilterModal";
 import ReactPaginate from "react-paginate";
+import {useGetPsychologists} from "@/hooks/useGetPsychologists";
+import {useGetServices} from "@/hooks/useGetServices";
 
 const Specialists = () => {
+
     const [psychologistsList, setPsychologistsList] = useState([
         {
             id: 1,
@@ -92,11 +95,17 @@ const Specialists = () => {
         },
     ]);
     const [showFilterModal, setShowFilterModal] = useState(false);
-
+    const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/uploads');
+    const {getPsychologists, psychologistsData } = useGetPsychologists();
+    const {getServices, servicesData } = useGetServices();
     const router = useRouter();
 
     useEffect(() => {
+      getPsychologists()
+    }, []);
 
+    useEffect(() => {
+        getServices()
     }, []);
 
     // const handlePageClick = (event) => {
@@ -113,6 +122,13 @@ const Specialists = () => {
     const redirectTPsychologistsSinglePage = (id) => {
         router.push(`/specialists/${id}`);
     }
+    const handleApplyFilters = (selectedServiceIds) => {
+        const filterParams = {
+            service_ids: selectedServiceIds, // Wrap selected IDs in "service_ids" key
+        };
+        getPsychologists(filterParams); // Pass the formatted object
+    };
+
     return (
         <div className={'main_wrapper'} id={'specialists'}>
             <Header activePage={"specialists"} isLogged={true}/>
@@ -147,7 +163,7 @@ const Specialists = () => {
                         </div>
                     </div>
                     <div className='psychologists_items_wrapper'>
-                        {psychologistsList.map((item, index) => {
+                        {psychologistsData && psychologistsData.map((item, index) => {
                             return (
                                 <div
                                     className='psychologists_item psychologists_item2' key={index}
@@ -157,7 +173,7 @@ const Specialists = () => {
                                 >
                                     <div className='psychologists_item_img'>
                                         <Image
-                                            src={item.img}
+                                            src={item?.image ? `${imagePath}/${item?.image}` : '/images/psychologist_img4.png'}
                                             alt="Company Logo"
                                             layout="fill"
                                             objectFit="cover"
@@ -165,8 +181,8 @@ const Specialists = () => {
                                         />
                                     </div>
                                     <div className='psychologists_item_info_box'>
-                                        <p className='psychologists_item_name'>{item.name}</p>
-                                        <p className='psychologists_item_position'>{item.position}</p>
+                                        <p className='psychologists_item_name'>{item?.first_name} {item?.last_name}</p>
+                                        <p className='psychologists_item_position'>Психологи</p>
                                         <a href="" className='read_more_link'>
                                             <span className='read_more_link_text'>
                                                 Информация
@@ -204,7 +220,9 @@ const Specialists = () => {
             {showFilterModal && (
                 <FilterModal
                     isOpen={showFilterModal}
+                    services={servicesData}
                     onClose={() => setShowFilterModal(false)}
+                    handleApplyFilters={handleApplyFilters}
                 />
             )}
         </div>

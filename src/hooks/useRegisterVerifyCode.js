@@ -1,66 +1,37 @@
 import { useState } from 'react';
+import { verifyRegisterCode } from '../utils/api/authApi';
 
-export const useRegisterVerifyCode= () => {
+export const useRegisterVerifyCode = () => {
     const [loading, setLoading] = useState(false);
     const [codeErrorText, setCodeErrorText] = useState('');
-    const [loginData, setLoginData] = useState(null);
+    const [codeData, setCodeData] = useState(null);
 
-    const registerVerifyCode = async (email,phone, code) => {
-        console.log(email, 'body_________nsnnsns')
-
-        setCodeErrorText('')
+    const registerVerifyCode = async (email, code) => {
+        setCodeErrorText('');
         setLoading(true);
 
         try {
-            if (code.length == 0) {
+            // Validation for the code input
+            if (!code) {
                 setCodeErrorText('Поле является обязательным.');
-                setLoading(false);
                 return false;
+            }
+
+            // Call the API function to verify the code
+            const data = await verifyRegisterCode(email, code);
+            setCodeData(data); // Store the result if successful
+            return true;
+        } catch (error) {
+            if (error.message === 'Invalid confirmation code or email') {
+                setCodeErrorText('Неверный код подтверждения');
             } else {
-                setCodeErrorText('')
+                setCodeErrorText(error.message || 'Ошибка при входе');
             }
-
-            let body = {
-                code: code,
-            };
-
-            if (email) {
-                body.email = email;
-            } else if (phone) {
-                body.phone = phone;
-            }
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/verify-code`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body),
-            });
-
-            const data = await response.json();
-            console.log(data, 'response______________-')
-            if (!response.ok) {
-                if (data.message == 'Неверный код подтверждения') {
-                    setCodeErrorText('Неверный код подтверждения');
-                } else {
-                    setCodeErrorText('')
-                    throw new Error(data.message || 'Login failed');
-                }
-                setLoading(false);
-                return false;
-            }
-
-            setLoginData(data);
-            // console.log(data.token, 'data.token')
-            // localStorage.setItem('token', data.token); // Сохранение токена в localStorage
-        } catch (err) {
-            console.error(err.message);
-            // Handle unexpected errors
-            setCodeErrorText('Ошибка при входе');
+            return false;
         } finally {
-            setLoading(false);
+            setLoading(false); // Always stop loading after request
         }
     };
 
-    return { registerVerifyCode, loading, codeErrorText, loginData };
+    return { registerVerifyCode, loading, codeErrorText, codeData};
 };

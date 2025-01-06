@@ -95,6 +95,9 @@
     font-family: 'JejuMyeongjo', sans-serif;
     color: rgba(196, 125, 78, 1);
     margin-bottom: 38px;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 .patient_profile_item1_phone_link {

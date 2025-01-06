@@ -8,6 +8,7 @@ import { PasswordShowIcon } from '../../../assets/icons/PasswordShowIcon';
 import DropDownIcon from '../../../assets/icons/dropdownIcon';
 import DropDownMobileIcon from '../../../assets/icons/dropdownMobileIcon';
 import { PasswordCloseIcon } from '../../../assets/icons/PasswordCloseIcon';
+import { useRegister } from '../../../hooks/useRegister';
 
 const Register = () => {
     const [password, setPassword] = useState('');
@@ -15,28 +16,46 @@ const Register = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
     const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('+7'); // Initialize with "+7"
+    const [phone, setPhone] = useState('+7'); // Initialize with "+7"
     const [isChecked, setIsChecked] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedType, setSelectedType] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
+    const [checkError, setCheckError] = useState(false);
     const [options, setOptions] = useState([
         {
             id: 1,
-            name: "Вариант 1",
+            name: "Пациент",
         },
 
         {
             id: 2,
-            name: "Вариант 2",
+            name: "Психолог",
         },
-        {
-            id: 3,
-            name: "Вариант 3",
-        }
+
     ]);
+    const { fetchRegister, loading, nameErrorText, surnameErrorText, registerData,
+            emailErrorText, phoneErrorText, typeErrorText, passwordErrorText, confirmPasswordErrorText} = useRegister();
+    "User registered successfully. Please check your email to confirm registration."
+
+
+    useEffect(() => {
+        if (registerData) {
+            if (registerData?.message == "User registered successfully. Please check your email to confirm registration.") {
+                router.push(`/auth/register/code/${email}`);
+            }
+        }
+    }, [registerData]);
+
     const handleOptionClick = (option) => {
         setSelectedOption(option);
+        if (option == 'Пациент') {
+            setSelectedType('user')
+        } else if (option == 'Психолог') {
+             setSelectedType('psycholog')
+        }
         setIsOpen(false);
     };
 
@@ -54,6 +73,21 @@ const Register = () => {
 
     const toggleConfirmPasswordVisibility = () => {
         setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
+    };
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        //
+        // if (name != '' && surname != '' && email != '' && phone != '' &&  selectedType != ''  && password != '' && confirmPassword != '') {
+        //     if(!isChecked) {
+        //         setCheckError(true)
+        //         return false
+        //     }
+        // }
+
+
+
+        await fetchRegister(name, surname, email, phone, selectedType, password, confirmPassword);
     };
 
 
@@ -79,10 +113,31 @@ const Register = () => {
                         onChange={(e) => {
                             setName(e.target.value)
                         }}
-                        placeholder='Имя Фамилия'
+                        placeholder='Имя'
                         className='login_form_input_field'
                     />
                 </div>
+                {nameErrorText &&
+                    <p className='error_text'>
+                        {nameErrorText}
+                    </p>
+                }
+                <div className='login_form_input'>
+                    <input
+                        type='text'
+                        value={surname}
+                        onChange={(e) => {
+                            setSurname(e.target.value)
+                        }}
+                        placeholder='Фамилия'
+                        className='login_form_input_field'
+                    />
+                </div>
+                {surnameErrorText &&
+                    <p className='error_text'>
+                        {surnameErrorText}
+                    </p>
+                }
                 <div className='login_form_input'>
                     <input
                         type='text'
@@ -94,6 +149,11 @@ const Register = () => {
                         className='login_form_input_field'
                     />
                 </div>
+                {emailErrorText &&
+                    <p className='error_text'>
+                        {emailErrorText}
+                    </p>
+                }
                 <div className="login_form_input_wrapper">
                     <input
                         type="text"
@@ -104,11 +164,16 @@ const Register = () => {
                     <input
                         type="number"
                         className="login_form_input_field2"
-                        value={phoneNumber.slice(2)} // Display only the phone number part
-                        onChange={(e) => setPhoneNumber('+7' + e.target.value)} // Prepend "+7" on input change
+                        value={phone.slice(2)} // Display only the phone number part
+                        onChange={(e) => setPhone('+7' + e.target.value)} // Prepend "+7" on input change
                         placeholder="Номер Телефона"
                     />
                 </div>
+                {phoneErrorText &&
+                    <p className='error_text'>
+                        {phoneErrorText}
+                    </p>
+                }
                 <div className="dropdown_form">
                     <div
                         className='dropdown_header'
@@ -139,34 +204,50 @@ const Register = () => {
                         </ul>
                     )}
                 </div>
+                {typeErrorText &&
+                    <p className='error_text'>
+                        {typeErrorText}
+                    </p>
+                }
                 <div className='login_form_input' id='login_form_input_password1'>
                     <input
                         type={isPasswordVisible ? 'text' : 'password'}
                         value={password}
                         onChange={(e) =>
-                            setPassword( e.target.value)
+                            setPassword(e.target.value)
                         }
                         placeholder='Пароль'
                         className='login_form_input_field'
                     />
                     <button className='password_icon_btn' onClick={togglePasswordVisibility}>
-                        {isPasswordVisible ? <PasswordShowIcon /> : <PasswordCloseIcon />}
+                        {isPasswordVisible ? <PasswordShowIcon/> : <PasswordCloseIcon/>}
                     </button>
                 </div>
+                {passwordErrorText &&
+                    <p className='error_text'>
+                        {passwordErrorText}
+                    </p>
+                }
                 <div className='login_form_input' id='login_form_input_password2'>
                     <input
                         type={isConfirmPasswordVisible ? 'text' : 'password'}
                         value={confirmPassword}
                         onChange={(e) =>
-                            setConfirmPassword( e.target.value)
+                            setConfirmPassword(e.target.value)
                         }
                         placeholder='Повторите пароль*'
                         className='login_form_input_field'
                     />
                     <button className='password_icon_btn' onClick={toggleConfirmPasswordVisibility}>
-                        {isConfirmPasswordVisible ? <PasswordShowIcon /> : <PasswordCloseIcon />}
+                        {isConfirmPasswordVisible ? <PasswordShowIcon/> : <PasswordCloseIcon/>}
                     </button>
                 </div>
+                {confirmPasswordErrorText &&
+                    <p className='error_text'>
+                        {confirmPasswordErrorText}
+                    </p>
+                }
+
                 <div className='checkbox_input_title_wrapper'>
                     <label className='checkbox_input_label'>
                         <input
@@ -174,16 +255,21 @@ const Register = () => {
                             checked={isChecked}
                             onChange={handleCheckboxChange}
                         />
-                        <span className="custom_checkbox"></span>
+                        <span className={checkError ? 'custom_checkbox_error' : 'custom_checkbox'}></span>
 
                     </label>
-                   <span className='checkbox_input_title'>
+                    <span className='checkbox_input_title'>
                         Согласие на предоставление и обработку персональных данных в
                         соответствии с <span className='checkbox_input_title2'>пользовательским соглашением</span>
                     </span>
                 </div>
                 <div className="login_form_btn_parent">
-                    <button className='login_form_btn'>
+                    <button
+                        className='login_form_btn'
+                        onClick={(e) => {
+                            handleRegister(e)
+                        }}
+                    >
                         Регистрация
                     </button>
                 </div>
@@ -201,4 +287,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default withOutAuth(Register) ;

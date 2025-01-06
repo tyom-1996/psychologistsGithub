@@ -16,6 +16,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Import default styles
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import {useAppointmentBook} from "@/hooks/useAppointmentBook";
 
 const AppointmentRegister = () => {
     const [psychologistsList, setPsychologistsList] = useState([
@@ -93,7 +94,10 @@ const AppointmentRegister = () => {
         },
     ]);
     const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
+    const [promoCode, setPromoCode] = useState('');
+    const [message, setMessage] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('+7'); // Initialize with "+7"
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -118,12 +122,33 @@ const AppointmentRegister = () => {
     const [selectedTime, setSelectedTime] = useState(null);
     const [showDateTime, setShowDateTime] = useState(null);
     const [showPaySuccessPopup, setShowPaySuccessPopup] = useState(false);
+    const {makeAppointmentBook, makeAppointmentBookData, nameError, surnameError, emailError, phoneError, messageError, selectedTimeError, selectedDateError} = useAppointmentBook();
+
+
+    useEffect(() => {
+        if (makeAppointmentBookData) {
+            if (makeAppointmentBookData?.message == "Appointment booked successfully") {
+                 setShowPaySuccessPopup(true)
+                 setName('');
+                 setSurname('');
+                 setEmail('');
+                 setPromoCode('');
+                 setMessage('');
+                 setPhoneNumber('');
+                 setSelectedDate('');
+                 setSelectedTime('');
+                 disableBodyScroll()
+            }
+        }
+    }, [makeAppointmentBookData])
+
     const handleDateChange = (date) => {
         setValue(date); // Update the calendar's selected date
         setSelectedDate(date.toLocaleDateString()); // Format and set the selected date
         setShowCalendar(false); // Close the calendar after selection
         enableBodyScroll()
     };
+
     const handleTimeChange = (time) => {
         if (time === null) {
             setSelectedTime(null); // Сбрасываем состояние
@@ -139,16 +164,24 @@ const AppointmentRegister = () => {
         }
     };
 
-
     const handleOptionClick = (option) => {
         setSelectedOption(option);
         setIsOpen(false);
     };
+
     const router = useRouter();
 
-    useEffect(() => {
+    const {id} = router.query; // Get the ID from the query
 
-    }, []);
+
+    useEffect(() => {
+        if (id) {
+            console.log(id, 'id________')
+        }
+    }, [id]);
+
+
+
 
     const disableBodyScroll = () => {
         document.body.style.overflow = "hidden";
@@ -158,6 +191,10 @@ const AppointmentRegister = () => {
         document.body.style.overflow = "auto";
     };
 
+    const bookAppointment = async () => {
+        let userId = localStorage.getItem('userId')
+        await makeAppointmentBook(id, userId, name, surname, email, phoneNumber, message, selectedTime, selectedDate, promoCode )
+    }
 
     return (
         <div className={'main_wrapper'} id={'appointmentRegister'}>
@@ -165,7 +202,9 @@ const AppointmentRegister = () => {
             <section className='appointment_register_section'>
                 <div className='appointment_register_wrapper'>
                     <div className='appointment_register_title_line_wrapper'>
-                        <h1 className='appointment_register_title'>Регистрация (Юрий Абалак)</h1>
+                        <h1 className='appointment_register_title'>
+                            Запис на приём
+                        </h1>
                         <div className='appointment_register_line'>
                         </div>
                     </div>
@@ -179,10 +218,33 @@ const AppointmentRegister = () => {
                                         onChange={(e) => {
                                             setName(e.target.value)
                                         }}
-                                        placeholder='Имя Фамилия'
+                                        placeholder='Имя'
                                         className='appointment_register_form_input_field'
                                     />
+                                    {nameError &&
+                                        <p className='error_text2'>
+                                            {nameError}
+                                        </p>
+                                    }
                                 </div>
+
+                                <div className='appointment_register_form_input'>
+                                    <input
+                                        type='text'
+                                        value={surname}
+                                        onChange={(e) => {
+                                            setSurname(e.target.value)
+                                        }}
+                                        placeholder='Фамилия'
+                                        className='appointment_register_form_input_field'
+                                    />
+                                    {surnameError &&
+                                        <p className='error_text2'>
+                                            {surnameError}
+                                        </p>
+                                    }
+                                </div>
+
                                 <div className="appointment_register_form_input_wrapper">
                                     <input
                                         type="text"
@@ -198,26 +260,31 @@ const AppointmentRegister = () => {
                                         placeholder="Номер Телефона"
                                     />
                                 </div>
-                                <div className="appointment_register_form_dropdown">
-                                    <div
-                                        className='appointment_register_form_dropdown_header'
-                                        onClick={() => {
-                                            setShowCalendar(true)
-                                            disableBodyScroll()
-                                        }}
-                                    >
-                                        <p className="appointment_register_form_dropdown_header_title">
-                                            {selectedDate || "Выбрать дату"}
-                                        </p>
-                                        <div className='appointment_register_form_dropdown_header_icon'>
-                                            <DropDownIcon/>
-                                        </div>
-                                        <div className='appointment_register_form_dropdown_header_icon_mobile'>
-                                            <DropDownMobileIcon/>
-                                        </div>
-                                    </div>
+                                {phoneError &&
+                                    <p className='error_text2' style={{marginBottom: 10}}>
+                                        {phoneError}
+                                    </p>
+                                }
+                                {/*<div className="appointment_register_form_dropdown">*/}
+                                {/*    <div*/}
+                                {/*        className='appointment_register_form_dropdown_header'*/}
+                                {/*        onClick={() => {*/}
+                                {/*            setShowCalendar(true)*/}
+                                {/*            disableBodyScroll()*/}
+                                {/*        }}*/}
+                                {/*    >*/}
+                                {/*        <p className="appointment_register_form_dropdown_header_title">*/}
+                                {/*            {selectedDate || "Выбрать дату"}*/}
+                                {/*        </p>*/}
+                                {/*        <div className='appointment_register_form_dropdown_header_icon'>*/}
+                                {/*            <DropDownIcon/>*/}
+                                {/*        </div>*/}
+                                {/*        <div className='appointment_register_form_dropdown_header_icon_mobile'>*/}
+                                {/*            <DropDownMobileIcon/>*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
 
-                                </div>
+                                {/*</div>*/}
                             </div>
                             <div className='appointment_register_form_item'>
                                 <div className='appointment_register_form_input'>
@@ -230,37 +297,56 @@ const AppointmentRegister = () => {
                                         placeholder='Эл.почта'
                                         className='appointment_register_form_input_field'
                                     />
-                                </div>
-                                <div className="appointment_register_form_dropdown">
-                                    <div
-                                        className='appointment_register_form_dropdown_header'
-                                        onClick={() => setIsOpen(!isOpen)}
-                                    >
-                                        <p className="appointment_register_form_dropdown_header_title">
-                                            {selectedOption || "Выбрать вариант приёма"}
+                                    {emailError &&
+                                        <p className='error_text2'>
+                                            {emailError}
                                         </p>
-                                        <div className='appointment_register_form_dropdown_header_icon'>
-                                            <DropDownIcon/>
-                                        </div>
-                                        <div className='appointment_register_form_dropdown_header_icon_mobile'>
-                                            <DropDownMobileIcon/>
-                                        </div>
-                                    </div>
-
-                                    {isOpen && (
-                                        <ul className="appointment_register_form_dropdown_menu">
-                                            {options.map((option, index) => (
-                                                <li
-                                                    key={index}
-                                                    className="appointment_register_form_dropdown_item"
-                                                    onClick={() => handleOptionClick(option?.name)}
-                                                >
-                                                    {option?.name}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
+                                    }
                                 </div>
+
+                                <div className='appointment_register_form_input'>
+                                    <input
+                                        type='text'
+                                        value={promoCode}
+                                        onChange={(e) => {
+                                            setPromoCode(e.target.value)
+                                        }}
+                                        placeholder='Промо-код'
+                                        className='appointment_register_form_input_field'
+                                    />
+
+                                </div>
+
+                                {/*<div className="appointment_register_form_dropdown">*/}
+                                {/*    <div*/}
+                                {/*        className='appointment_register_form_dropdown_header'*/}
+                                {/*        onClick={() => setIsOpen(!isOpen)}*/}
+                                {/*    >*/}
+                                {/*        <p className="appointment_register_form_dropdown_header_title">*/}
+                                {/*            {selectedOption || "Выбрать вариант приёма"}*/}
+                                {/*        </p>*/}
+                                {/*        <div className='appointment_register_form_dropdown_header_icon'>*/}
+                                {/*            <DropDownIcon/>*/}
+                                {/*        </div>*/}
+                                {/*        <div className='appointment_register_form_dropdown_header_icon_mobile'>*/}
+                                {/*            <DropDownMobileIcon/>*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
+
+                                {/*    {isOpen && (*/}
+                                {/*        <ul className="appointment_register_form_dropdown_menu">*/}
+                                {/*            {options.map((option, index) => (*/}
+                                {/*                <li*/}
+                                {/*                    key={index}*/}
+                                {/*                    className="appointment_register_form_dropdown_item"*/}
+                                {/*                    onClick={() => handleOptionClick(option?.name)}*/}
+                                {/*                >*/}
+                                {/*                    {option?.name}*/}
+                                {/*                </li>*/}
+                                {/*            ))}*/}
+                                {/*        </ul>*/}
+                                {/*    )}*/}
+                                {/*</div>*/}
                                 <div className="appointment_register_form_dropdown">
                                     <div
                                         className='appointment_register_form_dropdown_header'
@@ -279,8 +365,14 @@ const AppointmentRegister = () => {
                                             <DropDownMobileIcon/>
                                         </div>
                                     </div>
+                                    {selectedTimeError &&
+                                        <p className='error_text2'>
+                                            {selectedTimeError}
+                                        </p>
+                                    }
 
                                 </div>
+
                             </div>
                         </div>
 
@@ -292,10 +384,34 @@ const AppointmentRegister = () => {
                                     onChange={(e) => {
                                         setName(e.target.value)
                                     }}
-                                    placeholder='Имя Фамилия'
+                                    placeholder='Имя'
                                     className='appointment_register_form_input_field'
                                 />
+                                {nameError &&
+                                    <p className='error_text2'>
+                                        {nameError}
+                                    </p>
+                                }
                             </div>
+
+
+                            <div className='appointment_register_form_input'>
+                                <input
+                                    type='text'
+                                    value={surname}
+                                    onChange={(e) => {
+                                        setSurname(e.target.value)
+                                    }}
+                                    placeholder='Фамилия'
+                                    className='appointment_register_form_input_field'
+                                />
+                                {surnameError &&
+                                    <p className='error_text2'>
+                                        {surnameError}
+                                    </p>
+                                }
+                            </div>
+
                             <div className='appointment_register_form_input'>
                                 <input
                                     type='text'
@@ -306,7 +422,11 @@ const AppointmentRegister = () => {
                                     placeholder='Эл.почта'
                                     className='appointment_register_form_input_field'
                                 />
+                                {emailError &&
+                                    <p className="error_text2">{emailError}</p>
+                                }
                             </div>
+
                             <div className="appointment_register_form_input_wrapper">
                                 <input
                                     type="text"
@@ -322,36 +442,9 @@ const AppointmentRegister = () => {
                                     placeholder="Номер Телефона"
                                 />
                             </div>
-                            <div className="appointment_register_form_dropdown">
-                                <div
-                                    className='appointment_register_form_dropdown_header'
-                                    onClick={() => setIsOpen(!isOpen)}
-                                >
-                                    <p className="appointment_register_form_dropdown_header_title">
-                                        {selectedOption || "Выбрать вариант приёма"}
-                                    </p>
-                                    <div className='appointment_register_form_dropdown_header_icon'>
-                                        <DropDownIcon/>
-                                    </div>
-                                    <div className='appointment_register_form_dropdown_header_icon_mobile'>
-                                        <DropDownMobileIcon/>
-                                    </div>
-                                </div>
-
-                                {isOpen && (
-                                    <ul className="appointment_register_form_dropdown_menu">
-                                        {options.map((option, index) => (
-                                            <li
-                                                key={index}
-                                                className="appointment_register_form_dropdown_item"
-                                                onClick={() => handleOptionClick(option?.name)}
-                                            >
-                                                {option?.name}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
+                            {phoneError &&
+                                <p className='error_text2' style={{marginBottom: 10}}>{phoneError}</p>
+                            }
                             <div className="appointment_register_form_dropdown">
                                 <div
                                     className='appointment_register_form_dropdown_header'
@@ -370,8 +463,12 @@ const AppointmentRegister = () => {
                                         <DropDownMobileIcon/>
                                     </div>
                                 </div>
+                                {selectedDateError &&
+                                    <p className='error_text2'>{selectedDateError}</p>
+                                }
 
                             </div>
+
                             <div className="appointment_register_form_dropdown">
                                 <div
                                     className='appointment_register_form_dropdown_header'
@@ -390,24 +487,37 @@ const AppointmentRegister = () => {
                                         <DropDownMobileIcon/>
                                     </div>
                                 </div>
+                                {selectedTimeError &&
+                                    <p className='error_text2'>{selectedTimeError}</p>
+                                }
 
                             </div>
+
                         </div>
                         <div className='appointment_register_form_input'>
                              <textarea
                                  name="" id="" cols="10" rows="6" placeholder='Письмо'
                                  className='appointment_register_form_input_field'
+                                 value={message}
+                                 onChange={(e) => {
+                                     setMessage(e.target.value)
+                                 }}
                              ></textarea>
+                            {messageError &&
+                                <p className='error_text2'>{messageError}</p>
+                            }
                         </div>
+
                         <div className='appointment_register_form_pay_btn_price_info_wrapper'>
                             <button
                                 className='appointment_register_form_pay_btn'
                                 onClick={() => {
-                                    setShowPaySuccessPopup(true)
-                                    disableBodyScroll()
+                                    // setShowPaySuccessPopup(true)
+                                    // disableBodyScroll()
+                                    bookAppointment()
                                 }}
                             >
-                                Оплатить
+                                Записаться на приём
                             </button>
                             <div className="appointment_register_form_price_info_wrapper">
                                 <p className='appointment_register_form_price_info'>3000 <span>Руб.</span></p>
@@ -415,7 +525,7 @@ const AppointmentRegister = () => {
                             </div>
                         </div>
                     </div>
-                    {showCalendar  &&
+                    {showCalendar &&
                         <div className='calendar_popup'>
                             <div className='calendar_popup_wrapper'>
                                 <div className="calendar_popup_title_icon_wrapper">
@@ -517,9 +627,9 @@ const AppointmentRegister = () => {
                                 <h1 className='pay_success_popup_title'>
                                     Оплата Подтверждена
                                 </h1>
-                                <button className='pay_success_popup_btn'>
+                                <a href='/' className='pay_success_popup_btn'>
                                     Главная Страница
-                                </button>
+                                </a>
                             </div>
                         </div>
                     }
@@ -527,7 +637,6 @@ const AppointmentRegister = () => {
 
                 </div>
             </section>
-
             <Footer activePage={"appointment-register"}/>
 
         </div>

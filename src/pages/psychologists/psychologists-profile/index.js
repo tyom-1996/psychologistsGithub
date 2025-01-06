@@ -22,6 +22,8 @@ import ProfileCalendarTabletIcon from "@/assets/icons/profileCalendarIconTablet"
 import ProfileClockTabletIcon from "@/assets/icons/profileClockIconTablet";
 import ProfileCalendarMobileIcon from "@/assets/icons/profileCalendarIconMobile";
 import ProfileClockMobileIcon from "@/assets/icons/profileClockIconMobile";
+import {useGetProfileInfo} from "@/hooks/useGetProfileInfo";
+import {useGetAppointmentsSessions} from "@/hooks/useGetAppointmentsSessions";
 
 
 const PsychologistsProfile = () => {
@@ -111,15 +113,24 @@ const PsychologistsProfile = () => {
         },
     ]);
     const [activeTab, setActiveTab] = useState("about");
+    const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/upload/');
+    const { getProfileInfo, loadingUserInfo, profileInfoData } = useGetProfileInfo();
+    const { getAppointmentsSessions, appointmentsSessionsData } = useGetAppointmentsSessions();
+
     const router = useRouter();
+
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
-
     useEffect(() => {
+        const role = localStorage.getItem('role');
+        if (activeTab === "upcoming" || activeTab === "past") {
+            getAppointmentsSessions(role, activeTab); // Send request only for "upcoming" or "past"
+        }
+    }, [activeTab]);
 
-    }, []);
+
 
     const redirectToEditProfile = () => {
         router.push(`/psychologists/edit-profile`);
@@ -134,7 +145,7 @@ const PsychologistsProfile = () => {
                         <div className="patient_profile_item1_img_info_wrapper">
                             <div className="patient_profile_item1_img">
                                 <Image
-                                    src="/images/doctor_profile_img.png"
+                                    src={profileInfoData?.image ? `${imagePath / profileInfoData?.image}` : '/images/doctor_profile_img.png'}
                                     alt="Company Logo"
                                     layout="fill"
                                     objectFit="cover"
@@ -158,7 +169,7 @@ const PsychologistsProfile = () => {
                                         <ProfileEditIconMobile/>
                                    </span>
                                 </button>
-                                <h1 className='patient_profile_item1_title'>Юрий Абалак</h1>
+                                <h1 className='patient_profile_item1_title'> {profileInfoData?.first_name} {profileInfoData?.last_name}</h1>
                                 <p className='patient_profile_item1_title2'>Психолог</p>
                                 <a href="tel:+7000000000" className='patient_profile_item1_phone_link'>
                                     <span className='patient_profile_item1_phone_link_icon'>
@@ -171,7 +182,7 @@ const PsychologistsProfile = () => {
                                         <ProfilePhoneMobileIcon/>
                                     </span>
                                     <span className='patient_profile_item1_phone_link_info'>
-                                        +7 00 000 0000
+                                       {profileInfoData?.phone}
                                     </span>
                                 </a>
                                 <a href="mailto:Абалак@gmail.com" className='patient_profile_item1_phone_link'>
@@ -185,18 +196,18 @@ const PsychologistsProfile = () => {
                                         <ProfileEmailIconMobile/>
                                     </span>
                                     <span className='patient_profile_item1_phone_link_info'>
-                                       Абалак@gmail.com
+                                       {profileInfoData?.email}
                                     </span>
                                 </a>
                             </div>
                         </div>
                         <div className="patient_profile_item1_price_info_edit_btn_wrapper">
-                                <button
-                                    className='patient_profile_item1_edit_btn'
-                                    onClick={() => {
-                                        redirectToEditProfile()
-                                    }}
-                                >
+                            <button
+                                className='patient_profile_item1_edit_btn'
+                                onClick={() => {
+                                    redirectToEditProfile()
+                                }}
+                            >
                                    <span className='edit_icon1'>
                                         <ProfileEditIcon/>
                                    </span>
@@ -209,7 +220,7 @@ const PsychologistsProfile = () => {
                                 </button>
                                 <div className='patient_profile_item1_account_price_info_wrapper'>
                                     <p className='patient_profile_item1_account_price_info1'>
-                                        23000 <span>Руб.</span>
+                                        {profileInfoData?.balance} <span>Руб.</span>
                                     </p>
                                     <p className='patient_profile_item1_account_price_info2'>
                                         Ваш Счету
@@ -230,14 +241,14 @@ const PsychologistsProfile = () => {
                                 О себе
                             </button>
                             <button
-                                className={`patient_profile_tab ${activeTab === "planned" ? "patient_profile_tab_active" : ""}`}
-                                onClick={() => handleTabClick("planned")}
+                                className={`patient_profile_tab ${activeTab === "upcoming" ? "patient_profile_tab_active" : ""}`}
+                                onClick={() => handleTabClick("upcoming")}
                             >
                                 Запланированные
                             </button>
                             <button
-                                className={`patient_profile_tab ${activeTab === "completed" ? "patient_profile_tab_active" : ""}`}
-                                onClick={() => handleTabClick("completed")}
+                                className={`patient_profile_tab ${activeTab === "past" ? "patient_profile_tab_active" : ""}`}
+                                onClick={() => handleTabClick("past")}
                             >
                                 Завершенные
                             </button>
@@ -245,32 +256,32 @@ const PsychologistsProfile = () => {
                         {activeTab === "about" && (
                             <div className='patient_profile_about_item'>
                                 <p className='patient_profile_about_item_info'>
-                                    Александр Леонидович Мясников (род. 15 сентября 1953, Ленинград) — советский и российский врач-кардиолог, врач общей практики, теле-, радиоведущий и общественный деятель, автор книг о здоровье.  Родился в семье потомственных врачей, медицинская династия Мясниковых берёт начало в XIX веке. 34 В 1976 году окончил 2-й Московский медицинский институт имени Н. И. Пирогова, после чего до 1981 года проходил ординатуру и аспирантуру в Институте клинической кардиологии. В 1981 году в Институте кардиологии им. А. Л. Мясникова защитил диссертацию на соискание учёной степени кандидата медицинских наук.
-                                </p>
-                                <p className='patient_profile_about_item_info'>
-                                    Работал врачом группы геологов в Африке, в Народной Республике Мозамбик. В 1983 году трудился в провинции Замбези врачом общей практики. С 1984 по 1989 год служил старшим группы советских врачей-консультантов правительственного госпиталя «Пренда» в Анголе.  Вернувшись в Москву, совмещал работу врача-кардиолога во Всесоюзном кардиологическом научном центре
+                                    {profileInfoData?.about}
                                 </p>
                             </div>
                         )}
 
-                        {activeTab === "planned" && (
+                        {activeTab === "upcoming" && (
                             <div className="patient_profile_planned_item">
-                                {plannedList.map((item ,index) => {
+                                {appointmentsSessionsData && appointmentsSessionsData.map((item ,index) => {
                                     return (
                                         <div key={index} className="patient_profile_planned_item_child patient_profile_planned_item_child1">
-                                            <div className="patient_profile_planned_item_child_img">
-                                                <Image
-                                                    src={item.img}
-                                                    alt="Company Logo"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    quality={100}
-                                                />
+                                            {/*<div className="patient_profile_planned_item_child_img">*/}
+                                            {/*    <Image*/}
+                                            {/*        src={item.img}*/}
+                                            {/*        alt="Company Logo"*/}
+                                            {/*        layout="fill"*/}
+                                            {/*        objectFit="cover"*/}
+                                            {/*        quality={100}*/}
+                                            {/*    />*/}
 
-                                            </div>
+                                            {/*</div>*/}
                                             <div className="patient_profile_planned_item_child_info_wrapper">
                                                 <p className='patient_profile_planned_item_child_name'>
-                                                    {item.name}
+                                                    {item?.first_name} {item?.last_name}
+                                                </p>
+                                                <p className="patient_profile_planned_item_child_position">
+                                                    Психологи
                                                 </p>
                                                 <div className='patient_profile_planned_item_child_date_hour_info_item_wrapper'>
                                                     <div className='patient_profile_planned_item_child_date_hour_info_item'>
@@ -284,7 +295,7 @@ const PsychologistsProfile = () => {
                                                             <ProfileCalendarMobileIcon/>
                                                         </div>
                                                         <p className="patient_profile_planned_item_child_date_hour_info_item_title">
-                                                            {item.date}
+                                                            {item?.appointment_date}
                                                         </p>
                                                     </div>
                                                     <div className='patient_profile_planned_item_child_date_hour_info_item'>
@@ -298,12 +309,12 @@ const PsychologistsProfile = () => {
                                                             <ProfileClockMobileIcon/>
                                                         </div>
                                                         <p className="patient_profile_planned_item_child_date_hour_info_item_title">
-                                                            {item.hour}
+                                                            {item?.appointment_time}
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <p className='patient_profile_planned_item_child_price'>
-                                                    {item.price}
+                                                    {item?.price}
                                                     <span>Руб.</span>
                                                 </p>
                                             </div>
@@ -314,24 +325,27 @@ const PsychologistsProfile = () => {
                             </div>
                         )}
 
-                        {activeTab === "completed" && (
+                        {activeTab === "past" && (
                             <div className="patient_profile_planned_item">
-                                {completedList.map((item ,index) => {
+                                {appointmentsSessionsData && appointmentsSessionsData.map((item ,index) => {
                                     return (
                                         <div key={index} className="patient_profile_planned_item_child patient_profile_planned_item_child2">
-                                            <div className="patient_profile_planned_item_child_img">
-                                                <Image
-                                                    src={item.img}
-                                                    alt="Company Logo"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    quality={100}
-                                                />
+                                            {/*<div className="patient_profile_planned_item_child_img">*/}
+                                            {/*    <Image*/}
+                                            {/*        src={item.img}*/}
+                                            {/*        alt="Company Logo"*/}
+                                            {/*        layout="fill"*/}
+                                            {/*        objectFit="cover"*/}
+                                            {/*        quality={100}*/}
+                                            {/*    />*/}
 
-                                            </div>
+                                            {/*</div>*/}
                                             <div className="patient_profile_planned_item_child_info_wrapper">
                                                 <p className='patient_profile_planned_item_child_name'>
-                                                    {item.name}
+                                                    {item?.first_name} {item?.last_name}
+                                                </p>
+                                                <p className="patient_profile_planned_item_child_position">
+                                                    Психологи
                                                 </p>
                                                 <div className='patient_profile_planned_item_child_date_hour_info_item_wrapper'>
                                                     <div className='patient_profile_planned_item_child_date_hour_info_item'>
@@ -345,7 +359,7 @@ const PsychologistsProfile = () => {
                                                             <ProfileCalendarMobileIcon/>
                                                         </div>
                                                         <p className="patient_profile_planned_item_child_date_hour_info_item_title">
-                                                            {item.date}
+                                                            {item?.appointment_date}
                                                         </p>
                                                     </div>
                                                     <div className='patient_profile_planned_item_child_date_hour_info_item'>
@@ -359,12 +373,12 @@ const PsychologistsProfile = () => {
                                                             <ProfileClockMobileIcon/>
                                                         </div>
                                                         <p className="patient_profile_planned_item_child_date_hour_info_item_title">
-                                                            {item.hour}
+                                                            {item?.appointment_time}
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <p className='patient_profile_planned_item_child_price'>
-                                                    {item.price}
+                                                    {item?.price}
                                                     <span>Руб.</span>
                                                 </p>
                                             </div>

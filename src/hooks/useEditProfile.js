@@ -122,70 +122,30 @@
 
 
 import { useState } from 'react';
-import { setNewPassword } from '../utils/api/authApi'; // Import the API function
+import { editProfile2 } from '../utils/api/authApi'; // Import the API function
 
-export const useSetNewPassword = () => {
+export const useEditProfile = () => {
     const [loading, setLoading] = useState(false);
-    const [emailErrorText, setEmailErrorText] = useState('');
-    const [newPasswordErrorText, setNewPasswordErrorText] = useState('');
-    const [confirmNewPasswordErrorText, setConfirmNewPasswordErrorText] = useState('');
-    const [newPasswordData, setNewPasswordData] = useState(null);
+    const [editProfileData, setEditProfileData] = useState(null);
 
-    const validateInputs = (email, newPassword, confirmNewPassword) => {
-        let isValid = true;
-
-        // General validation for email or phone
-            if (!email.trim()) {
-                setEmailErrorText('Поле является обязательным.');
-                isValid = false;
-            }
-            if (!newPassword.trim()) {
-                setNewPasswordErrorText('Поле является обязательным.');
-                isValid = false;
-            }
-            if (!confirmNewPassword.trim()) {
-                setConfirmNewPasswordErrorText('Поле является обязательным.');
-                isValid = false;
-            }
-
-        return isValid;
-    };
-
-    const newPasswordSet = async (email, newPassword, confirmNewPassword) => {
+    const editProfile = async (name, surname, email, phoneNumber, about) => {
         setLoading(true);
-        setEmailErrorText('');
-        setNewPasswordErrorText('');
-        setConfirmNewPasswordErrorText('');
 
-        const isValid = validateInputs(email, newPassword, confirmNewPassword);
-        if (!isValid) {
-            setLoading(false);
-            return false;
-        }
 
         try {
-            const data = await setNewPassword(email, newPassword, confirmNewPassword); // Call the API function
-            console.log(data, 'set_new_password')
-            setNewPasswordData(data);
+            const data = await editProfile2(name, surname, email, phoneNumber, about); // Call the API function
+            console.log(data, 'edit_profile_______')
+            setEditProfileData(data);
         } catch (error) {
-            // Handle specific error cases
-           if (error === "Passwords do not match") {
-                setConfirmNewPasswordErrorText('Пароли не совпадают');
-            } else if (error === "User not found") {
-                setEmailErrorText('Неверные учетные данные')
-           } else {
-            }
+
         } finally {
             setLoading(false);
         }
     };
 
     return {
-        newPasswordSet,
-        newPasswordData,
+        editProfile,
+        editProfileData,
         loading,
-        emailErrorText,
-        newPasswordErrorText,
-        confirmNewPasswordErrorText
     };
 };

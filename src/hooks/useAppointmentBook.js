@@ -122,70 +122,94 @@
 
 
 import { useState } from 'react';
-import { setNewPassword } from '../utils/api/authApi'; // Import the API function
+import { makeAppointmentBook2 } from '../utils/api/authApi'; // Import the API function
 
-export const useSetNewPassword = () => {
+export const useAppointmentBook= () => {
     const [loading, setLoading] = useState(false);
-    const [emailErrorText, setEmailErrorText] = useState('');
-    const [newPasswordErrorText, setNewPasswordErrorText] = useState('');
-    const [confirmNewPasswordErrorText, setConfirmNewPasswordErrorText] = useState('');
-    const [newPasswordData, setNewPasswordData] = useState(null);
+    const [makeAppointmentBookData, setMakeAppointmentBookData] = useState(null);
+    const [nameError, setNameError] = useState('');
+    const [surnameError, setSurnameError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [phoneError, setPhoneError] = useState('');
+    const [messageError, setMessageError] = useState('');
+    const [selectedTimeError, setSelectedTimeError] = useState('');
+    const [selectedDateError, setSelectedDateError] = useState('');
 
-    const validateInputs = (email, newPassword, confirmNewPassword) => {
+    const validateInputs = (name, surname, email, phoneNumber, message, selectedTime, selectedDate) => {
         let isValid = true;
+        if (!name) {
+            setNameError('Поле является обязательн ым.');
+            isValid = false;
+        }
+        if (!surname) {
+            setSurnameError('Поле является обязательным.');
+            isValid = false;
+        }
+        if (!email) {
+            setEmailError('Поле является обязательным.');
+            isValid = false;
+        }
+        if (phoneNumber.length <= 2) {
+            setPhoneError('Поле является обязательным.');
+            isValid = false;
+        }
 
-        // General validation for email or phone
-            if (!email.trim()) {
-                setEmailErrorText('Поле является обязательным.');
-                isValid = false;
-            }
-            if (!newPassword.trim()) {
-                setNewPasswordErrorText('Поле является обязательным.');
-                isValid = false;
-            }
-            if (!confirmNewPassword.trim()) {
-                setConfirmNewPasswordErrorText('Поле является обязательным.');
-                isValid = false;
-            }
+
+        if (!message) {
+            setMessageError('Поле является обязательным.');
+            isValid = false;
+        }
+
+        if (!selectedTime) {
+            setSelectedTimeError('Поле является обязательным.');
+            isValid = false;
+        }
+        if (!selectedDate) {
+            setSelectedDateError('Поле является обязательным.');
+            isValid = false;
+        }
+
 
         return isValid;
     };
 
-    const newPasswordSet = async (email, newPassword, confirmNewPassword) => {
+    const makeAppointmentBook = async (id, userId,name, surname, email, phoneNumber, message, selectedTime, selectedDate, promoCode) => {
         setLoading(true);
-        setEmailErrorText('');
-        setNewPasswordErrorText('');
-        setConfirmNewPasswordErrorText('');
+        setNameError('');
+        setSurnameError('');
+        setEmailError('');
+        setPhoneError('');
+        setMessageError('');
+        setSelectedTimeError('');
+        setSelectedDateError('');
 
-        const isValid = validateInputs(email, newPassword, confirmNewPassword);
+        const isValid = validateInputs(name, surname, email, phoneNumber, message, selectedTime, selectedDate);
         if (!isValid) {
             setLoading(false);
             return false;
         }
 
         try {
-            const data = await setNewPassword(email, newPassword, confirmNewPassword); // Call the API function
-            console.log(data, 'set_new_password')
-            setNewPasswordData(data);
+            const data = await makeAppointmentBook2(id, userId, name, surname, email, phoneNumber, message, selectedTime, selectedDate, promoCode); // Call the API function
+            setMakeAppointmentBookData(data);
         } catch (error) {
-            // Handle specific error cases
-           if (error === "Passwords do not match") {
-                setConfirmNewPasswordErrorText('Пароли не совпадают');
-            } else if (error === "User not found") {
-                setEmailErrorText('Неверные учетные данные')
-           } else {
-            }
+            // if (error == 'Old password is incorrect') {
+            // }
         } finally {
             setLoading(false);
         }
     };
 
     return {
-        newPasswordSet,
-        newPasswordData,
+        makeAppointmentBook,
+        makeAppointmentBookData,
+        nameError,
+        surnameError,
+        emailError,
+        phoneError,
+        messageError,
+        selectedTimeError,
+        selectedDateError,
         loading,
-        emailErrorText,
-        newPasswordErrorText,
-        confirmNewPasswordErrorText
     };
 };

@@ -24,127 +24,23 @@ import ProfilePhoneTabletIcon from "@/assets/icons/profilePhoneIconTablet";
 import ProfileEditIconTablet from "@/assets/icons/profileEditIconTablet";
 import ProfileEditIconMobile from "@/assets/icons/profileEditIconMobile";
 import ProfileClockTabletIcon from "@/assets/icons/profileClockIconTablet";
+import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
+import { useGetAppointmentsSessions } from '@/hooks/useGetAppointmentsSessions';
+import { useGetCertificates } from '@/hooks/useGetCertificates';
+import { usePurchaseCertificates } from '@/hooks/usePurchaseCertificates';
 
 
 const PatientProfile = () => {
 
     const [showBuyCertificatePopup, setShowBuyCertificatePopup] = useState(false);
-    const [plannedList, setPlannedList] = useState([
-        {
-            id: 1,
-            img: '/images/planned_specialist_img1.png',
-            name: 'Александра Абалак',
-            position: 'Психологи',
-            price: '23000',
-            date: '03/04/2024',
-            hour: '13:00-14:00',
-        },
-        {
-            id: 2,
-            img: '/images/planned_specialist_img2.png',
-            name: 'Алла Абалак',
-            position: 'Психологи',
-            price: '23000',
-            date: '03/04/2024',
-            hour: '13:00-14:00',
-        },
-        {
-            id: 3,
-            img: '/images/planned_specialist_img3.png',
-            name: 'Анна Абалак',
-            position: 'Психологи',
-            price: '23000',
-            date: '03/04/2024',
-            hour: '13:00-14:00',
-        },
-        {
-            id: 4,
-            img: '/images/planned_specialist_img4.png',
-            name: 'Альберт Абалак',
-            position: 'Психологи',
-            price: '23000',
-            date: '03/04/2024',
-            hour: '13:00-14:00',
-        },
-        {
-            id: 5,
-            img: '/images/planned_specialist_img5.png',
-            name: 'Алина Абалак',
-            position: 'Психологи',
-            price: '23000',
-            date: '03/04/2024',
-            hour: '13:00-14:00',
-        },
-    ]);
-    const [completedList, setCompletedList] = useState([
-        {
-            id: 1,
-            img: '/images/completed_specialist_img1.png',
-            name: 'Александра Абалак',
-            position: 'Психологи',
-            price: '23000',
-            date: '03/04/2024',
-            hour: '13:00-14:00',
-        },
-        {
-            id: 2,
-            img: '/images/completed_specialist_img2.png',
-            name: 'Алла Абалак',
-            position: 'Психологи',
-            price: '23000',
-            date: '03/04/2024',
-            hour: '13:00-14:00',
-        },
-        {
-            id: 3,
-            img: '/images/completed_specialist_img3.png',
-            name: 'Анна Абалак',
-            position: 'Психологи',
-            price: '23000',
-            date: '03/04/2024',
-            hour: '13:00-14:00',
-        },
-        {
-            id: 4,
-            img: '/images/completed_specialist_img4.png',
-            name: 'Альберт Абалак',
-            position: 'Психологи',
-            price: '23000',
-            date: '03/04/2024',
-            hour: '13:00-14:00',
-        },
-        {
-            id: 5,
-            img: '/images/completed_specialist_img5.png',
-            name: 'Алина Абалак',
-            position: 'Психологи',
-            price: '23000',
-            date: '03/04/2024',
-            hour: '13:00-14:00',
-        },
-    ]);
     const [activeTab, setActiveTab] = useState("about");
-    const [certificatesList, setCertificatesList] = useState([
-        {
-            id: 1,
-            name: '1 сертификат',
-            price: '1000',
-        },
-        {
-            id: 2,
-            name: '2 сертификат',
-            price: '5000',
-        },
-        {
-            id: 3,
-            name: '3 сертификат',
-            price: '10000',
-        },
-
-
-
-    ]);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedCertificate, setSelectedCertificate] = useState(null);
+    const [selectedCertificateId, setSelectedCertificateId] = useState(null);
+    const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/upload/');
+    const { getProfileInfo, loadingUserInfo, profileInfoData } = useGetProfileInfo();
+    const { getAppointmentsSessions, appointmentsSessionsData } = useGetAppointmentsSessions();
+    const { getCertificates, certificatesData } = useGetCertificates();
+    const { purchaseCertificates, purchaseCertificatesData } = usePurchaseCertificates();
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -155,11 +51,30 @@ const PatientProfile = () => {
     const router = useRouter();
 
     useEffect(() => {
+        const role = localStorage.getItem('role');
+        if (activeTab === "upcoming" || activeTab === "past") {
+            getAppointmentsSessions(role, activeTab); // Send request only for "upcoming" or "past"
+        }
+    }, [activeTab]);
 
-    }, []);
+    useEffect(() => {
+        getCertificates()
+    }, [])
 
-    const handleOption1Change = (value) => {
-        setSelectedOption(value);
+    useEffect(() => {
+        if (purchaseCertificatesData) {
+             if (purchaseCertificatesData?.message == "Certificate purchased successfully") {
+                  setShowBuyCertificatePopup(false)
+             }
+             if (purchaseCertificatesData?.promo_code) {
+                  localStorage.setItem('promo_code', purchaseCertificatesData?.promo_code)
+             }
+        }
+    }, [purchaseCertificatesData])
+
+    const handleOption1Change = (item) => {
+        setSelectedCertificate(item?.name);
+        setSelectedCertificateId(item?.id);
     };
     const disableBodyScroll = () => {
         document.body.style.overflow = "hidden";
@@ -169,6 +84,11 @@ const PatientProfile = () => {
         document.body.style.overflow = "auto";
     };
 
+    const buyCertificates = async () => {
+        let userId = localStorage.getItem('userId')
+        console.log(userId, selectedCertificateId, 'idiss____')
+        await purchaseCertificates(userId, selectedCertificateId )
+    }
     return (
         <div className={'main_wrapper'} id={'patient-profile'}>
             <Header activePage={"patient_profile"} isLogged={true}/>
@@ -178,7 +98,7 @@ const PatientProfile = () => {
                         <div className="patient_profile_item1_img_info_wrapper">
                             <div className="patient_profile_item1_img">
                                 <Image
-                                    src="/images/patient_profile_img1.png"
+                                    src={profileInfoData?.image ? `${imagePath/profileInfoData?.image}` : '/images/patient_profile_img1.png'}
                                     alt="Company Logo"
                                     layout="fill"
                                     objectFit="cover"
@@ -202,7 +122,9 @@ const PatientProfile = () => {
                                         <ProfileEditIconMobile/>
                                    </span>
                                 </button>
-                                <h1 className='patient_profile_item1_title'>Юрий Абалак</h1>
+                                <h1 className='patient_profile_item1_title'>
+                                    {profileInfoData?.first_name} {profileInfoData?.last_name}
+                                </h1>
                                 <a href="tel:+7000000000" className='patient_profile_item1_phone_link'>
                                   <span className='patient_profile_item1_phone_link_icon'>
                                         <ProfilePhoneIcon/>
@@ -214,7 +136,7 @@ const PatientProfile = () => {
                                         <ProfilePhoneMobileIcon/>
                                     </span>
                                     <span className='patient_profile_item1_phone_link_info'>
-                                        +7 00 000 0000
+                                       {profileInfoData?.phone}
                                     </span>
                                 </a>
                                 <a href="mailto:Абалак@gmail.com" className='patient_profile_item1_phone_link'>
@@ -228,7 +150,7 @@ const PatientProfile = () => {
                                         <ProfileEmailIconMobile/>
                                     </span>
                                     <span className='patient_profile_item1_phone_link_info'>
-                                       Абалак@gmail.com
+                                       {profileInfoData?.email}
                                     </span>
                                 </a>
                                 <button
@@ -261,7 +183,7 @@ const PatientProfile = () => {
                                 </button>
                                 <div className='patient_profile_item1_account_price_info_wrapper'>
                                     <p className='patient_profile_item1_account_price_info1'>
-                                        23000 <span>Руб.</span>
+                                        {profileInfoData?.balance} <span>Руб.</span>
                                     </p>
                                     <p className='patient_profile_item1_account_price_info2'>
                                         Ваш Счету
@@ -282,14 +204,14 @@ const PatientProfile = () => {
                                 О себе
                             </button>
                             <button
-                                className={`patient_profile_tab ${activeTab === "planned" ? "patient_profile_tab_active" : ""}`}
-                                onClick={() => handleTabClick("planned")}
+                                className={`patient_profile_tab ${activeTab === "upcoming" ? "patient_profile_tab_active" : ""}`}
+                                onClick={() => handleTabClick("upcoming")}
                             >
                                 Запланированные
                             </button>
                             <button
-                                className={`patient_profile_tab ${activeTab === "completed" ? "patient_profile_tab_active" : ""}`}
-                                onClick={() => handleTabClick("completed")}
+                                className={`patient_profile_tab ${activeTab === "past" ? "patient_profile_tab_active" : ""}`}
+                                onClick={() => handleTabClick("past")}
                             >
                                 Завершенные
                             </button>
@@ -297,110 +219,34 @@ const PatientProfile = () => {
                         {activeTab === "about" && (
                             <div className='patient_profile_about_item'>
                                 <p className='patient_profile_about_item_info'>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                </p>
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                </p>
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised in
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                </p>
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                </p>
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                </p>
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+                                    {profileInfoData?.about}
                                 </p>
 
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised in
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                </p>
-
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting
-                                </p>
-
-
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                </p>
-
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting
-                                </p>
-
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                </p>
-
-
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting
-                                </p>
-                                <p className='patient_profile_about_item_info'>
-                                    remaining essentially unchanged. It was popularised inLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting
-
-                                </p>
 
                             </div>
                         )}
 
-                        {activeTab === "planned" && (
+                        {activeTab === "upcoming" && (
                             <div className="patient_profile_planned_item">
-                                {plannedList.map((item ,index) => {
+                                {appointmentsSessionsData && appointmentsSessionsData.map((item ,index) => {
                                     return (
                                         <div key={index} className="patient_profile_planned_item_child patient_profile_planned_item_child1">
-                                            <div className="patient_profile_planned_item_child_img">
-                                                <Image
-                                                    src={item.img}
-                                                    alt="Company Logo"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    quality={100}
-                                                />
+                                            {/*<div className="patient_profile_planned_item_child_img">*/}
+                                            {/*    <Image*/}
+                                            {/*        src={item.img}*/}
+                                            {/*        alt="Company Logo"*/}
+                                            {/*        layout="fill"*/}
+                                            {/*        objectFit="cover"*/}
+                                            {/*        quality={100}*/}
+                                            {/*    />*/}
 
-                                            </div>
+                                            {/*</div>*/}
                                             <div className="patient_profile_planned_item_child_info_wrapper">
                                                 <p className='patient_profile_planned_item_child_name'>
-                                                    {item.name}
+                                                    {item?.first_name} {item?.last_name}
                                                 </p>
                                                 <p className="patient_profile_planned_item_child_position">
-                                                    {item.position}
+                                                    Психологи
                                                 </p>
                                                 <div className='patient_profile_planned_item_child_date_hour_info_item_wrapper'>
                                                     <div className='patient_profile_planned_item_child_date_hour_info_item'>
@@ -414,7 +260,7 @@ const PatientProfile = () => {
                                                             <ProfileCalendarMobileIcon/>
                                                         </div>
                                                         <p className="patient_profile_planned_item_child_date_hour_info_item_title">
-                                                            {item.date}
+                                                            {item?.appointment_date}
                                                         </p>
                                                     </div>
                                                     <div className='patient_profile_planned_item_child_date_hour_info_item'>
@@ -428,12 +274,12 @@ const PatientProfile = () => {
                                                             <ProfileClockMobileIcon/>
                                                         </div>
                                                         <p className="patient_profile_planned_item_child_date_hour_info_item_title">
-                                                            {item.hour}
+                                                            {item?.appointment_time}
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <p className='patient_profile_planned_item_child_price'>
-                                                    {item.price}
+                                                    {item?.price}
                                                     <span>Руб.</span>
                                                 </p>
                                             </div>
@@ -444,27 +290,27 @@ const PatientProfile = () => {
                             </div>
                         )}
 
-                        {activeTab === "completed" && (
+                        {activeTab === "past" && (
                             <div className="patient_profile_planned_item">
-                                {completedList.map((item ,index) => {
+                                {appointmentsSessionsData && appointmentsSessionsData.map((item ,index) => {
                                     return (
                                         <div key={index} className="patient_profile_planned_item_child patient_profile_planned_item_child2">
-                                            <div className="patient_profile_planned_item_child_img">
-                                                <Image
-                                                    src={item.img}
-                                                    alt="Company Logo"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    quality={100}
-                                                />
+                                            {/*<div className="patient_profile_planned_item_child_img">*/}
+                                            {/*    <Image*/}
+                                            {/*        src={item.img}*/}
+                                            {/*        alt="Company Logo"*/}
+                                            {/*        layout="fill"*/}
+                                            {/*        objectFit="cover"*/}
+                                            {/*        quality={100}*/}
+                                            {/*    />*/}
 
-                                            </div>
+                                            {/*</div>*/}
                                             <div className="patient_profile_planned_item_child_info_wrapper">
                                                 <p className='patient_profile_planned_item_child_name'>
-                                                    {item.name}
+                                                    {item?.first_name} {item?.last_name}
                                                 </p>
                                                 <p className="patient_profile_planned_item_child_position">
-                                                    {item.position}
+                                                    Психологи
                                                 </p>
                                                 <div className='patient_profile_planned_item_child_date_hour_info_item_wrapper'>
                                                     <div className='patient_profile_planned_item_child_date_hour_info_item'>
@@ -478,7 +324,7 @@ const PatientProfile = () => {
                                                             <ProfileCalendarMobileIcon/>
                                                         </div>
                                                         <p className="patient_profile_planned_item_child_date_hour_info_item_title">
-                                                            {item.date}
+                                                            {item?.appointment_date}
                                                         </p>
                                                     </div>
                                                     <div className='patient_profile_planned_item_child_date_hour_info_item'>
@@ -492,12 +338,12 @@ const PatientProfile = () => {
                                                             <ProfileClockMobileIcon/>
                                                         </div>
                                                         <p className="patient_profile_planned_item_child_date_hour_info_item_title">
-                                                            {item.hour}
+                                                            {item?.appointment_time}
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <p className='patient_profile_planned_item_child_price'>
-                                                    {item.price}
+                                                    {item?.price}
                                                     <span>Руб.</span>
                                                 </p>
                                             </div>
@@ -536,20 +382,20 @@ const PatientProfile = () => {
                                 </button>
                             </div>
                             <div className='buy_certificate_popup_items_wrapper'>
-                                {certificatesList.map((item, index) => {
+                                {certificatesData && certificatesData.map((item, index) => {
                                     return (
                                         <label key={index} className='buy_certificate_popup_item'>
-                                            <span className='buy_certificate_popup_item_title'>{item.name}</span>
+                                            <span className='buy_certificate_popup_item_title'>{item?.name}</span>
                                             <div className='buy_certificate_popup_item_price_info_wrapper'>
-                                                <p className='buy_certificate_popup_item_price_info1'>{item.price} <span>Руб</span> .</p>
+                                                <p className='buy_certificate_popup_item_price_info1'>{item?.total_price} <span>Руб</span> .</p>
                                                 <span className='buy_certificate_popup_item_price_info2'>Цена сертификат</span>
                                             </div>
                                             <input
                                                 type="radio"
                                                 name="option1"
-                                                value={item.name}
-                                                checked={selectedOption === item.name}
-                                                onChange={() => handleOption1Change(item.name)}
+                                                value={item?.name}
+                                                checked={selectedCertificate === item?.name}
+                                                onChange={() => handleOption1Change(item)}
                                             />
                                             <span className="buy_certificate_popup_item_custom_radio"></span>
 
@@ -560,7 +406,12 @@ const PatientProfile = () => {
 
                             </div>
                             <div className='buy_certificate_popup_btn_parent'>
-                                <button className="buy_certificate_popup_btn">
+                                <button
+                                    className="buy_certificate_popup_btn"
+                                    onClick={() => {
+                                        buyCertificates()
+                                    }}
+                                >
                                     Купить
                                 </button>
                             </div>
@@ -569,7 +420,6 @@ const PatientProfile = () => {
                     </div>
                 )}
             </section>
-
             <Footer activePage={"patient_profile"}/>
 
         </div>

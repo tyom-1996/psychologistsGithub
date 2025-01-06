@@ -3,7 +3,7 @@ module.exports = {
         autoPrerender: false,
     },
     images: {
-        domains: ['5-63-153-114.cloudvps.regruhosting.ru'],
+        domains: ['api.menspsychology.ru'], // Add your external domain here
     },
 };
 

@@ -170,6 +170,11 @@
 .specialists_single_page_section_item1_price_info_box {
     max-width: 190px;
     width: 100%;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: flex-end;*/
+    /*align-items: flex-end;*/
+
 }
 
 .make_an_appointment_with_specialists_btn {
@@ -950,7 +955,7 @@
 .appointment_register_form_items_wrapper {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 10px;
 }
@@ -1212,7 +1217,7 @@
     font-weight: 400;
     font-size: 13px;
     font-family: 'JejuMyeongjo', sans-serif;
-
+     text-decoration: none;
 }
 .calendar_popup {
     position: fixed;
@@ -2129,3 +2134,12 @@
     }
 }
 
+
+.error_text2 {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: red;
+    margin-top: 10px;
+
+}

@@ -122,70 +122,71 @@
 
 
 import { useState } from 'react';
-import { setNewPassword } from '../utils/api/authApi'; // Import the API function
+import { makeFeedback2 } from '../utils/api/authApi'; // Import the API function
 
-export const useSetNewPassword = () => {
+export const useMakeFeedback= () => {
     const [loading, setLoading] = useState(false);
-    const [emailErrorText, setEmailErrorText] = useState('');
-    const [newPasswordErrorText, setNewPasswordErrorText] = useState('');
-    const [confirmNewPasswordErrorText, setConfirmNewPasswordErrorText] = useState('');
-    const [newPasswordData, setNewPasswordData] = useState(null);
+    const [makeFeedbackData, setMakeFeedbackData] = useState(null);
+    const [nameError, setNameError] = useState('');
+    const [surnameError, setSurnameError] = useState('');
+    const [phoneError, setPhoneError] = useState('');
+    const [messageError, setMessageError] = useState('');
 
-    const validateInputs = (email, newPassword, confirmNewPassword) => {
+    const validateInputs = (name, surname, phoneNumber, message) => {
         let isValid = true;
+        if (!name) {
+            setNameError('Поле является обязательн ым.');
+            isValid = false;
+        }
 
-        // General validation for email or phone
-            if (!email.trim()) {
-                setEmailErrorText('Поле является обязательным.');
-                isValid = false;
-            }
-            if (!newPassword.trim()) {
-                setNewPasswordErrorText('Поле является обязательным.');
-                isValid = false;
-            }
-            if (!confirmNewPassword.trim()) {
-                setConfirmNewPasswordErrorText('Поле является обязательным.');
-                isValid = false;
-            }
+        if (!surname) {
+            setSurnameError('Поле является обязательн ым.');
+            isValid = false;
+        }
+        if (phoneNumber.length <= 2) {
+            setPhoneError('Поле является обязательным.');
+            isValid = false;
+        }
+        if (!message) {
+            setMessageError('Поле является обязательн ым.');
+            isValid = false;
+        }
+
 
         return isValid;
     };
 
-    const newPasswordSet = async (email, newPassword, confirmNewPassword) => {
+    const makeFeedback = async (name, surname, phoneNumber, message) => {
         setLoading(true);
-        setEmailErrorText('');
-        setNewPasswordErrorText('');
-        setConfirmNewPasswordErrorText('');
+        setNameError('');
+        setSurnameError('');
+        setPhoneError('');
+        setMessageError('');
 
-        const isValid = validateInputs(email, newPassword, confirmNewPassword);
+
+        const isValid = validateInputs(name, surname, phoneNumber, message);
         if (!isValid) {
             setLoading(false);
             return false;
         }
 
         try {
-            const data = await setNewPassword(email, newPassword, confirmNewPassword); // Call the API function
-            console.log(data, 'set_new_password')
-            setNewPasswordData(data);
+            const data = await makeFeedback2(name, surname, phoneNumber, message); // Call the API function
+            setMakeFeedbackData(data);
         } catch (error) {
-            // Handle specific error cases
-           if (error === "Passwords do not match") {
-                setConfirmNewPasswordErrorText('Пароли не совпадают');
-            } else if (error === "User not found") {
-                setEmailErrorText('Неверные учетные данные')
-           } else {
-            }
+            // if (error == 'Old password is incorrect') {
+            // }
         } finally {
             setLoading(false);
         }
     };
 
     return {
-        newPasswordSet,
-        newPasswordData,
-        loading,
-        emailErrorText,
-        newPasswordErrorText,
-        confirmNewPasswordErrorText
+        makeFeedback,
+        makeFeedbackData,
+        nameError,
+        surnameError,
+        phoneError,
+        messageError
     };
 };

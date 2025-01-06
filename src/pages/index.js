@@ -7,6 +7,12 @@ import ArrowMobile from "../assets/icons/arrowMobileIcon";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import ReactPaginate from "react-paginate";
+import {useMakeFeedback} from "@/hooks/useMakeFeedback";
+import CalendarCloseIcon from "@/assets/icons/calendarCloseIcon";
+import CalendarCloseIconMobile from "@/assets/icons/calendarCloseIconMobile";
+import PayIcon from "@/assets/icons/payIcon";
+import PayTabletIcon from "@/assets/icons/payTabletIcon";
+import PayMobileIcon from "@/assets/icons/payMobileIcon";
 
 
 
@@ -35,6 +41,10 @@ export default function Home() {
     const [name, setName] = useState('');
     const [surname, setSurName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('+7'); // Initialize with "+7"
+    const [message, setMessage] = useState('');
+    const [showFeedbackSuccessPopup, setShowFeedbackSuccessPopup] = useState(false);
+    const { makeFeedback, makeFeedbackData, nameError, surnameError, phoneError, messageError } = useMakeFeedback();
+
 
     const handleInputChange = (e) => {
         const value = e.target.value;
@@ -48,7 +58,16 @@ export default function Home() {
     };
 
     useEffect(() => {
-    }, []);
+        if (makeFeedbackData) {
+            if (makeFeedbackData?.message == "Feedback submitted successfully") {
+                    setShowFeedbackSuccessPopup(true)
+                    setName('')
+                    setSurName('')
+                    setPhoneNumber('')
+                    setMessage('')
+            }
+        }
+    }, [makeFeedbackData]);
 
 
 
@@ -58,6 +77,17 @@ export default function Home() {
         router.push('/');
     };
 
+    const writeFeedback = async () => {
+        await  makeFeedback(name, surname, phoneNumber, message)
+    }
+
+    const disableBodyScroll = () => {
+        document.body.style.overflow = "hidden";
+    };
+
+    const enableBodyScroll = () => {
+        document.body.style.overflow = "auto";
+    };
     return (
         <div className={'main_wrapper'}>
             <Header activePage={"home_page"}/>
@@ -231,6 +261,9 @@ export default function Home() {
                                     placeholder='Имя'
                                     className='reverse_connection_form_input_field'
                                 />
+                                {nameError &&
+                                    <p className='error_text2'>{nameError}</p>
+                                }
                             </div>
                             <div className='reverse_connection_form_input'>
                                 <input
@@ -242,18 +275,11 @@ export default function Home() {
                                     placeholder='Фамилия'
                                     className='reverse_connection_form_input_field'
                                 />
+                                {surnameError &&
+                                    <p className='error_text2'>{surnameError}</p>
+                                }
                             </div>
-                            <div className='reverse_connection_form_input'>
-                                <input
-                                    type='text'
-                                    value={surname}
-                                    onChange={(e) => {
-                                        setSurName(e.target.value)
-                                    }}
-                                    placeholder='Фамилия'
-                                    className='reverse_connection_form_input_field'
-                                />
-                            </div>
+
                             <div className="reverse_connection_form_input_wraaper">
                                     <input
                                         type="text"
@@ -269,19 +295,71 @@ export default function Home() {
                                         placeholder="Номер Телефона"
                                     />
                             </div>
+                            {phoneError &&
+                                <p className='error_text2' style={{marginBottom: 10}}>{phoneError}</p>
+                            }
                             <div className='reverse_connection_form_input'>
                                 <textarea
                                     name="" id="" cols="10" rows="6" placeholder='Письмо'
                                     className='reverse_connection_form_input_field'
+                                    value={message}
+                                    onChange={(e) => {
+                                        setMessage(e.target.value)
+                                    }}
                                 ></textarea>
+                                {messageError &&
+                                    <p className='error_text2'>{messageError}</p>
+                                }
                             </div>
-                            <button className='reverse_connection_form_send_btn'>
+                            <button
+                                className='reverse_connection_form_send_btn'
+                                onClick={() => {
+                                    writeFeedback()
+                                }}
+                            >
                                 Отправить
                             </button>
                         </div>
                     </div>
                 </section>
             </main>
+
+            {showFeedbackSuccessPopup &&
+                <div className="pay_success_popup">
+                    <div className='pay_success_popup_wrapper'>
+                        <button
+                            className="pay_success_popup_close_btn"
+                            onClick={() => {
+                                setShowFeedbackSuccessPopup(false)
+                                enableBodyScroll()
+                            }}
+                        >
+                                 <span className='calendar_popup_close_btn_icon1'>
+                                       <CalendarCloseIcon/>
+                                </span>
+
+                                <span className='calendar_popup_close_btn_icon2'>
+                                        <CalendarCloseIconMobile/>
+                                </span>
+                        </button>
+                        <div className='pay_success_popup_icon_wrapper'>
+                                <span className='pay_success_popup_icon1'>
+                                        <PayIcon/>
+                                </span>
+                                <span className='pay_success_popup_icon2'>
+                                        <PayTabletIcon/>
+                                </span>
+                                <span className='pay_success_popup_icon3'>
+                                        <PayMobileIcon/>
+                                </span>
+                        </div>
+                        <h1 className='pay_success_popup_title'>
+                            Отзыв успешно отправлен
+                        </h1>
+
+                    </div>
+                </div>
+            }
 
             <Footer activPage={"home_page"}/>
         </div>
