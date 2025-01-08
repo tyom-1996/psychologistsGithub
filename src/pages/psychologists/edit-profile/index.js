@@ -17,6 +17,8 @@ import { PasswordCloseIcon } from '../../../assets/icons/PasswordCloseIcon';
 import { PasswordShowIcon } from '../../../assets/icons/PasswordShowIcon';
 import Link from "next/link";
 import {useChangePassword} from "@/hooks/useChangePassword";
+import EditFilterModal from "@/components/modals/EditFilterModal";
+import {useGetServices} from "@/hooks/useGetServices";
 
 
 const PsychologistsEditProfile = () => {
@@ -37,6 +39,15 @@ const PsychologistsEditProfile = () => {
     const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [showFilterModal, setShowFilterModal] = useState(false);
+    const {getServices, servicesData } = useGetServices();
+
+
+
+    useEffect(() => {
+        getServices()
+    }, []);
+
 
     const router = useRouter();
 
@@ -83,7 +94,7 @@ const PsychologistsEditProfile = () => {
 
     return (
         <div className={'main_wrapper'} id={'psychologists-edit-profile'}>
-            <Header activePage={"psychologists_profile"} isLogged={true}/>
+            <Header activePage={"psychologists_profile"} />
             <section className="edit_profile">
                 <div className="edit_profile_wrapper">
                     <div className='edit_profile_title_line_wrapper'>
@@ -172,31 +183,55 @@ const PsychologistsEditProfile = () => {
                             </div>
                             <div className='edit_profile_item2_input'>
                                 <input
-                                    type='password'
-                                    value={password}
-                                    onChange={(e) => {
-                                        setPassword(e.target.value)
-                                    }}
+                                    // type='password'
+                                    // value={password}
+                                    // onChange={(e) => {
+                                    //     setPassword(e.target.value)
+                                    // }}
                                     placeholder='****************'
                                     className='edit_profile_item2_input_field'
 
                                 />
-                                    <button
-                                        className='edit_password_icon'
-                                        onClick={() => setShowEditPasswordPopup(true)}
-                                    >
-                                        <ProfileEditIcon1/>
-                                    </button>
+                                <button
+                                    className='edit_password_icon'
+                                    onClick={() => setShowEditPasswordPopup(true)}
+                                >
+                                    <ProfileEditIcon1/>
+                                </button>
 
-                                    <button
-                                        className='edit_password_icon2'
-                                        onClick={() => setShowEditPasswordPopup(true)}
-                                    >
-                                        <ProfileEditIcon1Mobile/>
-                                    </button>
+                                <button
+                                    className='edit_password_icon2'
+                                    onClick={() => setShowEditPasswordPopup(true)}
+                                >
+                                    <ProfileEditIcon1Mobile/>
+                                </button>
 
 
+                            </div>
+                            <div className='edit_profile_item2_input'>
+                                <input
+                                    type='text'
+                                    // value={password}
+                                    // onChange={(e) => {
+                                    //     setPassword(e.target.value)
+                                    // }}
+                                    placeholder='Специализация'
+                                    className='edit_profile_item2_input_field'
+                                    readOnly={true}
+                                />
+                                <button
+                                    className='edit_password_icon'
+                                    onClick={() => setShowFilterModal(true)}
+                                >
+                                    <ProfileEditIcon1/>
+                                </button>
 
+                                <button
+                                    className='edit_password_icon2'
+                                    onClick={() => setShowFilterModal(true)}
+                                >
+                                    <ProfileEditIcon1Mobile/>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -297,6 +332,13 @@ const PsychologistsEditProfile = () => {
                     </div>
                 </div>
             }
+            {showFilterModal && (
+                <EditFilterModal
+                    isOpen={showFilterModal}
+                    services={servicesData}
+                    onClose={() => setShowFilterModal(false)}
+                />
+            )}
 
 
         </div>

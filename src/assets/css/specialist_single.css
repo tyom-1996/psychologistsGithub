@@ -83,7 +83,7 @@
     font-weight: 300;
     font-size: 33px;
     font-family: "Inter", serif;
-    margin-bottom: 43px;
+    margin-right: 10px;
 }
 
 .specialists_single_page_section_item1_price_dropdown_wrapper {
@@ -2142,4 +2142,25 @@
     color: red;
     margin-top: 10px;
 
+}
+.error_text_big {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: red;
+    margin-bottom: 15px;
+
+}
+
+.specialists_single_page_section_item1_infos_wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 43px;
+}
+
+@media (max-width: 768px) {
+    #appointment_register_form_dropdown_desktop {
+        display: none!important;
+    }
 }

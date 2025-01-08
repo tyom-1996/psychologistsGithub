@@ -123,6 +123,16 @@ const RecoveryAccountNewPassword = ({}) => {
             >
                 Сохранить
             </button>
+            <div className='recovery_line'>
+
+            </div>
+
+            <div className='login_form_register_info_link'>
+                <p className='login_form_register_info'>Еще не зарегистрированы?</p>
+                <Link href={'/auth/register'} className='login_form_register_link'>
+                    Регистрация
+                </Link>
+            </div>
         </div>
 
     </div>

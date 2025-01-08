@@ -134,6 +134,7 @@ export const useAppointmentBook= () => {
     const [messageError, setMessageError] = useState('');
     const [selectedTimeError, setSelectedTimeError] = useState('');
     const [selectedDateError, setSelectedDateError] = useState('');
+    const [balanceError, setBalanceError] = useState('');
 
     const validateInputs = (name, surname, email, phoneNumber, message, selectedTime, selectedDate) => {
         let isValid = true;
@@ -182,6 +183,7 @@ export const useAppointmentBook= () => {
         setMessageError('');
         setSelectedTimeError('');
         setSelectedDateError('');
+        setBalanceError('');
 
         const isValid = validateInputs(name, surname, email, phoneNumber, message, selectedTime, selectedDate);
         if (!isValid) {
@@ -193,8 +195,9 @@ export const useAppointmentBook= () => {
             const data = await makeAppointmentBook2(id, userId, name, surname, email, phoneNumber, message, selectedTime, selectedDate, promoCode); // Call the API function
             setMakeAppointmentBookData(data);
         } catch (error) {
-            // if (error == 'Old password is incorrect') {
-            // }
+            if (error == 'Insufficient balance') {
+                  setBalanceError('Недостаточный баланс')
+            }
         } finally {
             setLoading(false);
         }
@@ -210,6 +213,7 @@ export const useAppointmentBook= () => {
         messageError,
         selectedTimeError,
         selectedDateError,
+        balanceError,
         loading,
     };
 };

@@ -271,6 +271,7 @@
     max-width: 145px;
     width: 100%;
     height: 153px;
+    margin-right: 10px;
 }
 .patient_profile_planned_item_child_info_wrapper {
     flex: 1;

@@ -16,6 +16,9 @@ import CloseIcon2 from "@/assets/icons/closeIcon2";
 import Link from "next/link";
 import {PasswordShowIcon} from "@/assets/icons/PasswordShowIcon";
 import {PasswordCloseIcon} from "@/assets/icons/PasswordCloseIcon";
+import EditFilterModal from "@/components/modals/EditFilterModal";
+import {useGetServices} from "@/hooks/useGetServices";
+import {useServicesAssign} from "@/hooks/useServicesAssign";
 
 
 const PatientEditProfile = () => {
@@ -26,7 +29,6 @@ const PatientEditProfile = () => {
     const [email, setEmail] = useState('');
     const [about, setAbout] = useState('');
     const [password, setPassword] = useState('');
-    const [profileImage, setProfileImage] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState('+7');
     const {editProfile, editProfileData } = useEditProfile();
     const {changePassword, passwordError, newPasswordError, changePasswordData } = useChangePassword();
@@ -36,6 +38,33 @@ const PatientEditProfile = () => {
     const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [showFilterModal, setShowFilterModal] = useState(false);
+    const {getServices, servicesData } = useGetServices();
+    const [profileImage, setProfileImage] = useState(null); // Manage image for both desktop and mobile
+    const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/uploads');
+
+    const handleImageUpload =  (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = async () => {
+                setProfileImage(reader.result); // Set the uploaded image
+                try {
+                    await editProfile(profileImage);
+                    console.log("Profile updated successfully");
+                } catch (error) {
+                    console.error("Error updating profile:", error);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+
+
+    useEffect(() => {
+        getServices()
+    }, []);
 
     const router = useRouter();
 
@@ -60,16 +89,19 @@ const PatientEditProfile = () => {
 
     useEffect(() => {
         if (profileInfoData) {
-            console.log(profileInfoData?.about, 'profileInfoData?.about____________')
+            console.log(profileInfoData?.about, 'profileInfoData?.about____________');
             setName(profileInfoData?.first_name);
             setSurName(profileInfoData?.last_name);
             setEmail(profileInfoData?.email);
             setAbout(profileInfoData?.about);
             setPhoneNumber(profileInfoData?.phone);
-            setProfileImage(profileInfoData?.image)
-        }
 
+            // Correct way to create the image URL
+            const image = `${imagePath}/${profileInfoData?.image}`;
+            setProfileImage(image);
+        }
     }, [profileInfoData]);
+
     const togglePasswordVisibility1 = () => {
         setIsOldPasswordVisible(!isOldPasswordVisible);
     };
@@ -77,9 +109,17 @@ const PatientEditProfile = () => {
         setIsNewPasswordVisible(!isNewPasswordVisible);
     };
 
+    const disableBodyScroll = () => {
+        document.body.style.overflow = "hidden";
+    };
+
+    const enableBodyScroll = () => {
+        document.body.style.overflow = "auto";
+    };
+
     return (
         <div className={'main_wrapper'} id={'patient-edit-profile'}>
-            <Header activePage={"patient_profile"} isLogged={true}/>
+            <Header activePage={"patient_profile"}/>
             <section className="edit_profile">
                 <div className="edit_profile_wrapper">
                     <div className='edit_profile_title_line_wrapper'>
@@ -87,31 +127,84 @@ const PatientEditProfile = () => {
                         <div className="edit_profile_line"></div>
                     </div>
                     <div className='edit_profile_items_wrapper'>
+                        {/*<div className="edit_profile_item1">*/}
+                        {/*    <div className="edit_profile_item1_img">*/}
+                        {/*        <Image*/}
+                        {/*            src={profileImage ? profileImage : '/images/edit_profile_img1.png'}*/}
+                        {/*            alt="Company Logo"*/}
+                        {/*            layout="fill"*/}
+                        {/*            objectFit="cover"*/}
+                        {/*            quality={100}*/}
+                        {/*        />*/}
+                        {/*    </div>*/}
+
+                        {/*    <div className="edit_profile_item1_img_mobile">*/}
+                        {/*        <Image*/}
+                        {/*            src="/images/edit_profile_img_mobile.png"*/}
+                        {/*            alt="Company Logo"*/}
+                        {/*            layout="fill"*/}
+                        {/*            objectFit="cover"*/}
+                        {/*            quality={100}*/}
+                        {/*        />*/}
+                        {/*    </div>*/}
+                        {/*    <button className='edit_profile_img_icon'>*/}
+                        {/*        <ProfileEditIcon2/>*/}
+                        {/*    </button>*/}
+
+                        {/*    <button className='edit_profile_img_icon2'>*/}
+                        {/*        <ProfileEditIcon2Mobile/>*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
                         <div className="edit_profile_item1">
+                            {/* Desktop Image */}
                             <div className="edit_profile_item1_img">
                                 <Image
-                                    src={profileImage ? profileImage : '/images/edit_profile_img1.png'}
-                                    alt="Company Logo"
+                                    src={profileImage || "/images/edit_profile_img1.png"}
+                                    alt="Profile Image"
                                     layout="fill"
                                     objectFit="cover"
                                     quality={100}
                                 />
                             </div>
 
+                            {/* Mobile Image */}
                             <div className="edit_profile_item1_img_mobile">
                                 <Image
-                                    src="/images/edit_profile_img_mobile.png"
-                                    alt="Company Logo"
+                                    src={profileImage || "/images/edit_profile_img_mobile.png"}
+                                    alt="Profile Image"
                                     layout="fill"
                                     objectFit="cover"
                                     quality={100}
                                 />
                             </div>
-                            <button className='edit_profile_img_icon'>
+
+                            {/* Hidden file input for desktop */}
+                            <input
+                                type="file"
+                                id="desktopFileInput"
+                                accept="image/*"
+                                style={{display: "none"}}
+                                onChange={(e) => handleImageUpload(e)}
+                            />
+                            <button
+                                className="edit_profile_img_icon"
+                                onClick={() => document.getElementById("desktopFileInput").click()}
+                            >
                                 <ProfileEditIcon2/>
                             </button>
 
-                            <button className='edit_profile_img_icon2'>
+                            {/* Hidden file input for mobile */}
+                            <input
+                                type="file"
+                                id="mobileFileInput"
+                                accept="image/*"
+                                style={{display: "none"}}
+                                onChange={(e) => handleImageUpload(e)}
+                            />
+                            <button
+                                className="edit_profile_img_icon2"
+                                onClick={() => document.getElementById("mobileFileInput").click()}
+                            >
                                 <ProfileEditIcon2Mobile/>
                             </button>
                         </div>
@@ -175,6 +268,7 @@ const PatientEditProfile = () => {
                                     }}
                                     placeholder='****************'
                                     className='edit_profile_item2_input_field'
+                                    readOnly={true}
                                 />
                                 <button
                                     className='edit_password_icon'
@@ -186,6 +280,42 @@ const PatientEditProfile = () => {
                                 <button
                                     className='edit_password_icon2'
                                     onClick={() => setShowEditPasswordPopup(true)}
+                                >
+                                    <ProfileEditIcon1Mobile/>
+                                </button>
+                            </div>
+                            <div className='edit_profile_item2_input'>
+
+                                <input
+                                    type='text'
+                                    value={password}
+                                    onChange={(e) => {
+                                        setPassword(e.target.value)
+                                    }}
+                                    placeholder='Специализация'
+                                    className='edit_profile_item2_input_field'
+                                    readOnly={true}
+                                />
+                                <button
+                                    className='edit_password_icon'
+                                    onClick={() => {
+                                        setShowFilterModal(true)
+                                        disableBodyScroll()
+                                    }
+
+                                    }
+                                >
+                                    <ProfileEditIcon1/>
+                                </button>
+
+                                <button
+                                    className='edit_password_icon2'
+                                    onClick={() => {
+                                        setShowFilterModal(true)
+                                        disableBodyScroll()
+                                    }
+
+                                    }
                                 >
                                     <ProfileEditIcon1Mobile/>
                                 </button>
@@ -224,7 +354,7 @@ const PatientEditProfile = () => {
                                 setShowEditPasswordPopup(false);
                             }}
                         >
-                            <CloseIcon2 />
+                            <CloseIcon2/>
                         </button>
                         <header className='login-wrapper_header2'>
                             <Link href={'/'} className='login-wrapper_header_link'>
@@ -293,6 +423,13 @@ const PatientEditProfile = () => {
                     </div>
                 </div>
             }
+            {showFilterModal && (
+                <EditFilterModal
+                    isOpen={showFilterModal}
+                    services={servicesData}
+                    onClose={() => setShowFilterModal(false)}
+                />
+            )}
 
         </div>
     );

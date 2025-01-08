@@ -26,6 +26,7 @@ export async function getServerSideProps({ params }) {
 export default function Specialist ({id})  {
     const [showFilterModal, setShowFilterModal] = useState(false);
     const {getPsychologistSingle, psychologistSingleData } = useGetPsychologistSingle();
+    const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/uploads');
 
 
     const router = useRouter();
@@ -51,14 +52,14 @@ export default function Specialist ({id})  {
 
     return (
         <div className={'main_wrapper'} id={'specialists_single_page'}>
-            <Header activePage={"specialists"} isLogged={true}/>
+            <Header activePage={"specialists"} />
             <section className="specialists_single_page_section">
                 <div className="specialists_single_page_section_wrapper">
                     <div className="specialists_single_page_section_item1_mobile">
                         <div className='specialists_single_page_section_item1_mobile_child1'>
                             <div className="specialists_single_page_section_item1_img">
                                 <Image
-                                    src="/images/specialist_single_img1.png"
+                                    src={psychologistSingleData?.image ? `${imagePath}/${psychologistSingleData?.image}` : '/images/psychologist_img4.png'}
                                     alt="Company Logo"
                                     layout="fill"
                                     objectFit="cover"
@@ -69,7 +70,17 @@ export default function Specialist ({id})  {
                                 <h2 className='specialists_single_page_section_item1_title'>
                                     {psychologistSingleData?.first_name} {psychologistSingleData?.last_name}
                                 </h2>
-                                <p className='specialists_single_page_section_item1_info'>Психолог</p>
+                                <div className='specialists_single_page_section_item1_infos_wrapper'>
+                                    {psychologistSingleData?.services &&
+                                        psychologistSingleData?.services.map((item, index) => (
+                                            <p key={index} className='specialists_single_page_section_item1_info'>
+                                                {item?.name}{index !== psychologistSingleData?.services.length - 1 ? ',' : ''}
+                                            </p>
+                                        ))
+                                    }
+                                </div>
+
+
                             </div>
                         </div>
 
@@ -123,7 +134,7 @@ export default function Specialist ({id})  {
                     <div className="specialists_single_page_section_item1">
                         <div className="specialists_single_page_section_item1_img">
                             <Image
-                                src="/images/specialist_single_img1.png"
+                                src={psychologistSingleData?.image ? `${imagePath}/${psychologistSingleData?.image}` : '/images/psychologist_img4.png'}
                                 alt="Company Logo"
                                 layout="fill"
                                 objectFit="cover"
@@ -134,7 +145,17 @@ export default function Specialist ({id})  {
                             <h2 className='specialists_single_page_section_item1_title'>
                                 {psychologistSingleData?.first_name} {psychologistSingleData?.last_name}
                             </h2>
-                            <p className='specialists_single_page_section_item1_info'>Психолог</p>
+                            <div className='specialists_single_page_section_item1_infos_wrapper'>
+                                {psychologistSingleData?.services &&
+                                    psychologistSingleData?.services.map((item, index) => (
+                                        <p key={index} className='specialists_single_page_section_item1_info'>
+                                            {item?.name}{index !== psychologistSingleData?.services.length - 1 ? ',' : ''}
+                                        </p>
+                                    ))
+                                }
+                            </div>
+
+
                             <div className='specialists_single_page_section_item1_price_dropdown_wrapper'>
                                 {/*<div className="specialists_dropdown_form">*/}
                                 {/*    <div*/}
@@ -185,16 +206,12 @@ export default function Specialist ({id})  {
                     </div>
                     <div className="specialists_single_page_section_item2">
                         <div className='specialists_single_page_section_item2_title_line_wrapper'>
-                        <h1 className='specialists_single_page_section_item2_title'>Информация о специалисте</h1>
+                            <h1 className='specialists_single_page_section_item2_title'>Информация о специалисте</h1>
                             <div className='specialists_single_page_section_item2_line'></div>
                         </div>
                         <div className='specialists_single_page_section_item2_info_part'>
-                            <p className='specialists_single_page_section_item2_info'>
-                                Александр Леонидович Мясников (род. 15 сентября 1953, Ленинград) — советский и российский врач-кардиолог, врач общей практики, теле-, радиоведущий и общественный деятель, автор книг о здоровье.  Родился в семье потомственных врачей, медицинская династия Мясниковых берёт начало в XIX веке. 34 В 1976 году окончил 2-й Московский медицинский институт имени Н. И. Пирогова, после чего до 1981 года проходил ординатуру и аспирантуру в Институте клинической кардиологии. В 1981 году в Институте кардиологии им. А. Л. Мясникова защитил диссертацию на соискание учёной степени кандидата медицинских наук. 
-                            </p>
-                            <p className='specialists_single_page_section_item2_info'>
-                                Работал врачом группы геологов в Африке, в Народной Республике Мозамбик.
-                                В 1983 году трудился в провинции Замбези врачом общей практики. С 1984 по 1989 год служил старшим группы советских врачей-консультантов правительственного госпиталя «Пренда» в Анголе.  Вернувшись в Москву, совмещал работу врача-кардиолога во Всесоюзном кардиологическом научном центре.
+                        <p className='specialists_single_page_section_item2_info'>
+                                {psychologistSingleData?.about}
                             </p>
                         </div>
                     </div>

@@ -116,21 +116,32 @@ export const getProfileInfo2 = async () => {
     }
 };
 
-export const editProfile2 = async (name, surname, email, phoneNumber, about) => {
-    console.log(about, 'about_edit______')
+export const editProfile2 = async (name, surname, email, phoneNumber, about, profileImage) => {
+    console.log(about, 'about_edit______');
     try {
-        let body = {
-            first_name: name,
-            last_name: surname,
-            email: email,
-            phone: phoneNumber,
-            image: '',
-            about: about
-        };
+        // Create a FormData object
+        const formData = new FormData();
+
+        // Append all fields to the FormData object
+        formData.append('first_name', name);
+        formData.append('last_name', surname);
+        formData.append('email', email);
+        formData.append('phone', phoneNumber);
+        formData.append('about', about);
+
+        // Only append the image if it exists
+        if (profileImage) {
+            formData.append('image', profileImage);
+        }
 
 
+        console.log(profileImage, 'formdata_________')
         // Make the API call using the axios instance
-        const response = await apiClient.put('/profile', body);
+        const response = await apiClient.put('/profile', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Specify the correct content type
+            },
+        });
 
         // Return the response data
         return response.data;
@@ -139,6 +150,7 @@ export const editProfile2 = async (name, surname, email, phoneNumber, about) => 
         throw error.response?.data.message || error.message;
     }
 };
+
 export const makeAppointmentBook2 = async (id, userId, name, surname, email, phoneNumber, message, selectedTime, selectedDate, promoCode) => {
     try {
         let body = {
@@ -167,11 +179,13 @@ export const makeAppointmentBook2 = async (id, userId, name, surname, email, pho
         throw error.response?.data.message || error.message;
     }
 };
-export const getPsychologists2 = async (filters) => {
+export const getPsychologists2 = async (page,filters) => {
     try {
 
+        filters.page = page
+
         // Make the API call using the axios instance
-        const response = await apiClient.post('/psychologists', filters);
+        const response = await apiClient.post(`/psychologists`, filters);
 
         console.log(response, 'get_psychologists')
         // Return the response data
@@ -275,6 +289,22 @@ export const makeFeedback2 = async (name, surname, phoneNumber, message) => {
 
 
         console.log(response, 'write_feedback')
+
+        // Return the response data
+        return response.data;
+    } catch (error) {
+        // Throw the specific error message or general error
+        throw error.response?.data.message || error.message;
+    }
+};
+export const servicesAssign2 = async (filters) => {
+    try {
+
+        // Make the API call using the axios instance
+        const response = await apiClient.post('/services/assign', filters);
+
+
+        console.log(response, 'services_assign_____')
 
         // Return the response data
         return response.data;

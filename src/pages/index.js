@@ -13,6 +13,8 @@ import CalendarCloseIconMobile from "@/assets/icons/calendarCloseIconMobile";
 import PayIcon from "@/assets/icons/payIcon";
 import PayTabletIcon from "@/assets/icons/payTabletIcon";
 import PayMobileIcon from "@/assets/icons/payMobileIcon";
+import {useGetPsychologists} from "@/hooks/useGetPsychologists";
+import {useGetServices} from "@/hooks/useGetServices";
 
 
 
@@ -44,7 +46,13 @@ export default function Home() {
     const [message, setMessage] = useState('');
     const [showFeedbackSuccessPopup, setShowFeedbackSuccessPopup] = useState(false);
     const { makeFeedback, makeFeedbackData, nameError, surnameError, phoneError, messageError } = useMakeFeedback();
+    const {getPsychologists, psychologistsData } = useGetPsychologists();
 
+    const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/uploads');
+
+    useEffect(() => {
+        getPsychologists()
+    }, []);
 
     const handleInputChange = (e) => {
         const value = e.target.value;
@@ -193,43 +201,48 @@ export default function Home() {
                             <h1 className='psychologists_title'>Психологи</h1>
                             <div className="psychologists_line"></div>
                         </div>
-                        <div className='psychologists_items_wrapper'>
-                            {psychologistsList.map((item, index) => {
-                                return (
-                                    <div className='psychologists_item' key={index}>
-                                        <div className='psychologists_item_img'>
-                                            <Image
-                                                src={item.img}
-                                                alt="Company Logo"
-                                                layout="fill"
-                                                objectFit="cover"
-                                                quality={100}
-                                            />
-                                        </div>
-                                        <div className='psychologists_item_info_box'>
-                                            <p className='psychologists_item_name'>{item.name}</p>
-                                            <p className='psychologists_item_position'>{item.position}</p>
-                                            <a href="" className='read_more_link'>
-                                            <span className='read_more_link_text'>
-                                                Читать далее
-                                            </span>
-                                                <span className='read_more_link_arrow'>
-                                                <ArrowIcon/>
-                                            </span>
-                                                <span className='mobile_read_more_link_arrow'>
-                                                <ArrowMobile/>
-                                            </span>
-                                            </a>
-                                        </div>
 
-                                    </div>
-                                )
-                            })}
+                        <div className='psychologists_items_wrapper'>
+                            {psychologistsData?.data &&
+                                psychologistsData.data.slice(0, 6).map((item, index) => {
+                                    return (
+                                        <div
+                                            className='psychologists_item psychologists_item2' key={index}
+                                        >
+                                            <div className='psychologists_item_img'>
+                                                <Image
+                                                    src={item?.image ? `${imagePath}/${item?.image}` : '/images/psychologist_img4.png'}
+                                                    alt="Company Logo"
+                                                    layout="fill"
+                                                    objectFit="cover"
+                                                    quality={100}
+                                                />
+                                            </div>
+                                            <div className='psychologists_item_info_box'>
+                                                <p className='psychologists_item_name'>{item?.first_name} {item?.last_name}</p>
+                                                <p className='psychologists_item_position'>Психологи</p>
+                                                <a href="" className='read_more_link'>
+                                                    <span className='read_more_link_text'>
+                                                        Информация
+                                                    </span>
+                                                    <span className='read_more_link_arrow'>
+                                                        <ArrowIcon/>
+                                                    </span>
+                                                    <span className='mobile_read_more_link_arrow'>
+                                                         <ArrowMobile/>
+                                                     </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    );
+                                    })
+                                }
                         </div>
-                        <a href="" className='psychologists_more_link'>
-                                <span className='psychologists_more_link_text'>
-                                    Ещё
-                                </span>
+
+                        <a href="/specialists" className='psychologists_more_link'>
+                            <span className='psychologists_more_link_text'>
+                                Ещё
+                            </span>
                             <span className='psychologists_more_link_arrow'>
                                     <ArrowIcon/>
                             </span>
@@ -281,7 +294,7 @@ export default function Home() {
                             </div>
 
                             <div className="reverse_connection_form_input_wraaper">
-                                    <input
+                            <input
                                         type="text"
                                         className="reverse_connection_form_input_field1"
                                         value="+7"

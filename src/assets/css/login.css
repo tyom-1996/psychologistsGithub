@@ -58,8 +58,8 @@
     cursor: pointer;
     outline: none;
     text-decoration: none;
-    width: 107px;
-    height: 30px;
+    width: 100px;
+    height: 88px;
     position: relative;
 
 }
@@ -524,10 +524,10 @@
     .checkbox_input_title2 {
         font-size: 9px!important;
     }
-    .login-wrapper_header_link {
-        width: 80px!important;
-        height: 22px!important;
-    }
+    /*.login-wrapper_header_link {*/
+    /*    width: 80px!important;*/
+    /*    height: 22px!important;*/
+    /*}*/
     .forget_password_link {
         font-size: 10px!important;
     }
@@ -624,10 +624,10 @@
     .checkbox_input_title2 {
         font-size: 8px!important;
     }
-    .login-wrapper_header_link {
-        width: 65px!important;
-        height: 18px!important;
-    }
+    /*.login-wrapper_header_link {*/
+    /*    width: 65px!important;*/
+    /*    height: 18px!important;*/
+    /*}*/
     .forget_password_link {
         font-size: 10px!important;
     }
@@ -724,10 +724,10 @@
     .checkbox_input_title2 {
         font-size: 7px!important;
     }
-    .login-wrapper_header_link {
-        width: 46px!important;
-        height: 13px!important;
-    }
+    /*.login-wrapper_header_link {*/
+    /*    width: 46px!important;*/
+    /*    height: 13px!important;*/
+    /*}*/
     .login-wrapper {
         padding-bottom: 70px!important;
     }
@@ -892,4 +892,12 @@
     color: red;
     margin-top: 10px;
 
+}
+
+.recovery_line {
+    width: 100%;
+    height: 1px;
+    background: rgba(235, 235, 235, 1);
+    margin-bottom: 26px;
+    opacity: 22%;
 }

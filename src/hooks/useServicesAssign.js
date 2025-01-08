@@ -122,30 +122,30 @@
 
 
 import { useState } from 'react';
-import { editProfile2 } from '../utils/api/authApi'; // Import the API function
+import { servicesAssign2 } from '../utils/api/authApi'; // Import the API function
 
-export const useEditProfile = () => {
+export const useServicesAssign= () => {
     const [loading, setLoading] = useState(false);
-    const [editProfileData, setEditProfileData] = useState(null);
+    const [servicesAssignData, setServicesAssignData] = useState(null);
 
-    const editProfile = async (name, surname, email, phoneNumber, about, profileImage) => {
+
+    const servicesAssign = async (filters) => {
         setLoading(true);
 
-
         try {
-            const data = await editProfile2(name, surname, email, phoneNumber, about, profileImage); // Call the API function
-            console.log(data, 'edit_profile_______')
-            setEditProfileData(data);
+            const data = await servicesAssign2(filters); // Call the API function
+            setServicesAssignData(data);
         } catch (error) {
-
+            // if (error == 'Old password is incorrect') {
+            // }
         } finally {
             setLoading(false);
         }
     };
 
     return {
-        editProfile,
-        editProfileData,
+        servicesAssign,
+        servicesAssignData,
         loading,
     };
 };

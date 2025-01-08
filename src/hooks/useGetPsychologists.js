@@ -129,11 +129,11 @@ export const useGetPsychologists= (filters = {}) => {
     const [psychologistsData, setPsychologistsData] = useState(null);
 
 
-    const getPsychologists = async () => {
+    const getPsychologists = async (page = 1) => {
         setLoading(true);
 
         try {
-            const data = await getPsychologists2(filters); // Call the API function
+            const data = await getPsychologists2(page = 1,filters); // Call the API function
             setPsychologistsData(data);
         } catch (error) {
             // if (error == 'Old password is incorrect') {

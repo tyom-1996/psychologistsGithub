@@ -33,7 +33,7 @@ const Contact = () => {
 
     return (
         <div className={'main_wrapper'} id={'contact'}>
-            <Header activePage={"contact"} isLogged={true}/>
+            <Header activePage={"contact"} />
             <section className="contact">
                 <div className="contact_wrapper">
                     <div className="contact_title_line_wrapper">

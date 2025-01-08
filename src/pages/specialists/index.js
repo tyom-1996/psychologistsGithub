@@ -99,13 +99,21 @@ const Specialists = () => {
     const {getPsychologists, psychologistsData } = useGetPsychologists();
     const {getServices, servicesData } = useGetServices();
     const router = useRouter();
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
       getPsychologists()
     }, []);
 
+
     useEffect(() => {
-        getServices()
+        if (psychologistsData) {
+            console.log(psychologistsData, 'psychologistsData_________________')
+        }
+    }, [psychologistsData]);
+
+    useEffect(() => {
+        getServices(currentPage)
     }, []);
 
     // const handlePageClick = (event) => {
@@ -123,15 +131,20 @@ const Specialists = () => {
         router.push(`/specialists/${id}`);
     }
     const handleApplyFilters = (selectedServiceIds) => {
+        const numericIds = selectedServiceIds.map((id) => Number(id)); // Ensure all IDs are numbers
         const filterParams = {
-            service_ids: selectedServiceIds, // Wrap selected IDs in "service_ids" key
+            service_ids: numericIds, // Wrap numeric IDs in "service_ids"
         };
+        console.log(filterParams, 'filter_params______');
         getPsychologists(filterParams); // Pass the formatted object
     };
-
+    const handlePageClick = (event) => {
+        const selectedPage = event.selected + 1; // react-paginate uses 0-based index
+        setCurrentPage(selectedPage);
+    };
     return (
         <div className={'main_wrapper'} id={'specialists'}>
-            <Header activePage={"specialists"} isLogged={true}/>
+            <Header activePage={"specialists"} />
             <section className="psychologists">
                 <div className="psychologists_wrapper">
                     <div className="psychologists_title_line_wrapper2">
@@ -163,7 +176,7 @@ const Specialists = () => {
                         </div>
                     </div>
                     <div className='psychologists_items_wrapper'>
-                        {psychologistsData && psychologistsData.map((item, index) => {
+                        {psychologistsData?.data && psychologistsData?.data.map((item, index) => {
                             return (
                                 <div
                                     className='psychologists_item psychologists_item2' key={index}
@@ -200,19 +213,25 @@ const Specialists = () => {
                             )
                         })}
                     </div>
-                    <div className={'react-pagination-wrapper'}>
-                        <ReactPaginate
-                            className={'react-pagination'}
-                            breakLabel={null} // Hides the ellipsis
-                            nextLabel=">"
-                            pageRangeDisplayed={'5'} // Display all page numbers
-                            pageCount={"5"} // Total pages
-                            previousLabel="<"
-                            renderOnZeroPageCount={null}
-                            activeClassName={'react-pagination-active'}
-                        />
+                    {psychologistsData?.pagination.totalPages > 1 && (
+                        <div className={'react-pagination-wrapper'}>
+                            <ReactPaginate
+                                className={'react-pagination'}
+                                breakLabel={null}
+                                nextLabel=">"
+                                onPageChange={handlePageClick}
+                                pageRangeDisplayed={psychologistsData?.totalPages}
+                                marginPagesDisplayed={psychologistsData?.totalPages}
+                                pageCount={psychologistsData?.totalPages} // Use dynamic totalPages
+                                previousLabel="<"
+                                renderOnZeroPageCount={null}
+                                activeClassName={'react-pagination-active'}
+                            />
 
-                    </div>
+                        </div>
+                    )}
+
+
                 </div>
             </section>
             <Footer activePage={"specialists"}/>

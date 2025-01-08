@@ -30,8 +30,8 @@
     background: none;
     border: none;
     position: relative;
-    width: 107px;
-    height: 30px;
+    width: 100px;
+    height: 88px;
 }
 .header_logo_img Image {
     width: 100%;
@@ -233,7 +233,7 @@
     }
     .header_logo_img {
         width: 97px!important;
-        height: 27px!important;
+        /*height: 27px!important;*/
     }
 }
 
@@ -263,7 +263,7 @@
     }
     .header_logo_img {
         width: 97px!important;
-        height: 27px!important;
+        /*height: 27px!important;*/
     }
 }
 
@@ -297,7 +297,7 @@
     }
     .header_logo_img {
         width: 94px!important;
-        height: 26px!important;
+        /*height: 26px!important;*/
     }
 }
 @media (min-width: 1070px) and (max-width: 1120px) {
@@ -329,7 +329,7 @@
     }
     .header_logo_img {
         width: 94px!important;
-        height: 26px!important;
+        /*height: 26px!important;*/
     }
 }
 @media (min-width: 1000px) and (max-width: 1070px) {
@@ -361,7 +361,7 @@
     }
     .header_logo_img {
         width: 94px!important;
-        height: 26px!important;
+        /*height: 26px!important;*/
     }
 }
 @media (min-width: 910px) and (max-width: 1000px) {
@@ -393,7 +393,7 @@
     }
     .header_logo_img {
         width: 82px!important;
-        height: 23px!important;
+        height: 80px!important;
     }
 }
 @media (min-width: 860px) and (max-width: 910px) {
@@ -425,7 +425,7 @@
     }
     .header_logo_img {
         width: 82px!important;
-        height: 23px!important;
+        height: 80px!important;
     }
 }
 @media (min-width: 760px) and (max-width: 860px) {
@@ -495,7 +495,7 @@
     }
     .header_logo_img {
         width: 72px!important;
-        height: 20px!important;
+        height: 70px!important;
     }
     .header_hamburger_icon {
         display: flex!important;
@@ -568,7 +568,7 @@
     }
     .header_logo_img {
         width: 61px!important;
-        height: 17px!important;
+        height: 60px!important;
     }
     .header_hamburger_icon {
         display: flex!important;
@@ -644,8 +644,8 @@
         max-width: 85px!important;
     }
     .header_logo_img {
-        width: 50px!important;
-        height: 14px!important;
+        width: 60px!important;
+        height: 60px!important;
     }
     .header_hamburger_icon {
         display: flex!important;

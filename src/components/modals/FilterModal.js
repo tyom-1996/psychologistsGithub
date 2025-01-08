@@ -27,9 +27,16 @@ const FilterModal = ({ isOpen, onClose, services, handleApplyFilters }) => {
     };
 
     const handleOption2Change = (value) => {
-        setSelectedOptions2((prev) =>
-            prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-        );
+        const numericValue = Number(value); // Convert value to a number
+        if (!isNaN(numericValue)) { // Check if it's a valid number
+            setSelectedOptions2((prev) =>
+                prev.includes(numericValue)
+                    ? prev.filter((v) => v !== numericValue) // Remove if already selected
+                    : [...prev, numericValue] // Add if not selected
+            );
+        } else {
+            console.error("Invalid ID: not a number", value);
+        }
     };
 
     if (!isOpen) return null;
@@ -112,22 +119,23 @@ const FilterModal = ({ isOpen, onClose, services, handleApplyFilters }) => {
                     {/*</div>*/}
 
                     <div className={"filter_modal_section"}>
-                        {/*<h3 className={'filter_modal_section_title'}>Заголовок 2</h3>*/}
-                        <div className='filter_modal_section_child'>
-                            {services && services.map((service, idx) => (
-                                <label key={idx} className={'filter_modal_section_checkbox_input_label'}>
-                                    <span className='filter_modal_section_radio_input_label_title'>{service?.name}</span>
-                                    <input
-                                        type="checkbox"
-                                        value={service?.name}
-                                        checked={selectedOptions2.includes(service?.name)}
-                                        onChange={() => handleOption2Change(service?.name)}
-                                    />
-                                    <span className="custom_checkbox"></span>
-                                </label>
-                            ))}
+                        <div className="filter_modal_section_child">
+                            {services &&
+                                services.map((service, idx) => (
+                                    <label key={idx} className="filter_modal_section_checkbox_input_label">
+                                    <span className="filter_modal_section_radio_input_label_title">
+                                        {service?.name}
+                                    </span>
+                                        <input
+                                            type="checkbox"
+                                            value={service?.id} // Use numeric ID as the value
+                                            checked={selectedOptions2.includes(service?.id)} // Check if selected
+                                            onChange={() => handleOption2Change(service?.id)} // Pass ID to handler
+                                        />
+                                        <span className="custom_checkbox"></span>
+                                    </label>
+                                ))}
                         </div>
-
                     </div>
                 </div>
 

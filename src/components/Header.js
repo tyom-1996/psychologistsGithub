@@ -18,14 +18,17 @@ import SettingsIconMobile from "@/assets/icons/settingsIconMobile";
 import LogoutIcon from "@/assets/icons/logoutIcon";
 import LogoutIconTablet from "@/assets/icons/logoutIconTablet";
 import LogoutIconMobile from "@/assets/icons/logoutIconMobile";
+import {useGetProfileInfo} from "@/hooks/useGetProfileInfo";
 
 
 
 const Header = (props) => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
-    // const [isLogged, setIsLogged] = useState(false);
+    const [isLogged, setIsLogged] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
+    const {getProfileInfo, loadingUserInfo, profileInfoData } = useGetProfileInfo();
+    const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/uploads');
 
 
     const handleOptionClick = (option) => {
@@ -42,7 +45,10 @@ const Header = (props) => {
 
 
     useEffect(() => {
-
+            let token = localStorage.getItem('token');
+            if (token) {
+                setIsLogged(true)
+            }
     }, [])
 
     const disableBodyScroll = () => {
@@ -55,7 +61,11 @@ const Header = (props) => {
 
     const router = useRouter();
 
-    const handleNavigateToHome = () => {
+    const logOut = async () => {
+       await localStorage.clear()
+        router.push('/');
+    };
+    const handleNavigateToHome =  () => {
         router.push('/');
     };
 
@@ -116,19 +126,19 @@ const Header = (props) => {
                         </ul>
                     </nav>
                 </div>
-                {props.isLogged === true ?
+                {isLogged === true ?
                     (
                         <div className='header_user_info_wrapper'>
                             <div className='header_user_balance_info_wrapper'>
                                 <p className='header_user_balance_price_info'>
-                                    23000 <span>Руб.</span>
+                                    {profileInfoData?.balance} <span>Руб.</span>
                                 </p>
                                 <p className='header_user_balance_info2'>Ваш Счету</p>
                             </div>
                             <div className="header_user_img_info_wrapper">
                                 <div className="header_user_img">
                                     <Image
-                                        src="/images/profile_img2.png"
+                                        src={profileInfoData?.image   ? `${imagePath}/${profileInfoData?.image}` : '/images/profile_img2.png"'}
                                         alt="Company Logo"
                                         layout="fill"
                                         objectFit="cover"
@@ -142,7 +152,7 @@ const Header = (props) => {
                                     >
                                         <p className="header_dropdown_header_title">
                                             {/*{selectedOption || "Юрий Абалак"}*/}
-                                            Юрий Абалак
+                                            {profileInfoData?.first_name} {profileInfoData?.last_name}
                                         </p>
                                         <div className='header_dropdown_header_icon'>
                                             <ProfileDropdownIcon/>
@@ -157,7 +167,7 @@ const Header = (props) => {
                                             <div className='header_dropdown_menu_header'>
                                                 <div className="header_user_img">
                                                     <Image
-                                                        src="/images/profile_img2.png"
+                                                        src={profileInfoData?.image  ? `${imagePath}/${profileInfoData?.image}` : '/images/profile_img2.png"'}
                                                         alt="Company Logo"
                                                         layout="fill"
                                                         objectFit="cover"
@@ -170,7 +180,7 @@ const Header = (props) => {
                                                 >
                                                     <p className="header_dropdown_header_title">
                                                         {/*{selectedOption || "Юрий Абалак"}*/}
-                                                       Юрий Абалак
+                                                        {profileInfoData?.first_name} {profileInfoData?.last_name}
                                                     </p>
                                                     <div className='header_dropdown_header_icon'>
                                                         <ProfileDropdownIcon/>
@@ -224,7 +234,7 @@ const Header = (props) => {
                                                 <li
                                                     className='header_dropdown_item'
                                                     onClick={() => {
-                                                        router.push('/auth/login');
+                                                        logOut()
                                                         setIsOpen(false)
                                                     }}
                                                 >
