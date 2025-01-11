@@ -70,6 +70,8 @@ const Header = (props) => {
     };
 
 
+
+
     return (
         <header className={'header'}>
             <div className="header_wrapper">
@@ -196,7 +198,12 @@ const Header = (props) => {
                                                 <li
                                                     className='header_dropdown_item'
                                                     onClick={() => {
-                                                        router.push('/patient/patient-profile');
+                                                        let role = localStorage.getItem('role');
+                                                        if (role == 'user') {
+                                                            router.push('/patient/patient-profile');
+                                                        } else {
+                                                            router.push('/psychologists/psychologists-profile');
+                                                        }
                                                         setIsOpen(false)
                                                     }}
                                                 >
@@ -215,7 +222,12 @@ const Header = (props) => {
                                                 <li
                                                     className='header_dropdown_item'
                                                     onClick={() => {
-                                                        router.push('/patient/edit-profile');
+                                                        let role = localStorage.getItem('role');
+                                                        if (role == 'user') {
+                                                            router.push('/patient/edit-profile');
+                                                        } else {
+                                                            router.push('/psychologists/edit-profile');
+                                                        }
                                                         setIsOpen(false)
                                                     }}
                                                 >

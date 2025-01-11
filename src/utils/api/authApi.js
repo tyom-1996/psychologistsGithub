@@ -123,19 +123,23 @@ export const editProfile2 = async (name, surname, email, phoneNumber, about, pro
         const formData = new FormData();
 
         // Append all fields to the FormData object
-        formData.append('first_name', name);
-        formData.append('last_name', surname);
-        formData.append('email', email);
-        formData.append('phone', phoneNumber);
-        formData.append('about', about);
+        formData.append('first_name', name || '');
+        formData.append('last_name', surname || '');
+        formData.append('email', email || '');
+        formData.append('phone', phoneNumber || '');
+        formData.append('about', about || '');
 
-        // Only append the image if it exists
-        if (profileImage) {
+        // Only append the image if it exists and is a valid file object
+        if (profileImage && typeof profileImage === 'object') {
             formData.append('image', profileImage);
+        } else if (profileImage) {
+            console.warn('Invalid image file provided.');
         }
 
+        console.log(profileImage, 'Profile image before appending to FormData'); // Log the file object
+        console.log([...formData.entries()], 'FormData contents before sending'); // Log the entire FormData
 
-        console.log(profileImage, 'formdata_________')
+
         // Make the API call using the axios instance
         const response = await apiClient.put('/profile', formData, {
             headers: {
@@ -146,7 +150,8 @@ export const editProfile2 = async (name, surname, email, phoneNumber, about, pro
         // Return the response data
         return response.data;
     } catch (error) {
-        // Throw the specific error message or general error
+        // Log and throw the specific error message or a general error
+        console.error('Error uploading profile:', error.response?.data || error.message);
         throw error.response?.data.message || error.message;
     }
 };

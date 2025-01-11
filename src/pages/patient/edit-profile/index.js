@@ -14,12 +14,14 @@ import {useGetProfileInfo} from "@/hooks/useGetProfileInfo";
 import {useChangePassword} from "@/hooks/useChangePassword";
 import CloseIcon2 from "@/assets/icons/closeIcon2";
 import Link from "next/link";
-import {PasswordShowIcon} from "@/assets/icons/PasswordShowIcon";
-import {PasswordCloseIcon} from "@/assets/icons/PasswordCloseIcon";
+import { PasswordCloseIcon } from '../../../assets/icons/PasswordCloseIcon';
+import { PasswordCloseIcon2 } from '../../../assets/icons/PasswordCloseIcon2';
+import { PasswordShowIcon } from '../../../assets/icons/PasswordShowIcon';
+import { PasswordShowIcon2 } from '../../../assets/icons/PasswordShowIcon2';
 import EditFilterModal from "@/components/modals/EditFilterModal";
 import {useGetServices} from "@/hooks/useGetServices";
 import {useServicesAssign} from "@/hooks/useServicesAssign";
-
+import SettingsImageUploader from '@/components/SettingsImageUploader';
 
 const PatientEditProfile = () => {
 
@@ -41,24 +43,9 @@ const PatientEditProfile = () => {
     const [showFilterModal, setShowFilterModal] = useState(false);
     const {getServices, servicesData } = useGetServices();
     const [profileImage, setProfileImage] = useState(null); // Manage image for both desktop and mobile
+    const [newImage, setNewImage] = useState(null); // State for new image to save
     const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/uploads');
 
-    const handleImageUpload =  (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = async () => {
-                setProfileImage(reader.result); // Set the uploaded image
-                try {
-                    await editProfile(profileImage);
-                    console.log("Profile updated successfully");
-                } catch (error) {
-                    console.error("Error updating profile:", error);
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-    };
 
 
 
@@ -70,7 +57,19 @@ const PatientEditProfile = () => {
 
     const saveProfile = async (e) => {
         e.preventDefault();
-        await editProfile(name, surname, email, phoneNumber, about)
+        await editProfile(name, surname, email, phoneNumber, about, profileImage)
+        const updatedUserInfo = await getProfileInfo(); // Fetch updated data
+
+        setName(updatedUserInfo?.first_name)
+        setSurName(updatedUserInfo?.last_name)
+        setEmail(updatedUserInfo?.email)
+        setPhoneNumber(updatedUserInfo?.phone)
+        setAbout(updatedUserInfo?.about)
+        const updatedImage = updatedUserInfo?.image
+            ? `${imagePath}/${updatedUserInfo?.image}`
+            : '/images/psychologist_img15.png';
+        setProfileImage(updatedImage); // Update the displayed image
+        setNewImage(null); // Reset new image state after saving
 
     }
     const handleChangePassword = async (e) => {
@@ -97,7 +96,10 @@ const PatientEditProfile = () => {
             setPhoneNumber(profileInfoData?.phone);
 
             // Correct way to create the image URL
-            const image = `${imagePath}/${profileInfoData?.image}`;
+            let image = profileInfoData?.image
+                ? `${imagePath}/${profileInfoData?.image}`
+                : '/images/psychologist_img15.png';
+
             setProfileImage(image);
         }
     }, [profileInfoData]);
@@ -155,59 +157,14 @@ const PatientEditProfile = () => {
                         {/*        <ProfileEditIcon2Mobile/>*/}
                         {/*    </button>*/}
                         {/*</div>*/}
-                        <div className="edit_profile_item1">
-                            {/* Desktop Image */}
-                            <div className="edit_profile_item1_img">
-                                <Image
-                                    src={profileImage || "/images/edit_profile_img1.png"}
-                                    alt="Profile Image"
-                                    layout="fill"
-                                    objectFit="cover"
-                                    quality={100}
-                                />
-                            </div>
+                        <SettingsImageUploader
+                            userImage={profileImage} // Display the current profile image
+                            changeImage={(newImage) => {
+                                console.log(newImage, 'New image file received from uploader'); // Log the file
+                                setProfileImage(newImage); // Update state with the new file
+                            }}
+                        />
 
-                            {/* Mobile Image */}
-                            <div className="edit_profile_item1_img_mobile">
-                                <Image
-                                    src={profileImage || "/images/edit_profile_img_mobile.png"}
-                                    alt="Profile Image"
-                                    layout="fill"
-                                    objectFit="cover"
-                                    quality={100}
-                                />
-                            </div>
-
-                            {/* Hidden file input for desktop */}
-                            <input
-                                type="file"
-                                id="desktopFileInput"
-                                accept="image/*"
-                                style={{display: "none"}}
-                                onChange={(e) => handleImageUpload(e)}
-                            />
-                            <button
-                                className="edit_profile_img_icon"
-                                onClick={() => document.getElementById("desktopFileInput").click()}
-                            >
-                                <ProfileEditIcon2/>
-                            </button>
-
-                            {/* Hidden file input for mobile */}
-                            <input
-                                type="file"
-                                id="mobileFileInput"
-                                accept="image/*"
-                                style={{display: "none"}}
-                                onChange={(e) => handleImageUpload(e)}
-                            />
-                            <button
-                                className="edit_profile_img_icon2"
-                                onClick={() => document.getElementById("mobileFileInput").click()}
-                            >
-                                <ProfileEditIcon2Mobile/>
-                            </button>
-                        </div>
                         <div className="edit_profile_item2">
                             <div className='edit_profile_item2_input'>
                                 <input
@@ -254,72 +211,44 @@ const PatientEditProfile = () => {
                                 <input
                                     type="number"
                                     className="edit_profile_item2_input_field2"
-                                    value={phoneNumber.slice(2)} // Display only the phone number part
+                                    value={phoneNumber ? phoneNumber.slice(2) : ''} // Safely slice the number
                                     onChange={(e) => setPhoneNumber('+7' + e.target.value)} // Prepend "+7" on input change
                                     placeholder="000 0000 000"
                                 />
                             </div>
-                            <div className='edit_profile_item2_input'>
+                            <div
+                                className='edit_profile_item2_input'
+                                onClick={() =>
+                                      {
+                                          setShowEditPasswordPopup(true)
+                                          disableBodyScroll()
+
+                                      }}
+                                >
                                 <input
                                     type='password'
-                                    value={password}
-                                    onChange={(e) => {
-                                        setPassword(e.target.value)
-                                    }}
+                                    // value={password}
+                                    // onChange={(e) => {
+                                    //     setPassword(e.target.value)
+                                    // }}
                                     placeholder='****************'
                                     className='edit_profile_item2_input_field'
                                     readOnly={true}
                                 />
-                                <button
+                                <div
                                     className='edit_password_icon'
-                                    onClick={() => setShowEditPasswordPopup(true)}
+
                                 >
                                     <ProfileEditIcon1/>
-                                </button>
+                                </div>
 
-                                <button
+                                <div
                                     className='edit_password_icon2'
-                                    onClick={() => setShowEditPasswordPopup(true)}
                                 >
                                     <ProfileEditIcon1Mobile/>
-                                </button>
+                                </div>
                             </div>
-                            <div className='edit_profile_item2_input'>
 
-                                <input
-                                    type='text'
-                                    value={password}
-                                    onChange={(e) => {
-                                        setPassword(e.target.value)
-                                    }}
-                                    placeholder='Специализация'
-                                    className='edit_profile_item2_input_field'
-                                    readOnly={true}
-                                />
-                                <button
-                                    className='edit_password_icon'
-                                    onClick={() => {
-                                        setShowFilterModal(true)
-                                        disableBodyScroll()
-                                    }
-
-                                    }
-                                >
-                                    <ProfileEditIcon1/>
-                                </button>
-
-                                <button
-                                    className='edit_password_icon2'
-                                    onClick={() => {
-                                        setShowFilterModal(true)
-                                        disableBodyScroll()
-                                    }
-
-                                    }
-                                >
-                                    <ProfileEditIcon1Mobile/>
-                                </button>
-                            </div>
                         </div>
                     </div>
                     <div className='edit_profile_form_input'>
@@ -352,6 +281,7 @@ const PatientEditProfile = () => {
                             className='edit_password_modal_close_btn'
                             onClick={() => {
                                 setShowEditPasswordPopup(false);
+                                enableBodyScroll()
                             }}
                         >
                             <CloseIcon2/>
@@ -368,7 +298,7 @@ const PatientEditProfile = () => {
                             </Link>
                         </header>
                         <div className='login_form'>
-                            <div className='login_form_input'   id='login_form_input_field1'>
+                            <div className='login_form_input'   id='old_password'>
                                 <input
                                     type={isOldPasswordVisible ? 'text' : 'password'}
                                     value={oldPassword}
@@ -383,13 +313,13 @@ const PatientEditProfile = () => {
                                         togglePasswordVisibility1();
                                     }}
                                 >
-                                    {isOldPasswordVisible ? <PasswordShowIcon /> : <PasswordCloseIcon />}
+                                    {isOldPasswordVisible ? <PasswordShowIcon2 /> : <PasswordCloseIcon2 />}
                                 </button>
                             </div>
                             {passwordError &&
                                 <p className="error_text">{passwordError}</p>
                             }
-                            <div className='login_form_input'   id='login_form_input_field2'>
+                            <div className='login_form_input'   id='new_password'>
                                 <input
                                     type={isNewPasswordVisible ? 'text' : 'password'}
                                     value={newPassword}
@@ -405,7 +335,7 @@ const PatientEditProfile = () => {
                                         togglePasswordVisibility2();
                                     }}
                                 >
-                                    {isNewPasswordVisible ? <PasswordShowIcon /> : <PasswordCloseIcon />}
+                                    {isNewPasswordVisible ? <PasswordShowIcon2 /> : <PasswordCloseIcon2 />}
                                 </button>
                             </div>
                             {newPasswordError &&

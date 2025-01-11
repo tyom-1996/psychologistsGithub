@@ -14,11 +14,15 @@ import CloseIcon2 from "@/assets/icons/closeIcon2";
 import {useEditProfile} from "@/hooks/useEditProfile";
 import {useGetProfileInfo} from "@/hooks/useGetProfileInfo";
 import { PasswordCloseIcon } from '../../../assets/icons/PasswordCloseIcon';
+import { PasswordCloseIcon2 } from '../../../assets/icons/PasswordCloseIcon2';
 import { PasswordShowIcon } from '../../../assets/icons/PasswordShowIcon';
+import { PasswordShowIcon2 } from '../../../assets/icons/PasswordShowIcon2';
 import Link from "next/link";
 import {useChangePassword} from "@/hooks/useChangePassword";
 import EditFilterModal from "@/components/modals/EditFilterModal";
 import {useGetServices} from "@/hooks/useGetServices";
+import SettingsImageUploader from "@/components/SettingsImageUploader";
+import {useGetPsychologistSingle} from "@/hooks/useGetPsychologistSingle";
 
 
 const PsychologistsEditProfile = () => {
@@ -29,7 +33,6 @@ const PsychologistsEditProfile = () => {
     const [email, setEmail] = useState('');
     const [about, setAbout] = useState('');
     const [password, setPassword] = useState('');
-    const [profileImage, setProfileImage] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState('+7');
     const {editProfile, editProfileData } = useEditProfile();
     const {changePassword, passwordError, newPasswordError, changePasswordData } = useChangePassword();
@@ -41,6 +44,39 @@ const PsychologistsEditProfile = () => {
     const [newPassword, setNewPassword] = useState('');
     const [showFilterModal, setShowFilterModal] = useState(false);
     const {getServices, servicesData } = useGetServices();
+    const [profileImage, setProfileImage] = useState(null); // Manage image for both desktop and mobile
+    const [newImage, setNewImage] = useState(null); // State for new image to save
+    const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/uploads');
+    const [selectedServices, setSelectedServices] = useState([]); // Moved state to parent
+    const [serviceNames, setServiceNames] = useState(''); // To display in the input
+    const {getPsychologistSingle, psychologistSingleData } = useGetPsychologistSingle();
+
+
+    useEffect(() => {
+        if (profileInfoData) {
+            getPsychologistSingle(profileInfoData?.id)
+        }
+
+    }, [profileInfoData?.id]);
+
+
+    useEffect(() => {
+        if (psychologistSingleData?.services) {
+            const selectedIds = psychologistSingleData.services.map((service) => service.id);
+            setSelectedServices(selectedIds); // Initialize selected services
+        }
+    }, [psychologistSingleData]);
+
+
+    useEffect(() => {
+        if (servicesData && selectedServices.length > 0) {
+            const selectedNames = servicesData
+                .filter((service) => selectedServices.includes(service.id))
+                .map((service) => service.name)
+                .join(', ');
+            setServiceNames(selectedNames || 'Выберите специализацию');
+        }
+    }, [servicesData, selectedServices]);
 
 
 
@@ -54,14 +90,26 @@ const PsychologistsEditProfile = () => {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
-    const saveProfile = async (e) => {
-        e.preventDefault();
-        await editProfile(name, surname, email, phoneNumber, about)
-
-    }
     const handleChangePassword = async (e) => {
         e.preventDefault();
         await changePassword(oldPassword, newPassword)
+
+    }
+    const saveProfile = async (e) => {
+        e.preventDefault();
+        await editProfile(name, surname, email, phoneNumber, about, profileImage)
+        const updatedUserInfo = await getProfileInfo(); // Fetch updated data
+
+        setName(updatedUserInfo?.first_name)
+        setSurName(updatedUserInfo?.last_name)
+        setEmail(updatedUserInfo?.email)
+        setPhoneNumber(updatedUserInfo?.phone)
+        setAbout(updatedUserInfo?.about)
+        const updatedImage = updatedUserInfo?.image
+            ? `${imagePath}/${updatedUserInfo?.image}`
+            : '/images/psychologist_img15.png';
+        setProfileImage(updatedImage); // Update the displayed image
+        setNewImage(null); // Reset new image state after saving
 
     }
 
@@ -75,21 +123,46 @@ const PsychologistsEditProfile = () => {
 
     useEffect(() => {
         if (profileInfoData) {
-            console.log(profileInfoData?.about, 'profileInfoData?.about____________')
+            console.log(profileInfoData?.about, 'profileInfoData?.about____________');
             setName(profileInfoData?.first_name);
             setSurName(profileInfoData?.last_name);
             setEmail(profileInfoData?.email);
             setAbout(profileInfoData?.about);
             setPhoneNumber(profileInfoData?.phone);
-            setProfileImage(profileInfoData?.image)
-        }
 
+            // Correct way to create the image URL
+            let image = profileInfoData?.image
+                ? `${imagePath}/${profileInfoData?.image}`
+                : '/images/psychologist_img15.png';
+
+            setProfileImage(image);
+        }
     }, [profileInfoData]);
     const togglePasswordVisibility1 = () => {
         setIsOldPasswordVisible(!isOldPasswordVisible);
     };
     const togglePasswordVisibility2 = () => {
         setIsNewPasswordVisible(!isNewPasswordVisible);
+    };
+
+    const handleServiceSelection = (selectedIds) => {
+        setSelectedServices(selectedIds);
+
+        // Map selected IDs to their corresponding names for input display
+        const selectedNames = servicesData
+            ?.filter((service) => selectedIds.includes(service.id))
+            .map((service) => service.name)
+            .join(', ');
+        setServiceNames(selectedNames || 'Выберите специализацию');
+    };
+
+
+    const disableBodyScroll = () => {
+        document.body.style.overflow = "hidden";
+    };
+
+    const enableBodyScroll = () => {
+        document.body.style.overflow = "auto";
     };
 
     return (
@@ -102,34 +175,41 @@ const PsychologistsEditProfile = () => {
                         <div className="edit_profile_line"></div>
                     </div>
                     <div className='edit_profile_items_wrapper'>
-                        <div className="edit_profile_item1" id='edit_profile_item_mobile'>
-                            <div className="edit_profile_item1_img">
-                                <Image
-                                    src={profileImage ? profileImage : '/images/doctor_edit_profile_img.png'}
-                                    alt="Company Logo"
-                                    layout="fill"
-                                    objectFit="cover"
-                                    quality={100}
-                                />
-                            </div>
-                            <div className="edit_profile_item1_img_mobile2">
-                                <Image
-                                    src="/images/edit_profile_img_mobile2.png"
-                                    alt="Company Logo"
-                                    layout="fill"
-                                    objectFit="cover"
-                                    quality={100}
-                                />
-                            </div>
+                        {/*<div className="edit_profile_item1" id='edit_profile_item_mobile'>*/}
+                        {/*    <div className="edit_profile_item1_img">*/}
+                        {/*        <Image*/}
+                        {/*            src={profileImage ? profileImage : '/images/doctor_edit_profile_img.png'}*/}
+                        {/*            alt="Company Logo"*/}
+                        {/*            layout="fill"*/}
+                        {/*            objectFit="cover"*/}
+                        {/*            quality={100}*/}
+                        {/*        />*/}
+                        {/*    </div>*/}
+                        {/*    <div className="edit_profile_item1_img_mobile2">*/}
+                        {/*        <Image*/}
+                        {/*            src="/images/edit_profile_img_mobile2.png"*/}
+                        {/*            alt="Company Logo"*/}
+                        {/*            layout="fill"*/}
+                        {/*            objectFit="cover"*/}
+                        {/*            quality={100}*/}
+                        {/*        />*/}
+                        {/*    </div>*/}
 
-                            <button className='edit_profile_img_icon'>
-                                <ProfileEditIcon2/>
-                            </button>
+                        {/*    <button className='edit_profile_img_icon'>*/}
+                        {/*        <ProfileEditIcon2/>*/}
+                        {/*    </button>*/}
 
-                            <button className='edit_profile_img_icon2'>
-                                <ProfileEditIcon2Mobile/>
-                            </button>
-                        </div>
+                        {/*    <button className='edit_profile_img_icon2'>*/}
+                        {/*        <ProfileEditIcon2Mobile/>*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
+                        <SettingsImageUploader
+                            userImage={profileImage} // Display the current profile image
+                            changeImage={(newImage) => {
+                                console.log(newImage, 'New image file received from uploader'); // Log the file
+                                setProfileImage(newImage); // Update state with the new file
+                            }}
+                        />
                         <div className="edit_profile_item2">
                             <div className='edit_profile_item2_input'>
                                 <input
@@ -176,73 +256,84 @@ const PsychologistsEditProfile = () => {
                                 <input
                                     type="number"
                                     className="edit_profile_item2_input_field2"
-                                    value={phoneNumber.slice(2)} // Display only the phone number part
+                                    value={phoneNumber ? phoneNumber.slice(2) : ''} // Safely slice the number
                                     onChange={(e) => setPhoneNumber('+7' + e.target.value)} // Prepend "+7" on input change
                                     placeholder="000 0000 000"
                                 />
                             </div>
-                            <div className='edit_profile_item2_input'>
+                            <div
+                                className='edit_profile_item2_input'
+                                onClick={() => {
+                                    setShowEditPasswordPopup(true)
+                                    disableBodyScroll()
+                                }}
+                            >
                                 <input
-                                    // type='password'
+                                    type='password'
                                     // value={password}
                                     // onChange={(e) => {
                                     //     setPassword(e.target.value)
                                     // }}
+                                    readOnly
                                     placeholder='****************'
                                     className='edit_profile_item2_input_field'
 
                                 />
-                                <button
+                                <div
                                     className='edit_password_icon'
-                                    onClick={() => setShowEditPasswordPopup(true)}
+
                                 >
                                     <ProfileEditIcon1/>
-                                </button>
+                                </div>
 
-                                <button
+                                <div
                                     className='edit_password_icon2'
-                                    onClick={() => setShowEditPasswordPopup(true)}
                                 >
                                     <ProfileEditIcon1Mobile/>
-                                </button>
+                                </div>
 
 
                             </div>
-                            <div className='edit_profile_item2_input'>
+                            <div
+                                className='edit_profile_item2_input'
+                                onClick={() => {
+                                    setShowFilterModal(true)
+                                    disableBodyScroll()
+                                }}
+                            >
                                 <input
                                     type='text'
-                                    // value={password}
-                                    // onChange={(e) => {
-                                    //     setPassword(e.target.value)
-                                    // }}
+                                    value={serviceNames} // Show selected services
                                     placeholder='Специализация'
                                     className='edit_profile_item2_input_field'
-                                    readOnly={true}
+                                    readOnly
                                 />
-                                <button
+                                <div
                                     className='edit_password_icon'
-                                    onClick={() => setShowFilterModal(true)}
                                 >
                                     <ProfileEditIcon1/>
-                                </button>
+                                </div>
 
-                                <button
+                                <div
                                     className='edit_password_icon2'
-                                    onClick={() => setShowFilterModal(true)}
                                 >
                                     <ProfileEditIcon1Mobile/>
-                                </button>
+                                </div>
                             </div>
+
                         </div>
                     </div>
+
                     <div className='edit_profile_form_input'>
                              <textarea
-                                 name="" id="" cols="10" rows="6" placeholder='Письмо'
+                                 name="" id="" cols="10" rows="6"
+                                 placeholder='Письмо'
                                  className='edit_profile_form_input_field'
                                  value={about}
                                  onChange={(e) => {
                                      setAbout(e.target.value)
                                  }}
+
                              ></textarea>
                     </div>
                     <button className='edit_profile_btn'
@@ -262,6 +353,7 @@ const PsychologistsEditProfile = () => {
                             className='edit_password_modal_close_btn'
                             onClick={() => {
                                 setShowEditPasswordPopup(false);
+                                enableBodyScroll()
                             }}
                         >
                             <CloseIcon2 />
@@ -278,7 +370,7 @@ const PsychologistsEditProfile = () => {
                             </Link>
                         </header>
                         <div className='login_form'>
-                            <div className='login_form_input'>
+                            <div className='login_form_input' id='old_password'>
                                 <input
                                     type={isOldPasswordVisible ? 'text' : 'password'}
                                     value={oldPassword}
@@ -293,13 +385,13 @@ const PsychologistsEditProfile = () => {
                                         togglePasswordVisibility1();
                                     }}
                                 >
-                                    {isOldPasswordVisible ? <PasswordShowIcon /> : <PasswordCloseIcon />}
+                                    {isOldPasswordVisible ? <PasswordShowIcon2 /> : <PasswordCloseIcon2 />}
                                 </button>
                             </div>
                             {passwordError &&
                                 <p className="error_text">{passwordError}</p>
                             }
-                            <div className='login_form_input'>
+                            <div className='login_form_input' id='new_password'>
                                 <input
                                     type={isNewPasswordVisible ? 'text' : 'password'}
                                     value={newPassword}
@@ -314,7 +406,7 @@ const PsychologistsEditProfile = () => {
                                         togglePasswordVisibility2();
                                     }}
                                 >
-                                    {isNewPasswordVisible ? <PasswordShowIcon /> : <PasswordCloseIcon />}
+                                    {isNewPasswordVisible ? <PasswordShowIcon2 /> : <PasswordCloseIcon2 />}
                                 </button>
                             </div>
                             {newPasswordError &&
@@ -336,9 +428,12 @@ const PsychologistsEditProfile = () => {
                 <EditFilterModal
                     isOpen={showFilterModal}
                     services={servicesData}
+                    selectedServices={selectedServices} // Pass selected services
                     onClose={() => setShowFilterModal(false)}
+                    onSave={handleServiceSelection} // Callback to save selected services
                 />
             )}
+
 
 
         </div>

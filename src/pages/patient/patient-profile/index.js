@@ -45,6 +45,18 @@ const PatientProfile = () => {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
+
+
+
+    useEffect(() => {
+        if (purchaseCertificatesData) {
+            if (purchaseCertificatesData?.message == "Certificate purchased successfully") {
+                  setShowBuyCertificatePopup(false)
+                    enableBodyScroll()
+            }
+        }
+
+    }, [purchaseCertificatesData])
     const redirectToEditProfile = () => {
         router.push(`/patient/edit-profile`);
     }
@@ -52,8 +64,19 @@ const PatientProfile = () => {
 
     useEffect(() => {
         const role = localStorage.getItem('role');
+        let role2 = ''
+        let activeTab2 = ''
+        console.log(role, 'role________')
+        if (role == 'psycholog') {
+            role2 = 'psychologist'
+        } else {
+             if (role == 'user') {
+                 role2 = "user"
+             }
+        }
+
         if (activeTab === "upcoming" || activeTab === "past") {
-            getAppointmentsSessions(role, activeTab); // Send request only for "upcoming" or "past"
+            getAppointmentsSessions(role2, activeTab); // Send request only for "upcoming" or "past"
         }
     }, [activeTab]);
 
@@ -98,7 +121,7 @@ const PatientProfile = () => {
                         <div className="patient_profile_item1_img_info_wrapper">
                             <div className="patient_profile_item1_img">
                                 <Image
-                                    src={profileInfoData?.image ? `${imagePath/profileInfoData?.image}` : '/images/patient_profile_img1.png'}
+                                    src={profileInfoData?.image ? `${imagePath}/${profileInfoData?.image}` : '/images/patient_profile_img1.png'}
                                     alt="Company Logo"
                                     layout="fill"
                                     objectFit="cover"

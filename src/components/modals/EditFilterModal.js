@@ -1,19 +1,34 @@
-import { useState } from "react";
+import {useEffect, useState } from "react";
 import styles from "../../assets/css/filter.css";
 import FilterCloseIcon from "../../assets/icons/filterCloseIcon";
 import FilterCloseMobileIcon from "../../assets/icons/filterCloseMobileIcon";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import {useServicesAssign} from "@/hooks/useServicesAssign";
-const EditFilterModal = ({ isOpen, onClose, services }) => {
+const EditFilterModal = ({ isOpen, onClose, services, selectedServices, onSave }) => {
     const [price, setPrice] = useState([0, 5000]);
     const [selectedOption1, setSelectedOption1] = useState(null);
     const [selectedOptions2, setSelectedOptions2] = useState([]);
     const [range, setRange] = useState([0, 5000]);
     const {servicesAssign, servicesAssignData } = useServicesAssign();
+    const [localSelectedServices, setLocalSelectedServices] = useState(selectedServices || []);
+
     const handleRangeChange = (newRange) => {
         setRange(newRange);
     };
+
+    useEffect(() => {
+        setLocalSelectedServices(selectedServices || []); // Sync with parent state when opened
+    }, [selectedServices]);
+
+    const handleOptionChange = (serviceId) => {
+        setLocalSelectedServices((prev) =>
+            prev.includes(serviceId)
+                ? prev.filter((id) => id !== serviceId) // Remove if already selected
+                : [...prev, serviceId] // Add if not selected
+        );
+    };
+
 
     const disableBodyScroll = () => {
         document.body.style.overflow = "hidden";
@@ -75,20 +90,21 @@ const EditFilterModal = ({ isOpen, onClose, services }) => {
                 <div className='filter_modal_body_part2'>
                     <div className="filter_modal_section_child">
                         {services &&
-                            services.map((service, idx) => (
-                                <label key={idx} className="filter_modal_section_checkbox_input_label2">
+                            services.map((service) => (
+                                <label key={service.id} className="filter_modal_section_checkbox_input_label2">
                                     <span className="filter_modal_section_radio_input_label_title2">
-                                        {service?.name}
+                                        {service.name}
                                     </span>
                                     <input
                                         type="checkbox"
-                                        value={service?.id} // Use numeric ID as the value
-                                        checked={selectedOptions2.includes(service?.id)} // Check if selected
-                                        onChange={() => handleOption2Change(service?.id)} // Pass ID to handler
+                                        value={service.id}
+                                        checked={localSelectedServices.includes(service.id)} // Precheck selected items
+                                        onChange={() => handleOptionChange(service.id)} // Handle selection
                                     />
                                     <span className="custom_checkbox"></span>
                                 </label>
                             ))}
+
                     </div>
 
                 </div>
@@ -97,12 +113,14 @@ const EditFilterModal = ({ isOpen, onClose, services }) => {
                     <button
                         className="filter_modal_footer_btn1"
                         onClick={() => {
-                            handleServicesAssign(selectedOptions2); // Call the function during onClick
-                            onClose();
-                            document.body.style.overflow = "auto";
+                            onSave(localSelectedServices); // Pass updated services back to parent
+                            handleServicesAssign(localSelectedServices); // Call the API for service assignments
+
+                            onClose(); // Close modal
+                            document.body.style.overflow = "auto"; // Re-enable scroll
                         }}
                     >
-                        сохранять
+                        Сохранять
                     </button>
 
 
