@@ -2,7 +2,7 @@ import Image from "next/image";
 import '../../../assets/css/edit-profile.css';
 import '../../../assets/css/login.css';
 import { useEffect, useState } from "react";
-import withOutAuth from '../../../components/withAuth';
+import withAuth from '../../../components/withAuth';
 import { useRouter } from "next/router";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -440,4 +440,4 @@ const PsychologistsEditProfile = () => {
     );
 };
 
-export default PsychologistsEditProfile;
+export default withAuth(PsychologistsEditProfile);

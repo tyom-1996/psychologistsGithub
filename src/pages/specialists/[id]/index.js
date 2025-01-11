@@ -27,6 +27,7 @@ export default function Specialist ({id})  {
     const [showFilterModal, setShowFilterModal] = useState(false);
     const {getPsychologistSingle, psychologistSingleData } = useGetPsychologistSingle();
     const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/uploads');
+    const [isLogged, setIsLogged] = useState(false);
 
 
     const router = useRouter();
@@ -37,6 +38,13 @@ export default function Specialist ({id})  {
         }
 
     }, [id]);
+
+    useEffect(() => {
+        let token = localStorage.getItem('token');
+        if (token) {
+            setIsLogged(true)
+        }
+    }, [])
 
     useEffect(() => {
         if (psychologistSingleData) {
@@ -116,16 +124,20 @@ export default function Specialist ({id})  {
                             {/*        )}*/}
                             {/*    </div>*/}
                             <div className='specialists_single_page_section_item1_mobile_btn_price_info_box'>
-                                <button
-                                    className='make_an_appointment_with_specialists_btn'
-                                    onClick={() => {
-                                        redirectToAppointmentRegister()
-                                    }}
-                                >
-                                    Записаться на приём
-                                </button>
+                                {isLogged === true &&
+                                    <button
+                                        className='make_an_appointment_with_specialists_btn'
+                                        onClick={() => {
+                                            redirectToAppointmentRegister()
+                                        }}
+                                    >
+                                        Записаться на приём
+                                    </button>
+                                }
+
                                 <div className='specialists_single_page_section_item1_price_info_box'>
-                                    <h3 className='specialists_single_page_section_item1_price_info1'>3000 <span>Руб.</span> </h3>
+                                    <h3 className='specialists_single_page_section_item1_price_info1'>3000 <span>Руб.</span>
+                                    </h3>
                                     <p className='specialists_single_page_section_item1_price_info2'>Оплата за приём</p>
                                 </div>
                             </div>
@@ -187,14 +199,16 @@ export default function Specialist ({id})  {
                                 {/*        </ul>*/}
                                 {/*    )}*/}
                                 {/*</div>*/}
-                                <button
-                                    className='make_an_appointment_with_specialists_btn'
-                                    onClick={() => {
-                                        redirectToAppointmentRegister()
-                                    }}
-                                >
-                                    Записаться на приём
-                                </button>
+                                {isLogged === true &&
+                                    <button
+                                        className='make_an_appointment_with_specialists_btn'
+                                        onClick={() => {
+                                            redirectToAppointmentRegister()
+                                        }}
+                                    >
+                                        Записаться на приём
+                                    </button>
+                                }
                                 <div className='specialists_single_page_section_item1_price_info_box'>
                                     <h3 className='specialists_single_page_section_item1_price_info1'>3000 <span>Руб.</span>
                                     </h3>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import '../../../assets/css/patient-profile.css';
 import { useEffect, useState } from "react";
-import withOutAuth from '../../../components/withAuth';
+import withAuth from '../../../components/withAuth';
 import { useRouter } from "next/router";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -469,4 +469,4 @@ const PatientProfile = () => {
     );
 };
 
-export default PatientProfile;
+export default withAuth(PatientProfile);
