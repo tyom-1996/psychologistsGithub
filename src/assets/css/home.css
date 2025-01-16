@@ -241,16 +241,19 @@
 }
 .psychologists_items_wrapper {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
     margin-bottom: 50px;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns, equally spaced */
+    gap: 30px; /* space between grid items */
 }
 
 
 .psychologists_item {
-    width: 32%;
+    width: 100%;
     border-radius: 20px;
     background: linear-gradient(180deg, #835628 -51.06%, #0D0803 106.98%);
     display: flex;
@@ -285,6 +288,8 @@
     font-weight: 600;
     font-size: 32px;
     margin-bottom: 11px;
+    text-align: center;
+    word-break: auto-phrase;
 }
 
 .psychologists_item_position {
@@ -494,6 +499,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 0 10px;
 }
 .reverse_connection_title_line_wrapper {
     display: none;
@@ -2461,5 +2467,12 @@
     .pay_success_popup_title {
         font-size: 20px !important;
         margin-bottom: 14px !important;
+    }
+}
+
+@media (max-width: 680px) {
+    .psychologists_items_wrapper {
+        grid-template-columns: repeat(1, 1fr); /* 3 columns, equally spaced */
+        gap: 0;
     }
 }
