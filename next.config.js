@@ -3,6 +3,7 @@ module.exports = {
         autoPrerender: false,
     },
     images: {
-        domains: ['www.api.menspsychology.ru'], // Add your external domain here
+        domains: ['api.menspsychology.ru'], // Убираем "www."
     },
 };
+
