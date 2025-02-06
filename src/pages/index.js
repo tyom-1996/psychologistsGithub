@@ -211,18 +211,9 @@ export default function Home() {
                                             className='psychologists_item psychologists_item2' key={index}
                                         >
                                             <div className='psychologists_item_img'>
-                                                <img src="https://api.menspsychology.ru/uploads/1736958246920.png"
-                                                     alt="Company Logo" width="200" height="100"/>
+                                                <img src={item?.image ? `${imagePath}/${item?.image}` : '/images/psychologist_img4.png'}
+                                                     alt="Company Logo"/>
                                             </div>
-                                            {/*<div className='psychologists_item_img'>*/}
-                                            {/*    <Image*/}
-                                            {/*        src={item?.image ? `${imagePath}/${item?.image}` : '/images/psychologist_img4.png'}*/}
-                                            {/*        alt="Company Logo"*/}
-                                            {/*        layout="fill"*/}
-                                            {/*        objectFit="cover"*/}
-                                            {/*        quality={100}*/}
-                                            {/*    />*/}
-                                            {/*</div>*/}
                                             <div className='psychologists_item_info_box'>
                                                 <p className='psychologists_item_name'>{item?.first_name} {item?.last_name}</p>
                                                 <p className='psychologists_item_position'>Психологи</p>
