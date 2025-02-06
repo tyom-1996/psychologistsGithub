@@ -211,13 +211,8 @@ export default function Home() {
                                             className='psychologists_item psychologists_item2' key={index}
                                         >
                                             <div className='psychologists_item_img'>
-                                                <Image
-                                                    src={'https://api.menspsychology.ru/uploads/1736958246920.png'}
-                                                    alt="Company Logo"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    quality={100}
-                                                />
+                                                <img src="https://api.menspsychology.ru/uploads/1736958246920.png"
+                                                     alt="Company Logo" width="200" height="100"/>
                                             </div>
                                             {/*<div className='psychologists_item_img'>*/}
                                             {/*    <Image*/}
