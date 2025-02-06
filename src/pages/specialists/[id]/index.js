@@ -66,12 +66,9 @@ export default function Specialist ({id})  {
                     <div className="specialists_single_page_section_item1_mobile">
                         <div className='specialists_single_page_section_item1_mobile_child1'>
                             <div className="specialists_single_page_section_item1_img">
-                                <Image
+                                <img
                                     src={psychologistSingleData?.image ? `${imagePath}/${psychologistSingleData?.image}` : '/images/psychologist_img4.png'}
                                     alt="Company Logo"
-                                    layout="fill"
-                                    objectFit="cover"
-                                    quality={100}
                                 />
                             </div>
                             <div className='specialists_single_page_section_item1_mobile_child_info_box'>
@@ -145,12 +142,9 @@ export default function Specialist ({id})  {
                     </div>
                     <div className="specialists_single_page_section_item1">
                         <div className="specialists_single_page_section_item1_img">
-                            <Image
+                            <img
                                 src={psychologistSingleData?.image ? `${imagePath}/${psychologistSingleData?.image}` : '/images/psychologist_img4.png'}
                                 alt="Company Logo"
-                                layout="fill"
-                                objectFit="cover"
-                                quality={100}
                             />
                         </div>
                         <div className="specialists_single_page_section_item1_info_wrapper">

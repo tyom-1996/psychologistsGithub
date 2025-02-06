@@ -36,12 +36,9 @@ const AboutUs = () => {
                             handleNavigateToHome()
                         }}
                     >
-                        <Image
+                        <img
                             src="/svg/logo.svg"
                             alt="Company Logo"
-                            layout="fill"
-                            objectFit="cover"
-                            quality={100}
                         />
                     </div>
                     <div className="about_us_single_item2">
@@ -52,12 +49,9 @@ const AboutUs = () => {
                                 handleNavigateToHome()
                             }}
                         >
-                            <Image
+                            <img
                                 src="/svg/logo.svg"
                                 alt="Company Logo"
-                                layout="fill"
-                                objectFit="cover"
-                                quality={100}
                             />
                         </div>
                         <p className='about_us_single_item2_info'>

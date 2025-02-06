@@ -91,12 +91,9 @@ const Header = (props) => {
                             handleNavigateToHome()
                         }}
                     >
-                        <Image
+                        <img
                             src="/svg/logo.svg"
                             alt="Company Logo"
-                            layout="fill"
-                            objectFit="cover"
-                            quality={100}
                         />
 
                     </button>
@@ -139,12 +136,9 @@ const Header = (props) => {
                             </div>
                             <div className="header_user_img_info_wrapper">
                                 <div className="header_user_img">
-                                    <Image
-                                        src={profileInfoData?.image   ? `${imagePath}/${profileInfoData?.image}` : '/images/profile_img2.png"'}
+                                    <img
+                                        src={profileInfoData?.image   ? `${imagePath}/${profileInfoData?.image}` : '/images/profile_img2.png'}
                                         alt="Company Logo"
-                                        layout="fill"
-                                        objectFit="cover"
-                                        quality={100}
                                     />
                                 </div>
                                 <div className="header_dropdown_form">
@@ -168,12 +162,9 @@ const Header = (props) => {
                                         <div className="header_dropdown_menu">
                                             <div className='header_dropdown_menu_header'>
                                                 <div className="header_user_img">
-                                                    <Image
-                                                        src={profileInfoData?.image  ? `${imagePath}/${profileInfoData?.image}` : '/images/profile_img2.png"'}
+                                                    <img
+                                                        src={profileInfoData?.image  ? `${imagePath}/${profileInfoData?.image}` : '/images/profile_img2.png'}
                                                         alt="Company Logo"
-                                                        layout="fill"
-                                                        objectFit="cover"
-                                                        quality={100}
                                                     />
                                                 </div>
                                                 <div
@@ -305,12 +296,9 @@ const Header = (props) => {
                                     href={'/'}
                                     className='mobile_header_logo_img'
                                 >
-                                    <Image
+                                    <img
                                         src="/svg/logo.svg"
                                         alt="Company Logo"
-                                        layout="fill"
-                                        objectFit="cover"
-                                        quality={100}
                                     />
 
                                 </Link>

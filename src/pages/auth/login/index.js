@@ -61,12 +61,9 @@ const Login = () => {
         <div className={'login-wrapper'}>
             <header className='login-wrapper_header'>
                 <Link href={'/'} className='login-wrapper_header_link'>
-                    <Image
+                    <img
                         src="/svg/logo.svg"
                         alt="Company Logo"
-                        layout="fill"
-                        objectFit="cover"
-                        quality={100}
                     />
                 </Link>
             </header>

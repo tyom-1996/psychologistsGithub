@@ -185,12 +185,9 @@ const Specialists = () => {
                                     }}
                                 >
                                     <div className='psychologists_item_img'>
-                                        <Image
+                                        <img
                                             src={item?.image ? `${imagePath}/${item?.image}` : '/images/psychologist_img4.png'}
                                             alt="Company Logo"
-                                            layout="fill"
-                                            objectFit="cover"
-                                            quality={100}
                                         />
                                     </div>
                                     <div className='psychologists_item_info_box'>

@@ -154,12 +154,9 @@ const PsychologistsProfile = () => {
                     <div className="patient_profile_item1">
                         <div className="patient_profile_item1_img_info_wrapper">
                             <div className="patient_profile_item1_img">
-                                <Image
+                                <img
                                     src={profileInfoData?.image ? `${imagePath}/${profileInfoData?.image}` : '/images/patient_profile_img1.png'}
                                     alt="Company Logo"
-                                    layout="fill"
-                                    objectFit="cover"
-                                    quality={100}
                                 />
                             </div>
                             <div className='patient_profile_item1_info_wrapper'>
@@ -278,12 +275,9 @@ const PsychologistsProfile = () => {
                                         <div key={index}
                                              className="patient_profile_planned_item_child patient_profile_planned_item_child1">
                                             <div className="patient_profile_planned_item_child_img">
-                                                <Image
+                                                <img
                                                     src={item?.psychologist_image ? `${imagePath}/${item?.psychologist_image}` : '/images/psychologist_img13.png'}
                                                     alt="Company Logo"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    quality={100}
                                                 />
                                             </div>
 
@@ -352,12 +346,9 @@ const PsychologistsProfile = () => {
                                         <div key={index}
                                              className="patient_profile_planned_item_child patient_profile_planned_item_child2">
                                             <div className="patient_profile_planned_item_child_img">
-                                                <Image
+                                                <img
                                                     src={item?.psychologist_image ? `${imagePath}/${item?.psychologist_image}` : '/images/psychologist_img13.png'}
                                                     alt="Company Logo"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    quality={100}
                                                 />
                                             </div>
 

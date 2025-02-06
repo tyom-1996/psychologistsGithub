@@ -78,7 +78,7 @@
     position: relative;
     overflow: hidden;
 }
-.patient_profile_item1_img Image {
+.patient_profile_item1_img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -276,7 +276,7 @@
 .patient_profile_planned_item_child_info_wrapper {
     flex: 1;
 }
-.patient_profile_planned_item_child_img Image {
+.patient_profile_planned_item_child_img img {
     width: 100%;
     height: 100%;
     object-fit: cover;

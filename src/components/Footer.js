@@ -10,12 +10,9 @@ const Footer = (props) => {
             <div className="footer_wrapper">
                 <div className="footer_wrapper_child">
                     <a href='/' className='mobile_footer_logo_img'>
-                        <Image
+                        <img
                             src="/svg/logo.svg"
                             alt="Company Logo"
-                            layout="fill"
-                            objectFit="cover"
-                            quality={100}
                         />
 
                     </a>
@@ -34,12 +31,9 @@ const Footer = (props) => {
                             </li>
                             <li className='footer_ul_li footer_logo_img_parent'>
                                 <a href='/' className='footer_logo_img'>
-                                    <Image
+                                    <img
                                         src="/svg/logo.svg"
                                         alt="Company Logo"
-                                        layout="fill"
-                                        objectFit="cover"
-                                        quality={100}
                                     />
 
                                 </a>
