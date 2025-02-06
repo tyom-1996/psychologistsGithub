@@ -205,6 +205,7 @@ export default function Home() {
                         <div className='psychologists_items_wrapper'>
                             {psychologistsData?.data &&
                                 psychologistsData.data.slice(0, 6).map((item, index) => {
+                                    console.log(`${imagePath}/${item?.image}`, 'hhsagaggsbbsbsbsb')
                                     return (
                                         <div
                                             className='psychologists_item psychologists_item2' key={index}

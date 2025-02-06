@@ -1,9 +1,7 @@
 module.exports = {
-    devIndicators: {
-        autoPrerender: false,
-    },
     images: {
-        domains: ['api.menspsychology.ru'], // Убираем "www."
+        domains: ['api.menspsychology.ru', 'cdn.menspsychology.ru'], // Add other domains if needed
     },
 };
+
 
