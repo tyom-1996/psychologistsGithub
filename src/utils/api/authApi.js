@@ -101,6 +101,24 @@ export const setNewPassword = async (email, newPassword, confirmPassword) => {
         throw error.response?.data.message || error.message;
     }
 };
+export const changePassword2 = async (oldPassword, newPassword) => {
+    try {
+        let body = {
+            old_password: oldPassword,
+            new_password: newPassword,
+        };
+
+
+        // Make the API call using the axios instance
+        const response = await apiClient.put('/profile/change-password', body);
+
+        // Return the response data
+        return response.data;
+    } catch (error) {
+        // Throw the specific error message or general error
+        throw error.response?.data.message || error.message;
+    }
+};
 
 
 export const getProfileInfo2 = async () => {
