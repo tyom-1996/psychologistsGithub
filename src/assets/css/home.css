@@ -2369,6 +2369,9 @@
 }
 
 @media (min-width: 768px) and (max-width: 860px) {
+    .psychologists_info {
+        font-size: 20px!important;
+    }
     .calendar_popup_close_btn_icon1 {
         display: none!important;
     }
@@ -2403,6 +2406,9 @@
     }
 }
 @media (min-width: 426px) and (max-width: 768px) {
+    .psychologists_info {
+        font-size: 18px!important;
+    }
     .calendar_popup_close_btn_icon1 {
         display: none!important;
     }
@@ -2438,6 +2444,10 @@
 }
 
 @media (max-width: 426px) {
+    .psychologists_info {
+        font-size: 16px!important;
+        line-height: 28px!important;
+    }
     .calendar_popup_close_btn_icon1 {
         display: none!important;
     }
@@ -2482,4 +2492,17 @@
         grid-template-columns: repeat(1, 1fr); /* 3 columns, equally spaced */
         gap: 0;
     }
+}
+
+.psychologists_info_wrapper {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.psychologists_info {
+    color: #9F9F9F;
+    font-family: "Inter", serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 32px;
 }
