@@ -28,7 +28,10 @@
     /*background-size: cover;*/
     /*background-repeat: no-repeat;*/
     background-color: #0D0803;
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .about_us_single {
@@ -41,12 +44,13 @@
     max-width: 1593px;
     margin: 0 auto;
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
 
 .about_us_single_item1 {
-    position: relative;
+    position: sticky;
+    top: 30px; /* Adjust as needed */
+    z-index: 1000; /* Ensure it stays above other elements */
     width: 100%;
     max-width: 443px;
     height: 324px;

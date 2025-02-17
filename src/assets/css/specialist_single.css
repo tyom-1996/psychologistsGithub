@@ -28,7 +28,7 @@
     /*background-size: cover;*/
     /*background-repeat: no-repeat;*/
     background-color: #0D0803;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 
@@ -911,7 +911,7 @@
     /*background-size: cover;*/
     /*background-repeat: no-repeat;*/
     background-color: #0D0803;
-    height: 100%;
+    min-height: 100vh;
 }
 
 .appointment_register_section {

@@ -28,7 +28,11 @@
     /*background-size: cover;*/
     /*background-repeat: no-repeat;*/
     background-color: #0D0803;
-    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
 #psychologists-profile {
     width: 100%;
@@ -36,7 +40,7 @@
     /*background-size: cover;*/
     /*background-repeat: no-repeat;*/
     background-color: #0D0803;
-    height: 100%;
+    min-height: 100vh;
 }
 
 .patient_profile_section {

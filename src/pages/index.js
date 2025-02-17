@@ -108,8 +108,7 @@ export default function Home() {
                                 Здесь
                             </h1>
                             <p className='top_info'>
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has
+                                Men’s Psychology – сознательное развитие для современного мужчины.
                             </p>
                         </div>
                         <div className="top_img_item">
@@ -169,19 +168,23 @@ export default function Home() {
                                 О нас
                             </h1>
                             <p className="about_us_info_box_text">
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                                В современном мире многие представители сильного пола не уделяют достаточного внимания своему психологическому состоянию. Существовали, и существуют до сих пор стереотипы, согласно которым работа с психологом – это проявление слабости. Мы, совместно с нашими специалистами, призваны развенчать подобные мифы. Мы убеждены, что только человек, обладающий внутренней силой, способен обратиться за помощью.
                             </p>
 
                             <p className="about_us_info_box_text">
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                                Когда же мужчине может понадобиться помощь психолога?
+                                Совершенно в любой жизненной ситуации. У Вас возникло недопонимание с вашей второй половиной? Вы сталкиваетесь с трудностями в рабочем процессе? Вы не можете найти общий язык с начальством или коллегами? У Вас возникают разногласия с родителями, детьми или друзьями? Или же Вы просто хотите с кем-то поговорить? С этими и другими проблемами Вам помогут разобраться наши специалисты.
+
                             </p>
                             <p className="about_us_info_box_text">
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting
+                                Почему именно мы?
+                                Men’s Psychology - твой путь к самосовершенствованию!
+                                Сервис предложит платформу, объединяющую онлайн-консультации с психологами, тренинги, профессиональные курсы саморазвития и поддержку сообщества мужчин, стремящихся к гармонии и уверенности в себе.
+                                Мы безгранично ценим женщин. Но никто не поймёт мужчину, как другой мужчина. Мы помогаем раскрыть потенциал и достигать успеха в любой сфере жизни, сохраняя внутреннее равновесие и эмоциональное благополучие. У нас работают преимущественно молодые специалисты, с которыми Вам будет очень легко найти общий язык.
+                                Ну и самое главное. Разобраться в себе и понять окружающих хочет каждый человек, но также очень важно решить ту задачу, с которой пришёл клиент. Наша позиция заключается в том, что консультации должны приносить не только психологический комфорт, но и быть направлены на практическое применение в жизни. Наш основной принцип – на любую задачу найдётся своё решение.
+                                Men’s Psychology – люди, которые поймут.»
                             </p>
-                            <a href="" className='more_link'>
+                            <a href="/about-us" className='more_link'>
                                 <span className='more_link_text'>
                                     Ещё
                                 </span>
@@ -217,7 +220,7 @@ export default function Home() {
                                             <div className='psychologists_item_info_box'>
                                                 <p className='psychologists_item_name'>{item?.first_name} {item?.last_name}</p>
                                                 <p className='psychologists_item_position'>Психологи</p>
-                                                <a href="" className='read_more_link'>
+                                                <a href={`/specialists/${item?.id}`} className='read_more_link'>
                                                     <span className='read_more_link_text'>
                                                         Информация
                                                     </span>

@@ -421,4 +421,4 @@ const PsychologistsProfile = () => {
     );
 };
 
-export default withAuth(PsychologistsProfile);
+export default PsychologistsProfile;
