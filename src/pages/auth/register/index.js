@@ -27,7 +27,7 @@ const Register = () => {
     const [options, setOptions] = useState([
         {
             id: 1,
-            name: "Пациент",
+            name: "Клиент",
         },
 
         {

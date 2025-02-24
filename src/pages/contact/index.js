@@ -6,6 +6,9 @@ import { useRouter } from "next/router";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PhoneIcon from "@/assets/icons/phoneIcon";
+import TelegramIcon from "@/assets/icons/telegramIcon";
+import TelegramIconTablet from "@/assets/icons/telegramIconTablet";
+import TelegramIconMobile from "@/assets/icons/telegramIconMobile";
 import PhoneIconTablet from "@/assets/icons/phoneIconTablet";
 import PhoneIconMobile from "@/assets/icons/phoneIconMobile";
 import EmailIcon from "@/assets/icons/emailIcon";
@@ -45,16 +48,16 @@ const Contact = () => {
                     <div className="contact_social_links_wrapper">
                         <Link href={'/'} className='contact_social_link'>
                             <span className='contact_social_link_icon'>
-                                <PhoneIcon/>
+                                <TelegramIcon/>
                             </span>
                             <span className='contact_social_link_icon2'>
-                                <PhoneIconTablet/>
+                                <TelegramIconTablet/>
                             </span>
                             <span className='contact_social_link_icon3'>
-                                <PhoneIconMobile/>
+                                <TelegramIconMobile/>
                             </span>
                             <span className='contact_social_link_title'>
-                                +7 00 000 000 00
+                                https://web.telegram.org/a/
                             </span>
 
                         </Link>

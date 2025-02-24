@@ -853,6 +853,7 @@
     width: 100%;
     margin-bottom: 15px;
     position: relative;
+    cursor: pointer;
 }
 
 .dropdown_header_icon_mobile {
