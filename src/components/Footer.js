@@ -4,6 +4,7 @@ import styles from '../assets/css/footer.css';
 import Image from "next/image";
 import Link from "next/link";
 
+
 const Footer = (props) => {
     return (
         <footer className={'footer'}>
@@ -52,6 +53,19 @@ const Footer = (props) => {
 
                         </ul>
                     </nav>
+                </div>
+                <div className="footer_wrapper_child2">
+                    <div className='footer_wrapper_child2_item'>
+                        <p className='footer_wrapper_child2_item_title'>ИНН - </p>
+                        <p className='footer_wrapper_child2_item_info'>781434088627</p>
+                    </div>
+                    <div className='footer_wrapper_child2_item'>
+                        <p className='footer_wrapper_child2_item_title'>ОГРН - </p>
+                        <p className='footer_wrapper_child2_item_info'>324784700054111</p>
+                    </div>
+                    <a href="https://api.menspsychology.ru/uploads/oferta_781434088627.docx" className='footer_wrapper_child2_item_link'   >
+                        Оферта
+                    </a>
                 </div>
 
             </div>
