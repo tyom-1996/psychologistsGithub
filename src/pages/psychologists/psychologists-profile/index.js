@@ -230,11 +230,11 @@ const PsychologistsProfile = () => {
                                         {profileInfoData?.balance} <span>Руб.</span>
                                     </p>
                                     <p className='patient_profile_item1_account_price_info2'>
-                                        Ваш Счету
+                                        Ваш счёт
                                     </p>
                                 </div>
                                 <button className='add_to_account_btn'>
-                                    Добавлять Счету
+                                    Пополнить счёт
                                 </button>
                         </div>
 

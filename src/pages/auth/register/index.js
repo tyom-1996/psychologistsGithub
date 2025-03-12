@@ -51,7 +51,7 @@ const Register = () => {
 
     const handleOptionClick = (option) => {
         setSelectedOption(option);
-        if (option == 'Пациент') {
+        if (option == 'Клиент') {
             setSelectedType('user')
         } else if (option == 'Психолог') {
              setSelectedType('psycholog')

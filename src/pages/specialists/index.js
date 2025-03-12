@@ -20,80 +20,6 @@ import {useGetServices} from "@/hooks/useGetServices";
 
 const Specialists = () => {
 
-    const [psychologistsList, setPsychologistsList] = useState([
-        {
-            id: 1,
-            img: '/images/psychologist_img4.png',
-            name: 'Александра Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 2,
-            img: '/images/psychologist_img5.png',
-            name: 'Алла Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 3,
-            img: '/images/psychologist_img6.png',
-            name: 'Анна Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 4,
-            img: '/images/psychologist_img7.png',
-            name: 'Альберт Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 5,
-            img: '/images/psychologist_img8.png',
-            name: 'Алина Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 6,
-            img: '/images/psychologist_img9.png',
-            name: 'Альберт Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 7,
-            img: '/images/psychologist_img10.png',
-            name: 'Алиса Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 8,
-            img: '/images/psychologist_img11.png',
-            name: 'Александр  Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 9,
-            img: '/images/psychologist_img12.png',
-            name: 'Анатолий Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 10,
-            img: '/images/psychologist_img13.png',
-            name: 'Анатолий Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 11,
-            img: '/images/psychologist_img14.png',
-            name: 'Александра Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 12,
-            img: '/images/psychologist_img15.png',
-            name: 'Алла Абалак',
-            position: 'Психологи',
-        },
-    ]);
     const [showFilterModal, setShowFilterModal] = useState(false);
     const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/uploads');
     const {getPsychologists, psychologistsData } = useGetPsychologists();
@@ -102,9 +28,9 @@ const Specialists = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-      getPsychologists()
-    }, []);
-
+        // On initial load or whenever page changes, fetch psychologists with no filters
+        getPsychologists({}, currentPage);
+    }, [currentPage]);
 
     useEffect(() => {
         if (psychologistsData) {
@@ -131,12 +57,17 @@ const Specialists = () => {
         router.push(`/specialists/${id}`);
     }
     const handleApplyFilters = (selectedServiceIds) => {
-        const numericIds = selectedServiceIds.map((id) => Number(id)); // Ensure all IDs are numbers
+        // Convert all IDs to numbers
+        const numericIds = selectedServiceIds.map((id) => Number(id));
+
+        // Build the filter object for your POST body
         const filterParams = {
-            service_ids: numericIds, // Wrap numeric IDs in "service_ids"
+            service_ids: numericIds,
         };
         console.log(filterParams, 'filter_params______');
-        getPsychologists(filterParams); // Pass the formatted object
+
+        // Pass the filter object and the current page to the hook
+        getPsychologists(filterParams, currentPage);
     };
     const handlePageClick = (event) => {
         const selectedPage = event.selected + 1; // react-paginate uses 0-based index
@@ -215,7 +146,7 @@ const Specialists = () => {
                                     </div>
                                     <div className='psychologists_item_info_box'>
                                         <p className='psychologists_item_name'>{item?.first_name} {item?.last_name}</p>
-                                        <p className='psychologists_item_position'>Психологи</p>
+                                        {/*<p className='psychologists_item_position'>Психологи</p>*/}
                                         <a href="" className='read_more_link'>
                                             <span className='read_more_link_text'>
                                                 Информация

@@ -202,19 +202,18 @@ export const makeAppointmentBook2 = async (id, userId, name, surname, email, pho
         throw error.response?.data.message || error.message;
     }
 };
-export const getPsychologists2 = async (page,filters) => {
+export const getPsychologists2 = async (page, filters) => {
     try {
+        // Build the request body with page and any other filters (like service_ids)
+        const requestBody = {
+            ...filters, // e.g. { service_ids: [1,2,3] }
+            page,       // add page as well
+        };
 
-        filters.page = page
-
-        // Make the API call using the axios instance
-        const response = await apiClient.post(`/psychologists`, filters);
-
-        console.log(response, 'get_psychologists')
-        // Return the response data
+        // POST to /psychologists
+        const response = await apiClient.post('/psychologists', requestBody);
         return response.data;
     } catch (error) {
-        // Throw the specific error message or general error
         throw error.response?.data.message || error.message;
     }
 };

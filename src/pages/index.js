@@ -219,7 +219,7 @@ export default function Home() {
                                             </div>
                                             <div className='psychologists_item_info_box'>
                                                 <p className='psychologists_item_name'>{item?.first_name} {item?.last_name}</p>
-                                                <p className='psychologists_item_position'>Психологи</p>
+                                                {/*<p className='psychologists_item_position'>Психологи</p>*/}
                                                 <a href={`/specialists/${item?.id}`} className='read_more_link'>
                                                     <span className='read_more_link_text'>
                                                         Информация

@@ -132,7 +132,7 @@ const Header = (props) => {
                                 <p className='header_user_balance_price_info'>
                                     {profileInfoData?.balance} <span>Руб.</span>
                                 </p>
-                                <p className='header_user_balance_info2'>Ваш Счету</p>
+                                <p className='header_user_balance_info2'>Ваш счёт</p>
                             </div>
                             <div className="header_user_img_info_wrapper">
                                 <div className="header_user_img">
@@ -310,7 +310,7 @@ const Header = (props) => {
                                     <p className='header_user_balance_price_info'>
                                         23000 <span>Руб.</span>
                                     </p>
-                                    <p className='header_user_balance_info2'>Ваш Счету</p>
+                                    <p className='header_user_balance_info2'>Ваш счёт</p>
                                 </div>
                             }
                         </div>

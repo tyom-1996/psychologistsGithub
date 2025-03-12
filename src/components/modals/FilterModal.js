@@ -149,6 +149,7 @@ const FilterModal = ({ isOpen, onClose, services, handleApplyFilters }) => {
                     >
                         выполнять
                     </button>
+
                     <button
                         className='filter_modal_footer_btn2'
                         onClick={() => {

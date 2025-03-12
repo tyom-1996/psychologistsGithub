@@ -203,7 +203,7 @@ const AppointmentRegister = () => {
                 <div className='appointment_register_wrapper'>
                     <div className='appointment_register_title_line_wrapper'>
                         <h1 className='appointment_register_title'>
-                            Запис на приём
+                            Запись на приём
                         </h1>
                         <div className='appointment_register_line'>
                         </div>
