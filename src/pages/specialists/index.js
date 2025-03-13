@@ -26,6 +26,7 @@ const Specialists = () => {
     const {getServices, servicesData } = useGetServices();
     const router = useRouter();
     const [currentPage, setCurrentPage] = useState(1);
+    const [selectedOptions, setSelectedOptions] = useState([]);
 
     useEffect(() => {
         // On initial load or whenever page changes, fetch psychologists with no filters
@@ -193,6 +194,8 @@ const Specialists = () => {
                     services={servicesData}
                     onClose={() => setShowFilterModal(false)}
                     handleApplyFilters={handleApplyFilters}
+                    selectedOptions={selectedOptions}       // pass current selections
+                    setSelectedOptions={setSelectedOptions} // pass setter so modal can update them
                 />
             )}
         </div>

@@ -4,7 +4,7 @@ import FilterCloseIcon from "../../assets/icons/filterCloseIcon";
 import FilterCloseMobileIcon from "../../assets/icons/filterCloseMobileIcon";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-const FilterModal = ({ isOpen, onClose, services, handleApplyFilters }) => {
+const FilterModal = ({ isOpen, onClose, services, handleApplyFilters, selectedOptions, setSelectedOptions, }) => {
     const [price, setPrice] = useState([0, 5000]);
     const [selectedOption1, setSelectedOption1] = useState(null);
     const [selectedOptions2, setSelectedOptions2] = useState([]);
@@ -27,9 +27,9 @@ const FilterModal = ({ isOpen, onClose, services, handleApplyFilters }) => {
     };
 
     const handleOption2Change = (value) => {
-        const numericValue = Number(value); // Convert value to a number
-        if (!isNaN(numericValue)) { // Check if it's a valid number
-            setSelectedOptions2((prev) =>
+        const numericValue = Number(value);
+        if (!isNaN(numericValue)) {
+            setSelectedOptions((prev) =>
                 prev.includes(numericValue)
                     ? prev.filter((v) => v !== numericValue) // Remove if already selected
                     : [...prev, numericValue] // Add if not selected
@@ -129,7 +129,7 @@ const FilterModal = ({ isOpen, onClose, services, handleApplyFilters }) => {
                                         <input
                                             type="checkbox"
                                             value={service?.id} // Use numeric ID as the value
-                                            checked={selectedOptions2.includes(service?.id)} // Check if selected
+                                            checked={selectedOptions.includes(service?.id)} // Check if selected
                                             onChange={() => handleOption2Change(service?.id)} // Pass ID to handler
                                         />
                                         <span className="custom_checkbox"></span>
@@ -142,7 +142,7 @@ const FilterModal = ({ isOpen, onClose, services, handleApplyFilters }) => {
                 <div className="filter_modal_footer">
                     <button className='filter_modal_footer_btn1'
                             onClick={() => {
-                                handleApplyFilters(selectedOptions2); // Pass selected IDs to parent function
+                                handleApplyFilters(selectedOptions);
                                 onClose();
                                 document.body.style.overflow = "auto";
                             }}
@@ -153,7 +153,7 @@ const FilterModal = ({ isOpen, onClose, services, handleApplyFilters }) => {
                     <button
                         className='filter_modal_footer_btn2'
                         onClick={() => {
-                            setSelectedOptions2([])
+                            setSelectedOptions([]);
                         }}
                     >
                         удалить
