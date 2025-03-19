@@ -72,7 +72,7 @@ const Contact = () => {
                                 <EmailIconMobile/>
                             </span>
                             <span className='contact_social_link_title'>
-                               аааа@mail.ru
+                               menspsychology@mail.ru
                             </span>
                         </Link>
                         <Link href={'/'} className='contact_social_link'>
@@ -86,7 +86,7 @@ const Contact = () => {
                                 <GmailIconMobile/>
                             </span>
                             <span className='contact_social_link_title'>
-                              Support@mail.ru
+                             hrmenspsychology@mail.ru
                             </span>
                         </Link>
                     </div>
