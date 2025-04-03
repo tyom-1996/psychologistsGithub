@@ -58,6 +58,9 @@ export default function Specialist ({id})  {
     const redirectToAppointmentRegister = () => {
         router.push(`/specialists/appointment-register?id=${id}`);
     }
+    const redirectToLogin = () => {
+        router.push(`/auth/login`);
+    }
 
 
     return (
@@ -133,9 +136,18 @@ export default function Specialist ({id})  {
                                         Записаться на приём
                                     </button>
                                 }
-
+                                {isLogged !== true &&
+                                    <button
+                                        className='make_an_appointment_with_specialists_btn'
+                                        onClick={() => {
+                                            redirectToLogin()
+                                        }}
+                                    >
+                                        Записаться на приём
+                                    </button>
+                                }
                                 <div className='specialists_single_page_section_item1_price_info_box'>
-                                    <h3 className='specialists_single_page_section_item1_price_info1'>{profileInfoData?.balance} <span>Руб.</span>
+                                    <h3 className='specialists_single_page_section_item1_price_info1'>3000 <span>Руб.</span>
                                     </h3>
                                     <p className='specialists_single_page_section_item1_price_info2'>Оплата за приём</p>
                                 </div>
@@ -205,8 +217,18 @@ export default function Specialist ({id})  {
                                         Записаться на приём
                                     </button>
                                 }
+                                {isLogged !== true &&
+                                    <button
+                                        className='make_an_appointment_with_specialists_btn'
+                                        onClick={() => {
+                                            redirectToLogin()
+                                        }}
+                                    >
+                                        Записаться на приём
+                                    </button>
+                                }
                                 <div className='specialists_single_page_section_item1_price_info_box'>
-                                    <h3 className='specialists_single_page_section_item1_price_info1'>{profileInfoData?.balance} <span>Руб.</span>
+                                    <h3 className='specialists_single_page_section_item1_price_info1'>3000 <span>Руб.</span>
                                     </h3>
                                     <p className='specialists_single_page_section_item1_price_info2'>Оплата за приём</p>
                                 </div>

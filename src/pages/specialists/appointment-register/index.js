@@ -477,7 +477,7 @@ const AppointmentRegister = () => {
                                 Записаться на приём
                             </button>
                             <div className="appointment_register_form_price_info_wrapper">
-                                <p className='appointment_register_form_price_info'>{profileInfoData?.balance} <span>Руб.</span></p>
+                                <p className='appointment_register_form_price_info'>3000  <span>Руб.</span></p>
                                 <p className='appointment_register_form_price_info_title'>Цена</p>
                             </div>
                         </div>
