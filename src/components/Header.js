@@ -26,6 +26,7 @@ const Header = (props) => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [isLogged, setIsLogged] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [role, setRole] = useState('');
     const [selectedOption, setSelectedOption] = useState(null);
     const {getProfileInfo, loadingUserInfo, profileInfoData } = useGetProfileInfo();
     const [imagePath, setImagePath] = useState('https://api.menspsychology.ru/uploads');
@@ -45,6 +46,8 @@ const Header = (props) => {
 
 
     useEffect(() => {
+            const role = localStorage.getItem('role');
+            setRole(role)
             let token = localStorage.getItem('token');
             if (token) {
                 setIsLogged(true)
@@ -68,6 +71,7 @@ const Header = (props) => {
     const handleNavigateToHome =  () => {
         router.push('/');
     };
+
 
 
 
@@ -128,12 +132,15 @@ const Header = (props) => {
                 {isLogged === true ?
                     (
                         <div className='header_user_info_wrapper'>
-                            <div className='header_user_balance_info_wrapper'>
-                                <p className='header_user_balance_price_info'>
-                                    {profileInfoData?.balance} <span>Руб.</span>
-                                </p>
-                                <p className='header_user_balance_info2'>Ваш счёт</p>
-                            </div>
+                            {role == 'user' &&
+                                <div className='header_user_balance_info_wrapper'>
+                                    <p className='header_user_balance_price_info'>
+                                        {profileInfoData?.balance} <span>Руб.</span>
+                                    </p>
+                                    <p className='header_user_balance_info2'>Ваш счёт</p>
+                                </div>
+                            }
+
                             <div className="header_user_img_info_wrapper">
                                 <div className="header_user_img">
                                     <img
@@ -305,14 +312,19 @@ const Header = (props) => {
                             </div>
 
 
-                            {props.isLogged === true  &&
-                                <div className='mobile_header_user_balance_info_wrapper'>
-                                    <p className='header_user_balance_price_info'>
-                                        23000 <span>Руб.</span>
-                                    </p>
-                                    <p className='header_user_balance_info2'>Ваш счёт</p>
+                            {role == 'user' &&
+                                <div>
+                                    {props.isLogged === true  &&
+                                        <div className='mobile_header_user_balance_info_wrapper'>
+                                            <p className='header_user_balance_price_info'>
+                                                23000 <span>Руб.</span>
+                                            </p>
+                                            <p className='header_user_balance_info2'>Ваш счёт</p>
+                                        </div>
+                                    }
                                 </div>
                             }
+
                         </div>
                         <nav className="mobile_header_nav">
                             <ul className="header_ul_list">

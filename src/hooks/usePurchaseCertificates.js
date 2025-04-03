@@ -5,6 +5,7 @@ import { purchaseCertificates2 } from '../utils/api/authApi'; // Import the API 
 export const usePurchaseCertificates = () => {
     const [loading, setLoading] = useState(false);
     const [purchaseCertificatesData, setPurchaseCertificatesData] = useState(null);
+    const [errorPurchaseCertificatesData, setErrorPurchaseCertificatesData] = useState(null);
 
 
     const purchaseCertificates = async (userId, selectedCertificateId) => {
@@ -14,8 +15,7 @@ export const usePurchaseCertificates = () => {
             const data = await purchaseCertificates2(userId, selectedCertificateId); // Call the API function
             setPurchaseCertificatesData(data);
         } catch (error) {
-            // if (error == 'Old password is incorrect') {
-            // }
+           setErrorPurchaseCertificatesData(error)
         } finally {
             setLoading(false);
         }
@@ -23,6 +23,7 @@ export const usePurchaseCertificates = () => {
 
     return {
         purchaseCertificates,
+        errorPurchaseCertificatesData,
         purchaseCertificatesData,
         loading,
     };

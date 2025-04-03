@@ -119,6 +119,23 @@ export const changePassword2 = async (oldPassword, newPassword) => {
         throw error.response?.data.message || error.message;
     }
 };
+export const payment2 = async (amount) => {
+    try {
+        let body = {
+            amount: amount,
+        };
+
+
+        // Make the API call using the axios instance
+        const response = await apiClient.post('/payment/start', body);
+
+        // Return the response data
+        return response.data;
+    } catch (error) {
+        // Throw the specific error message or general error
+        throw error.response?.data.message || error.message;
+    }
+};
 
 
 export const getProfileInfo2 = async () => {

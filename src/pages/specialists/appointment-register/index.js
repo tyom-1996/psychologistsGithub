@@ -17,82 +17,9 @@ import 'react-calendar/dist/Calendar.css'; // Import default styles
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {useAppointmentBook} from "@/hooks/useAppointmentBook";
+import {useGetProfileInfo} from "@/hooks/useGetProfileInfo";
 
 const AppointmentRegister = () => {
-    const [psychologistsList, setPsychologistsList] = useState([
-        {
-            id: 1,
-            img: '/images/psychologist_img4.png',
-            name: 'Александра Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 2,
-            img: '/images/psychologist_img5.png',
-            name: 'Алла Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 3,
-            img: '/images/psychologist_img6.png',
-            name: 'Анна Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 4,
-            img: '/images/psychologist_img7.png',
-            name: 'Альберт Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 5,
-            img: '/images/psychologist_img8.png',
-            name: 'Алина Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 6,
-            img: '/images/psychologist_img9.png',
-            name: 'Альберт Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 7,
-            img: '/images/psychologist_img10.png',
-            name: 'Алиса Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 8,
-            img: '/images/psychologist_img11.png',
-            name: 'Александр  Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 9,
-            img: '/images/psychologist_img12.png',
-            name: 'Анатолий Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 10,
-            img: '/images/psychologist_img13.png',
-            name: 'Анатолий Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 11,
-            img: '/images/psychologist_img14.png',
-            name: 'Александра Абалак',
-            position: 'Психологи',
-        },
-        {
-            id: 12,
-            img: '/images/psychologist_img15.png',
-            name: 'Алла Абалак',
-            position: 'Психологи',
-        },
-    ]);
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
@@ -101,28 +28,15 @@ const AppointmentRegister = () => {
     const [phoneNumber, setPhoneNumber] = useState('+7'); // Initialize with "+7"
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
-    const [options, setOptions] = useState([
-        {
-            id: 1,
-            name: "Вариант 1",
-        },
-
-        {
-            id: 2,
-            name: "Вариант 2",
-        },
-        {
-            id: 3,
-            name: "Вариант 3",
-        }
-    ]);
     const [value, setValue] = useState(new Date());
     const [showCalendar, setShowCalendar] = useState(false);
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState(null);
     const [showDateTime, setShowDateTime] = useState(null);
+    const [appointmentError, setAppointmentError] = useState('');
     const [showPaySuccessPopup, setShowPaySuccessPopup] = useState(false);
-    const {makeAppointmentBook, makeAppointmentBookData, nameError, surnameError, emailError, phoneError, messageError, selectedTimeError, selectedDateError, balanceError} = useAppointmentBook();
+    const {makeAppointmentBook, makeAppointmentBookData, errorMakeAppointmentBookData, nameError, surnameError, emailError, phoneError, messageError, selectedTimeError, selectedDateError, balanceError} = useAppointmentBook();
+    const {getProfileInfo, loadingUserInfo, profileInfoData } = useGetProfileInfo();
 
 
     useEffect(() => {
@@ -141,13 +55,26 @@ const AppointmentRegister = () => {
             }
         }
     }, [makeAppointmentBookData])
+    useEffect(() => {
+        if (errorMakeAppointmentBookData) {
+            console.log(errorMakeAppointmentBookData, 'eememmeme')
+            if (errorMakeAppointmentBookData == 'No sessions remaining on this promo code') {
+                setAppointmentError('По этому промокоду не осталось сеансов')
+            }
+            if (errorMakeAppointmentBookData == 'Invalid promo code') {
+                setAppointmentError('Недействительный промокод')
+            }
+        }
+    }, [errorMakeAppointmentBookData])
 
     const handleDateChange = (date) => {
         setValue(date); // Update the calendar's selected date
-        setSelectedDate(date.toLocaleDateString()); // Format and set the selected date
+        // Format the date as YYYY-MM-DD
+        setSelectedDate(date.toISOString().split('T')[0]);
         setShowCalendar(false); // Close the calendar after selection
-        enableBodyScroll()
+        enableBodyScroll();
     };
+
 
     const handleTimeChange = (time) => {
         if (time === null) {
@@ -201,6 +128,9 @@ const AppointmentRegister = () => {
             <Header activePage={"appointment-register"} />
             <section className='appointment_register_section'>
                 <div className='appointment_register_wrapper'>
+                    {appointmentError &&
+                        <p className='error_text3'>{appointmentError}</p>
+                    }
                     <div className='appointment_register_title_line_wrapper'>
                         <h1 className='appointment_register_title'>
                             Запись на приём
@@ -547,7 +477,7 @@ const AppointmentRegister = () => {
                                 Записаться на приём
                             </button>
                             <div className="appointment_register_form_price_info_wrapper">
-                                <p className='appointment_register_form_price_info'>3000 <span>Руб.</span></p>
+                                <p className='appointment_register_form_price_info'>{profileInfoData?.balance} <span>Руб.</span></p>
                                 <p className='appointment_register_form_price_info_title'>Цена</p>
                             </div>
                         </div>
@@ -608,17 +538,17 @@ const AppointmentRegister = () => {
                                 </div>
                                 <DatePicker
                                     selected={selectedTime ? new Date(`1970-01-01T${selectedTime}:00`) : null}
-                                    onChange={(time) => {
-                                        handleTimeChange(time)
-                                    }}
+                                    onChange={(time) => handleTimeChange(time)}
                                     showTimeSelect
                                     showTimeSelectOnly
                                     timeIntervals={15}
                                     timeCaption="Время"
                                     dateFormat="HH:mm"
+                                    timeFormat="HH:mm" // added prop for 24-hour format
                                     placeholderText="Выберите время"
                                     isClearable={true}
                                 />
+
                             </div>
                         </div>
                     }

@@ -168,7 +168,7 @@
 }
 
 .specialists_single_page_section_item1_price_info_box {
-    max-width: 190px;
+    max-width: 250px;
     width: 100%;
     /*display: flex;*/
     /*flex-direction: column;*/
@@ -259,7 +259,7 @@
         font-size: 13px!important;
     }
     .specialists_single_page_section_item1_price_info_box {
-        max-width: 170px!important;
+        max-width: 226px!important;
     }
     .specialists_single_page_section_item1_img {
         max-width: 224px!important;
@@ -324,7 +324,7 @@
         font-size: 12px!important;
     }
     .specialists_single_page_section_item1_price_info_box {
-        max-width: 150px!important;
+        max-width: 185px!important;
     }
     .specialists_dropdown_header {
         padding: 14px!important;
@@ -394,7 +394,7 @@
         font-size: 11px!important;
     }
     .specialists_single_page_section_item1_price_info_box {
-        max-width: 125px!important;
+        max-width: 157px!important;
     }
     .specialists_dropdown_header_icon_mobile {
         display: flex!important;
@@ -537,7 +537,7 @@
         margin-bottom: 40px!important;
     }
     .specialists_single_page_section_item1_price_info_box {
-        max-width: 80px!important;
+        max-width: 112px!important;
     }
 }
 @media (min-width: 370px) and (max-width: 426px) {
@@ -618,7 +618,7 @@
         padding: 15px 15px 24px 28px!important;
     }
     .specialists_single_page_section_item1_price_info_box {
-        max-width: 75px!important;
+        max-width: 100px!important;
     }
     .specialists_single_page_section_item1_mobile {
         margin-bottom: 40px!important;
@@ -727,7 +727,7 @@
         padding: 15px 15px 24px 28px!important;
     }
     .specialists_single_page_section_item1_price_info_box {
-        max-width: 75px!important;
+        max-width: 100px!important;
     }
     .specialists_single_page_section_item1_mobile {
         margin-bottom: 40px!important;
@@ -836,7 +836,7 @@
         padding: 15px 15px 24px 28px!important;
     }
     .specialists_single_page_section_item1_price_info_box {
-        max-width: 75px!important;
+        max-width: 100px!important;
     }
     .specialists_single_page_section_item1_mobile {
         margin-bottom: 40px!important;
@@ -2163,4 +2163,12 @@
     #appointment_register_form_dropdown_desktop {
         display: none!important;
     }
+}
+
+.error_text3 {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: red;
+    margin-bottom: 10px;
 }

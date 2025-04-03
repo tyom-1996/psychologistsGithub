@@ -778,7 +778,7 @@
 .header_user_balance_price_info {
     color: rgba(255, 255, 255, 1);
     font-weight: 400;
-    font-size: 22px;
+    font-size: 20px;
     font-family: 'JejuMyeongjo', sans-serif;
 }
 
@@ -820,7 +820,7 @@
         margin-right: 14px!important;
     }
     .header_user_balance_price_info {
-        font-size: 20px!important;
+        font-size: 18px!important;
     }
     .header_user_balance_price_info span{
         font-size: 13px!important;
@@ -848,7 +848,7 @@
         margin-right: 12px!important;
     }
     .header_user_balance_price_info {
-        font-size: 18px!important;
+        font-size: 16px!important;
     }
     .header_user_balance_price_info span{
         font-size: 12px!important;
@@ -877,7 +877,7 @@
     }
 
     .header_user_balance_price_info {
-        font-size: 16px!important;
+        font-size: 14px!important;
     }
     .header_user_balance_price_info span{
         font-size: 11px!important;
@@ -906,7 +906,7 @@
     }
 
     .header_user_balance_price_info {
-        font-size: 14px!important;
+        font-size: 13px!important;
     }
     .header_user_balance_price_info span{
         font-size: 10px!important;
@@ -941,7 +941,7 @@
     }
 
     .header_user_balance_price_info {
-        font-size: 12px!important;
+        font-size: 11px!important;
     }
     .header_user_balance_price_info span{
         font-size: 9px!important;
@@ -976,7 +976,7 @@
     }
 
     .header_user_balance_price_info {
-        font-size: 11px!important;
+        font-size: 10px!important;
     }
     .header_user_balance_price_info span{
         font-size: 7px!important;
@@ -1011,7 +1011,7 @@
         margin-right: 7px!important;
     }
     .header_user_balance_price_info {
-        font-size: 11px!important;
+        font-size: 9px!important;
     }
     .header_user_balance_price_info span{
         font-size: 7px!important;
@@ -1044,7 +1044,7 @@
         margin-right: 7px!important;
     }
     .header_user_balance_price_info {
-        font-size: 11px!important;
+        font-size: 10px!important;
     }
     .header_user_balance_price_info span{
         font-size: 7px!important;

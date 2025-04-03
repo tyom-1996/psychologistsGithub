@@ -127,6 +127,7 @@ import { makeAppointmentBook2 } from '../utils/api/authApi'; // Import the API f
 export const useAppointmentBook= () => {
     const [loading, setLoading] = useState(false);
     const [makeAppointmentBookData, setMakeAppointmentBookData] = useState(null);
+    const [errorMakeAppointmentBookData, setErrorMakeAppointmentBookData] = useState(null);
     const [nameError, setNameError] = useState('');
     const [surnameError, setSurnameError] = useState('');
     const [emailError, setEmailError] = useState('');
@@ -198,6 +199,7 @@ export const useAppointmentBook= () => {
             if (error == 'Insufficient balance') {
                   setBalanceError('Недостаточный баланс')
             }
+            setErrorMakeAppointmentBookData(error)
         } finally {
             setLoading(false);
         }
@@ -205,6 +207,7 @@ export const useAppointmentBook= () => {
 
     return {
         makeAppointmentBook,
+        errorMakeAppointmentBookData,
         makeAppointmentBookData,
         nameError,
         surnameError,
