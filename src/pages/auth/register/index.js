@@ -9,6 +9,7 @@ import DropDownIcon from '../../../assets/icons/dropdownIcon';
 import DropDownMobileIcon from '../../../assets/icons/dropdownMobileIcon';
 import { PasswordCloseIcon } from '../../../assets/icons/PasswordCloseIcon';
 import { useRegister } from '../../../hooks/useRegister';
+import {useRegisterVerifyCode} from "@/hooks/useRegisterVerifyCode";
 
 const Register = () => {
     const [password, setPassword] = useState('');
@@ -38,13 +39,20 @@ const Register = () => {
     ]);
     const { fetchRegister, loading, nameErrorText, surnameErrorText, registerData,
             emailErrorText, phoneErrorText, typeErrorText, passwordErrorText, confirmPasswordErrorText} = useRegister();
-    "User registered successfully. Please check your email to confirm registration."
+    const { registerVerifyCode, codeErrorText, codeData } = useRegisterVerifyCode();
+    const [code, setCode] = useState('1111');
 
+    useEffect(() => {
+        if (codeData?.token) {
+            router.push(`/auth/login`);
+        }
+    }, [codeData]);
 
     useEffect(() => {
         if (registerData) {
             if (registerData?.message == "User registered successfully. Please check your email to confirm registration.") {
-                router.push(`/auth/register/code/${email}`);
+                // router.push(`/auth/register/code/${email}`);
+                 registerVerifyCode(email ? email : null, code);
             }
         }
     }, [registerData]);

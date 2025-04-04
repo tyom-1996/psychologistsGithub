@@ -327,7 +327,7 @@ const PsychologistsEditProfile = () => {
                     <div className='edit_profile_form_input'>
                              <textarea
                                  name="" id="" cols="10" rows="6"
-                                 placeholder='Письмо'
+                                 placeholder='О себе'
                                  className='edit_profile_form_input_field'
                                  value={about}
                                  onChange={(e) => {

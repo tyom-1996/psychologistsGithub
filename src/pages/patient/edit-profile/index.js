@@ -29,7 +29,7 @@ const PatientEditProfile = () => {
     const [name, setName] = useState('');
     const [surname, setSurName] = useState('');
     const [email, setEmail] = useState('');
-    const [about, setAbout] = useState('');
+    const [about, setAbout] = useState('test');
     const [password, setPassword] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('+7');
     const {editProfile, editProfileData } = useEditProfile();
@@ -251,16 +251,16 @@ const PatientEditProfile = () => {
 
                         </div>
                     </div>
-                    <div className='edit_profile_form_input'>
-                             <textarea
-                                 name="" id="" cols="10" rows="6" placeholder='Письмо'
-                                 className='edit_profile_form_input_field'
-                                 value={about}
-                                 onChange={(e) => {
-                                     setAbout(e.target.value)
-                                 }}
-                             ></textarea>
-                    </div>
+                    {/*<div className='edit_profile_form_input'>*/}
+                    {/*         <textarea*/}
+                    {/*             name="" id="" cols="10" rows="6" placeholder='О себе'*/}
+                    {/*             className='edit_profile_form_input_field'*/}
+                    {/*             value={about}*/}
+                    {/*             onChange={(e) => {*/}
+                    {/*                 setAbout(e.target.value)*/}
+                    {/*             }}*/}
+                    {/*         ></textarea>*/}
+                    {/*</div>*/}
                     <button
                         className='edit_profile_btn'
                         onClick={(e) => {

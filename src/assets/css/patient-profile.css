@@ -210,6 +210,14 @@
     width: 100%;
     max-width: 760px;
 }
+.patient_profile_tabs_wrapper2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    width: 100%;
+    max-width: 650px;
+}
 
 .patient_profile_tab {
     color: rgba(124, 124, 124, 1);
@@ -639,6 +647,9 @@
     .patient_profile_tabs_wrapper {
         max-width: 720px!important;
     }
+    .patient_profile_tabs_wrapper2 {
+        max-width: 600px!important;
+    }
 }
 @media (min-width: 1020px) and (max-width: 1100px) {
     .patient_profile_item1_title {
@@ -698,6 +709,10 @@
 
     .patient_profile_tabs_wrapper {
         max-width: 680px!important;
+        margin-bottom: 40px!important;
+    }
+    .patient_profile_tabs_wrapper2 {
+        max-width: 540px!important;
         margin-bottom: 40px!important;
     }
 }
@@ -774,6 +789,10 @@
 
     .patient_profile_tabs_wrapper {
         max-width: 660px!important;
+        margin-bottom: 30px!important;
+    }
+    .patient_profile_tabs_wrapper2 {
+        max-width: 480px!important;
         margin-bottom: 30px!important;
     }
 }
@@ -853,6 +872,10 @@
 
     .patient_profile_tabs_wrapper {
         max-width: 570px!important;
+        margin-bottom: 25px!important;
+    }
+    .patient_profile_tabs_wrapper2 {
+        max-width: 420px!important;
         margin-bottom: 25px!important;
     }
     .patient_profile_item1_info_wrapper {
@@ -940,6 +963,10 @@
 
     .patient_profile_tabs_wrapper {
         max-width: 540px!important;
+        margin-bottom: 25px!important;
+    }
+    .patient_profile_tabs_wrapper2 {
+        max-width: 420px!important;
         margin-bottom: 25px!important;
     }
     .patient_profile_item1_info_wrapper {
@@ -1030,6 +1057,10 @@
 
     .patient_profile_tabs_wrapper {
         max-width: 440px!important;
+        margin-bottom: 25px!important;
+    }
+    .patient_profile_tabs_wrapper2 {
+        max-width: 360px!important;
         margin-bottom: 25px!important;
     }
     .patient_profile_item1_info_wrapper {
@@ -1123,6 +1154,10 @@
 
     .patient_profile_tabs_wrapper {
         max-width: 335px!important;
+        margin-bottom: 25px!important;
+    }
+    .patient_profile_tabs_wrapper2 {
+        max-width: 275px!important;
         margin-bottom: 25px!important;
     }
     .patient_profile_item1_info_wrapper {
@@ -1250,6 +1285,10 @@
         max-width: 335px!important;
         margin-bottom: 25px!important;
     }
+    .patient_profile_tabs_wrapper2 {
+        max-width: 270px!important;
+        margin-bottom: 25px!important;
+    }
     .patient_profile_item1_info_wrapper {
         width: 100%;
         max-width: 145px!important;
@@ -1270,7 +1309,11 @@
         margin-bottom: 6px!important;
     }
     .patient_profile_tabs_wrapper {
-        max-width: unset!important;
+        max-width: 300px!important;
+        margin-bottom: 25px!important;
+    }
+    .patient_profile_tabs_wrapper2 {
+        max-width: 225px!important;
         margin-bottom: 25px!important;
     }
     .mobile_patient_profile_item1_edit_btn {
@@ -2380,4 +2423,42 @@
     font-weight: 400;
     color: red;
     margin-top: 10px;
+}
+
+
+@media (max-width: 470px) {
+    .patient_profile_wrapper {
+        padding-top: 25px;
+    }
+}
+
+
+@media (min-width: 340px) and (max-width: 375px) {
+    .patient_profile_item1 {
+        padding: 15px 11px 15px 11px !important;
+    }
+    .patient_profile_item1_img {
+        max-width: 84px !important;
+        height: 113px !important;
+        margin-right: 10px;
+    }
+}
+@media  (max-width: 340px) {
+    .patient_profile_item1 {
+        padding: 15px 10px 15px 10px !important;
+    }
+    .patient_profile_item1_img {
+        max-width: 74px !important;
+        height: 95px !important;
+        margin-right: 10px;
+    }
+    .patient_profile_item1_title {
+        font-size: 16px !important;
+        margin-bottom: 8px !important;
+        margin-top: 8px;
+    }
+    .patient_profile_item1_phone_link_info {
+        font-size: 8px !important;
+        margin-left: 4px !important;
+    }
 }

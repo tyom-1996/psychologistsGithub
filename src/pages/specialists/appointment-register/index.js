@@ -24,7 +24,7 @@ const AppointmentRegister = () => {
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [promoCode, setPromoCode] = useState('');
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState('test');
     const [phoneNumber, setPhoneNumber] = useState('+7'); // Initialize with "+7"
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -68,10 +68,12 @@ const AppointmentRegister = () => {
     }, [errorMakeAppointmentBookData])
 
     const handleDateChange = (date) => {
-        setValue(date); // Update the calendar's selected date
-        // Format the date as YYYY-MM-DD
-        setSelectedDate(date.toISOString().split('T')[0]);
-        setShowCalendar(false); // Close the calendar after selection
+        setValue(date);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        setSelectedDate(`${year}-${month}-${day}`);
+        setShowCalendar(false);
         enableBodyScroll();
     };
 
@@ -452,19 +454,19 @@ const AppointmentRegister = () => {
                             }
 
                         </div>
-                        <div className='appointment_register_form_input'>
-                             <textarea
-                                 name="" id="" cols="10" rows="6" placeholder='Письмо'
-                                 className='appointment_register_form_input_field'
-                                 value={message}
-                                 onChange={(e) => {
-                                     setMessage(e.target.value)
-                                 }}
-                             ></textarea>
-                            {messageError &&
-                                <p className='error_text2'>{messageError}</p>
-                            }
-                        </div>
+                        {/*<div className='appointment_register_form_input'>*/}
+                        {/*     <textarea*/}
+                        {/*         name="" id="" cols="10" rows="6" placeholder='Письмо'*/}
+                        {/*         className='appointment_register_form_input_field'*/}
+                        {/*         value={message}*/}
+                        {/*         onChange={(e) => {*/}
+                        {/*             setMessage(e.target.value)*/}
+                        {/*         }}*/}
+                        {/*     ></textarea>*/}
+                        {/*    {messageError &&*/}
+                        {/*        <p className='error_text2'>{messageError}</p>*/}
+                        {/*    }*/}
+                        {/*</div>*/}
                         <div className='appointment_register_form_pay_btn_price_info_wrapper'>
                             <button
                                 className='appointment_register_form_pay_btn'

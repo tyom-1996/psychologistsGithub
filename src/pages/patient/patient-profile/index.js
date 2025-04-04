@@ -37,7 +37,7 @@ import {usePayment} from "@/hooks/usePayment";
 
 const PatientProfile = () => {
     const [showBuyCertificatePopup, setShowBuyCertificatePopup] = useState(false);
-    const [activeTab, setActiveTab] = useState("about");
+    const [activeTab, setActiveTab] = useState("upcoming");
     const [selectedCertificate, setSelectedCertificate] = useState(null);
     const [selectedCertificateId, setSelectedCertificateId] = useState(null);
     const [showBalanceError, setShowBalanceError] = useState('');
@@ -180,6 +180,10 @@ const PatientProfile = () => {
     const addBalance = async () => {
         await  payment(balance)
     }
+    const redirectTPsychologistsSinglePage = (id) => {
+        router.push(`/specialists/${id}`);
+    };
+
     return (
         <div className={'main_wrapper'} id={'patient-profile'}>
             <Header activePage={"patient_profile"} />
@@ -289,15 +293,15 @@ const PatientProfile = () => {
                         </div>
                     </div>
                     <div className="patient_profile_item2">
-                        <div className="patient_profile_tabs_wrapper">
-                            <button
-                                className={`patient_profile_tab ${
-                                    activeTab === "about" ? "patient_profile_tab_active" : ""
-                                }`}
-                                onClick={() => handleTabClick("about")}
-                            >
-                                О себе
-                            </button>
+                        <div className="patient_profile_tabs_wrapper2">
+                            {/*<button*/}
+                            {/*    className={`patient_profile_tab ${*/}
+                            {/*        activeTab === "about" ? "patient_profile_tab_active" : ""*/}
+                            {/*    }`}*/}
+                            {/*    onClick={() => handleTabClick("about")}*/}
+                            {/*>*/}
+                            {/*    О себе*/}
+                            {/*</button>*/}
                             <button
                                 className={`patient_profile_tab ${
                                     activeTab === "upcoming" ? "patient_profile_tab_active" : ""
@@ -316,13 +320,13 @@ const PatientProfile = () => {
                             </button>
                         </div>
 
-                        {activeTab === "about" && (
-                            <div className="patient_profile_about_item">
-                                <p className="patient_profile_about_item_info">
-                                    {profileInfoData?.about}
-                                </p>
-                            </div>
-                        )}
+                        {/*{activeTab === "about" && (*/}
+                        {/*    <div className="patient_profile_about_item">*/}
+                        {/*        <p className="patient_profile_about_item_info">*/}
+                        {/*            {profileInfoData?.about}*/}
+                        {/*        </p>*/}
+                        {/*    </div>*/}
+                        {/*)}*/}
 
                         {activeTab === "upcoming" && (
                             <div className="patient_profile_planned_item">
@@ -331,6 +335,7 @@ const PatientProfile = () => {
                                         <div
                                             key={index}
                                             className="patient_profile_planned_item_child patient_profile_planned_item_child1"
+                                            onClick={() => redirectTPsychologistsSinglePage(item?.psychologist_id)}
                                         >
                                             <div className="patient_profile_planned_item_child_img">
                                                 <img
@@ -407,6 +412,7 @@ const PatientProfile = () => {
                                         <div
                                             key={index}
                                             className="patient_profile_planned_item_child patient_profile_planned_item_child2"
+                                            onClick={() => redirectTPsychologistsSinglePage(item?.psychologist_id)}
                                         >
                                             <div className="patient_profile_planned_item_child_img">
                                                 <img

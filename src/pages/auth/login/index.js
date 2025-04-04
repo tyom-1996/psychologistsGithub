@@ -109,11 +109,11 @@ const Login = () => {
                         {isPasswordVisible ? <PasswordShowIcon /> : <PasswordCloseIcon />}
                     </button>
                 </div>
-                <div className='forget_password_link_wrapper'>
-                    <Link href={'/auth/recovery-account'} className='forget_password_link'>
-                        Забыли пароль?
-                    </Link>
-                </div>
+                {/*<div className='forget_password_link_wrapper'>*/}
+                {/*    <Link href={'/auth/recovery-account'} className='forget_password_link'>*/}
+                {/*        Забыли пароль?*/}
+                {/*    </Link>*/}
+                {/*</div>*/}
                 <div className="login_form_btn_parent">
                     <button
                         className='login_form_btn'

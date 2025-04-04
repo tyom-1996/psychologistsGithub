@@ -181,11 +181,10 @@ const PsychologistsProfile = () => {
                                     <div
                                         key={index}
                                         className="patient_profile_planned_item_child patient_profile_planned_item_child1"
-                                        onClick={() => redirectTPsychologistsSinglePage(item?.id)}
                                     >
                                         <div className="patient_profile_planned_item_child_img">
                                             <img
-                                                src={item?.psychologist_image ? `${imagePath}/${item?.psychologist_image}` : '/images/psychologist_img13.png'}
+                                                src={item?.user_image ? `${imagePath}/${item?.user_image}` : '/images/psychologist_img13.png'}
                                                 alt="Psychologist"
                                             />
                                         </div>
@@ -247,11 +246,11 @@ const PsychologistsProfile = () => {
                                     <div
                                         key={index}
                                         className="patient_profile_planned_item_child patient_profile_planned_item_child2"
-                                        onClick={() => redirectTPsychologistsSinglePage(item?.id)}
+
                                     >
                                         <div className="patient_profile_planned_item_child_img">
                                             <img
-                                                src={item?.psychologist_image ? `${imagePath}/${item?.psychologist_image}` : '/images/psychologist_img13.png'}
+                                                src={item?.user_image ? `${imagePath}/${item?.user_image}` : '/images/psychologist_img13.png'}
                                                 alt="Psychologist"
                                             />
                                         </div>
