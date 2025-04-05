@@ -51,7 +51,7 @@
     padding: 40px 40px 26px 76px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .specialists_single_page_section_item1_img {
@@ -198,6 +198,7 @@
 
 .specialists_single_page_section_item2 {
     width: 100%;
+
 }
 
 .specialists_single_page_section_item2_title_line_wrapper {
@@ -271,7 +272,7 @@
     }
     .specialists_single_page_section_item1_info {
         font-size: 28px!important;
-        margin-bottom: 38px!important;
+        margin-bottom: 10px!important;
     }
     .specialists_dropdown_form {
         margin-right: 36px!important;
@@ -340,7 +341,7 @@
     }
     .specialists_single_page_section_item1_info {
         font-size: 25px!important;
-        margin-bottom: 28px!important;
+        margin-bottom: 10px!important;
     }
     .specialists_dropdown_form {
         margin-right: 28px!important;
@@ -416,7 +417,7 @@
     }
     .specialists_single_page_section_item1_info {
         font-size: 18px!important;
-        margin-bottom: 20px!important;
+        margin-bottom: 10px!important;
     }
     .specialists_dropdown_form {
         margin-right: 20px!important;
@@ -491,7 +492,7 @@
     }
     .specialists_single_page_section_item1_info {
         font-size: 13px!important;
-        margin-bottom: 14px!important;
+        margin-bottom: 8px!important;
     }
     .specialists_dropdown_form {
         margin-right: 17px!important;
@@ -570,7 +571,7 @@
     }
     .specialists_single_page_section_item1_info {
         font-size: 13px!important;
-        margin-bottom: unset!important;
+        margin-bottom: 5px!important;
     }
     .specialists_dropdown_form {
         margin-right: 17px!important;
@@ -634,7 +635,7 @@
     .specialists_single_page_section_item1_mobile_child1 {
         width: 100%;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: flex-start;
         margin-bottom: 27px;
     }
@@ -679,7 +680,7 @@
     }
     .specialists_single_page_section_item1_info {
         font-size: 13px!important;
-        margin-bottom: unset!important;
+        margin-bottom: 5px!important;
     }
     .specialists_dropdown_form {
         margin-right: 17px!important;
@@ -743,7 +744,7 @@
     .specialists_single_page_section_item1_mobile_child1 {
         width: 100%;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: flex-start;
         margin-bottom: 27px;
     }
@@ -788,7 +789,7 @@
     }
     .specialists_single_page_section_item1_info {
         font-size: 12px!important;
-        margin-bottom: unset!important;
+        margin-bottom: 5px!important;
     }
     .specialists_dropdown_form {
         margin-right: 17px!important;
@@ -852,7 +853,7 @@
     .specialists_single_page_section_item1_mobile_child1 {
         width: 100%;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: flex-start;
         margin-bottom: 27px;
     }
@@ -887,7 +888,7 @@
        .specialists_single_page_section_item1_mobile_child1 {
            width: 100%;
            display: flex;
-           align-items: center;
+           align-items: flex-start;
            justify-content: flex-start;
            margin-bottom: 27px;
        }
@@ -2156,6 +2157,8 @@
     width: 100%;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     margin-bottom: 43px;
 }
 
@@ -2171,4 +2174,33 @@
     font-weight: 400;
     color: red;
     margin-bottom: 10px;
+}
+
+@media (min-width: 370px) and (max-width: 470px) {
+    .specialists_single_page_section_item1_mobile_child1 {
+        flex-direction: column;
+    }
+    .specialists_single_page_section_item1_img {
+        margin-right: unset !important;
+        margin-bottom: 10px;
+        max-width: 150px !important;
+        height: 150px !important;
+    }
+    .specialists_single_page_section_item1_infos_wrapper {
+        margin-bottom: unset!important;
+    }
+}
+@media  (max-width: 370px) {
+    .specialists_single_page_section_item1_mobile_child1 {
+        flex-direction: column;
+    }
+    .specialists_single_page_section_item1_img {
+        margin-right: unset !important;
+        margin-bottom: 10px;
+        max-width: 110px !important;
+        height: 110px !important;
+    }
+    .specialists_single_page_section_item1_infos_wrapper {
+        margin-bottom: unset!important;
+    }
 }
